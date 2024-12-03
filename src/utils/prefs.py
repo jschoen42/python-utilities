@@ -5,14 +5,13 @@
     class Prefs:
         init(cls, pref_path = None, pref_prefix = None ) -> None
         read(cls, pref_name: str) -> bool
-        get(cls, key_path: str, default: Any = None) -> Any
+        get(cls, key_path: str, default: any = None) -> any
 
     merge_dicts(dict1: dict, dict2: dict) -> dict
     build_tree(tree: list, in_key: str, value: str) -> dict
 """
 import sys
 
-from typing import Any
 from pathlib import Path
 
 import yaml
@@ -65,7 +64,7 @@ class Prefs:
         return cls.data
 
     @classmethod
-    def get(cls, key_path: str, default: Any = None) -> Any:
+    def get(cls, key_path: str, default: any = None) -> any:
         keys = key_path.split(".")
 
         data = cls.data

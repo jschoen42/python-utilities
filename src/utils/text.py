@@ -2,7 +2,7 @@
     (c) Jürgen Schoenemeyer, 10.11.2024
 
     PUBLIC:
-    check_quote(test_id: str, text: None |str, language: str) -> str
+    check_quote(test_id: str, text: None | str, language: str) -> str
 """
 from src.utils.trace import Trace
 
@@ -60,7 +60,7 @@ quote_info = {
     # "vi": [chr(34), chr(34)]  # vietnamesisch
 }
 
-def check_quote(test_id: str, text: None |str, language: str) -> str:
+def check_quote(test_id: str, text: None | str, language: str) -> str:
     if text is None:
         return ""
 

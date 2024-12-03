@@ -2,7 +2,9 @@
     (c) Jürgen Schoenemeyer, 03.12.2024
 
     PUBLIC:
-
+    get_audioinfo_mutagen(filepath: str) -> dict:
+    get_audio_metadata_mutagen(filepath: Path | str) -> dict | None:
+    get_video_metadata_mutagen(filepath: Path | str) -> dict | None:
 """
 
 from pathlib import Path
@@ -47,7 +49,7 @@ def get_audioinfo_mutagen(filepath: str) -> dict:
     }
     return info
 
-def get_audio_metadata_mutagen(filepath: Path | str) -> None | dict:
+def get_audio_metadata_mutagen(filepath: Path | str) -> dict | None:
 
     try:
         metadata = mutagen.mp3.Open(Path(filepath))
@@ -71,7 +73,7 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> None | dict:
         "sampleRate":  sample_rate,
     }
 
-def get_video_metadata_mutagen(filepath: Path | str) -> None | dict:
+def get_video_metadata_mutagen(filepath: Path | str) -> dict | None:
     try:
         metadata = mutagen.mp4.Open(Path(filepath))
     except MutagenError as err:
