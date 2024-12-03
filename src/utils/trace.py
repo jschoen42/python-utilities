@@ -100,39 +100,6 @@ class Color(StrEnum):
 def remove_colors(text: str) -> str:
     return re.sub(r"\033\[[0-9;]*m", "", text)
 
-
-# decorator for time measure
-
-def timeit(pre_text: str = "", rounds: int = 1):
-    def decorator(func):
-        def wrapper(*args, **kwargs):
-            start_time = time.perf_counter()
-
-            result = func(*args, **kwargs)
-
-            end_time = time.perf_counter()
-            total_time = (end_time - start_time) / rounds
-
-            def replace_args(match):
-                word = match.group(1)
-                if word.isnumeric():
-                    return str(args[int(word)]) # {1} -> args[1]
-                else:
-                    return kwargs.get(word)     # {type} -> kwargs["type"]
-
-            pattern = r"\{(.*?)\}"
-            pretext = re.sub(pattern, replace_args, pre_text)
-
-            text = f"{Color.GREEN}{Color.BOLD}{total_time:.3f} sec{Color.RESET}"
-            if pretext == "":
-                Trace.time(f"{text}")
-            else:
-                Trace.time(f"{pretext}: {text}")
-
-            return result
-        return wrapper
-    return decorator
-
 pattern = {
     "clear":     "     ", # only internal
 
@@ -318,6 +285,61 @@ class Trace:
             except KeyboardInterrupt:
                 sys.exit()
 
+
+    @classmethod
+    def __check_file_output(cls) -> bool:
+        trace_type = inspect.currentframe().f_back.f_code.co_name
+        return trace_type in list(cls.pattern)
+
+    @classmethod
+    def __get_time(cls) -> str:
+        if cls.settings["show_timestamp"]:
+            try:
+                timezone = ZoneInfo(cls.settings["time_zone"])
+                curr_time = datetime.now().astimezone(timezone).strftime("%H:%M:%S.%f")[:-3]
+                return f"{Color.BLUE}{curr_time}{Color.RESET}\t"
+
+            # "tzdata" not installed
+
+            except ZoneInfoNotFoundError:
+                curr_time = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+                return f"{Color.BLACK}{curr_time}{Color.RESET}\t"
+
+        return ""
+
+    @staticmethod
+    def __get_pattern() -> str:
+        trace_type = inspect.currentframe().f_back.f_code.co_name
+        if trace_type in pattern:
+            return pattern[trace_type]
+        else:
+            return pattern["clear"]
+
+    @classmethod
+    def __get_caller(cls) -> str:
+        if cls.settings["show_caller"] is False:
+            return f"{Color.RESET} "
+
+        path = inspect.stack()[2][1].replace("\\", "/")
+        path = path.split(cls.settings["appl_folder"])[-1]
+
+        lineno = str(inspect.currentframe().f_back.f_back.f_lineno).zfill(3)
+
+        caller = inspect.currentframe().f_back.f_back.f_code.co_qualname # .co_qualname (erst ab 3.11)
+        caller = caller.replace(".<locals>.", " → ")
+
+        if caller == "<module>":
+            return f"\t{Color.BLUE}[{path}:{lineno}]{Color.RESET}\t"
+        else:
+            return f"\t{Color.BLUE}[{path}:{lineno} » {caller}]{Color.RESET}\t"
+
+    @classmethod
+    def __get_custom_caller(cls, text) -> str:
+        if cls.settings["show_caller"] is False:
+            return f"{Color.RESET} "
+
+        return f"\t{Color.BLUE}[{text}]{Color.RESET}\t"
+
     @classmethod
     def __show_message(cls, file_output: bool, pre: str, message: str, *optional: any) -> None:
         extra = ""
@@ -354,59 +376,37 @@ class Trace:
             text = bytes.decode("utf-8", "strict")
             sys.stdout.write(text)
 
-    @classmethod
-    def __get_time(cls) -> str:
-        if cls.settings["show_timestamp"]:
-            try:
-                timezone = ZoneInfo(cls.settings["time_zone"])
-                curr_time = datetime.now().astimezone(timezone).strftime("%H:%M:%S.%f")[:-3]
-                return f"{Color.BLUE}{curr_time}{Color.RESET}\t"
+# decorator for time measure
 
-            # "tzdata" not installed
+def timeit(pre_text: str = "", rounds: int = 1):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            start_time = time.perf_counter()
 
-            except ZoneInfoNotFoundError:
-                curr_time = datetime.now().strftime("%H:%M:%S.%f")[:-3]
-                return f"{Color.BLACK}{curr_time}{Color.RESET}\t"
+            result = func(*args, **kwargs)
 
-        return ""
+            end_time = time.perf_counter()
+            total_time = (end_time - start_time) / rounds
 
-    @classmethod
-    def __get_caller(cls) -> str:
-        if cls.settings["show_caller"] is False:
-            return f"{Color.RESET} "
+            def replace_args(match):
+                word = match.group(1)
+                if word.isnumeric():
+                    return str(args[int(word)]) # {1} -> args[1]
+                else:
+                    return kwargs.get(word)     # {type} -> kwargs["type"]
 
-        path = inspect.stack()[2][1].replace("\\", "/")
-        path = path.split(cls.settings["appl_folder"])[-1]
+            pattern = r"\{(.*?)\}"
+            pretext = re.sub(pattern, replace_args, pre_text)
 
-        lineno = str(inspect.currentframe().f_back.f_back.f_lineno).zfill(3)
+            text = f"{Color.GREEN}{Color.BOLD}{total_time:.3f} sec{Color.RESET}"
+            if pretext == "":
+                Trace.time(f"{text}")
+            else:
+                Trace.time(f"{pretext}: {text}")
 
-        caller = inspect.currentframe().f_back.f_back.f_code.co_qualname # .co_qualname (erst ab 3.11)
-        caller = caller.replace(".<locals>.", " → ")
-
-        if caller == "<module>":
-            return f"\t{Color.BLUE}[{path}:{lineno}]{Color.RESET}\t"
-        else:
-            return f"\t{Color.BLUE}[{path}:{lineno} » {caller}]{Color.RESET}\t"
-
-    @classmethod
-    def __get_custom_caller(cls, text) -> str:
-        if cls.settings["show_caller"] is False:
-            return f"{Color.RESET} "
-
-        return f"\t{Color.BLUE}[{text}]{Color.RESET}\t"
-
-    @classmethod
-    def __check_file_output(cls) -> bool:
-        trace_type = inspect.currentframe().f_back.f_code.co_name
-        return trace_type in list(cls.pattern)
-
-    @staticmethod
-    def __get_pattern() -> str:
-        trace_type = inspect.currentframe().f_back.f_code.co_name
-        if trace_type in pattern:
-            return pattern[trace_type]
-        else:
-            return pattern["clear"]
+            return result
+        return wrapper
+    return decorator
 
 #######################
 
