@@ -16,6 +16,8 @@ import unicodedata
 import re
 import datetime
 
+import warnings
+
 from typing import Tuple
 
 from openpyxl import Workbook, cell
@@ -23,6 +25,9 @@ from openpyxl import load_workbook
 
 from src.utils.trace import Trace
 from src.utils.file  import get_modification_timestamp, check_excel_file_exists
+
+# UserWarning: Data Validation extension is not supported and will be removed
+warnings.simplefilter("ignore")
 
 def get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: int = 0) -> Tuple[int, Workbook, int]:
     file_path = source_path + filename
