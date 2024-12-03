@@ -1,0 +1,10 @@
+result/*
+!result/.gitkeep
+
+folderico-*.ico
+desktop.ini
+
+.venv*/
+__pycache__/
+
+~*
