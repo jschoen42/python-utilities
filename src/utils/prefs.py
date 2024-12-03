@@ -5,7 +5,7 @@
     class Prefs:
         init(cls, pref_path = None, pref_prefix = None ) -> None
         read(cls, pref_name: str) -> bool
-        get(cls, key_path: str, default: any = None) -> any
+        get(cls, key_path: str) -> any
 
     merge_dicts(dict1: dict, dict2: dict) -> dict
     build_tree(tree: list, in_key: str, value: str) -> dict
@@ -68,19 +68,18 @@ class Prefs:
         return cls.data
 
     @classmethod
-    def get(cls, key: str, default: any = None) -> any:
+    def get(cls, key: str) -> any:
 
-        def get_pref_key(key: str) -> any:
+        def get_pref_key(key_path: str) -> any:
+            keys = key_path.split(".")
+
             data = cls.data
-
-            if key in data:
-                return data[key]
-
-            elif default:
-                Trace.warning(f"unknown key '{key}' -> default value '{default}'")
-                return default
-            else:
-                Trace.fatal(f"unknown pref: {key}")
+            for key in keys:
+                if key in data:
+                    data = data[key]
+                else:
+                    Trace.fatal(f"unknown pref: {key}")
+            return data
 
         result = get_pref_key(key)
 
