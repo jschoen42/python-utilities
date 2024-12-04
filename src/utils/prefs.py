@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 03.12.2024
+    (c) Jürgen Schoenemeyer, 04.12.2024
 
     PUBLIC:
     class Prefs:
@@ -93,7 +93,7 @@ class Prefs:
 
         tmp = json.dumps(result)
 
-        pattern = r'\{\{([^\}]+)\}\}' # '{{ ... }}'
+        pattern = r"\{\{([^\}]+)\}\}" # '{{ ... }}'
         replace = re.findall(pattern, tmp)
         if len(replace)==0:
             return result
@@ -105,14 +105,14 @@ class Prefs:
             ret = json.loads(tmp)
         except JSONDecodeError as err:
             Trace.error(f"json error: {key} -> {tmp} ({err})")
-            ret = ''
+            ret = ""
 
         return ret
 
 
 def get_pref_special(pref_path: Path, pref_prexix, pref_name: str, key: str) -> str:
     try:
-        with open(Path(pref_path, pref_prexix + pref_name + ".yaml"), 'r', encoding="utf-8") as file:
+        with open(Path(pref_path, pref_prexix + pref_name + ".yaml"), "r", encoding="utf-8") as file:
             pref = yaml.safe_load(file)
     except OSError as err:
         Trace.error(f"{beautify_path(err)}")
@@ -126,7 +126,7 @@ def get_pref_special(pref_path: Path, pref_prexix, pref_name: str, key: str) -> 
 
 def read_pref( pref_path: Path, pref_name: str ) -> tuple[bool, dict]:
     try:
-        with open( Path(pref_path, pref_name), 'r', encoding="utf-8") as file:
+        with open( Path(pref_path, pref_name), "r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
 
         # Trace.wait( f"{pref_name}: {json.dumps(data, sort_keys=True, indent=2)}" )
