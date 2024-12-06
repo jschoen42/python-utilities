@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 01.12.2024
+    (c) Jürgen Schoenemeyer, 06.12.2024
 
     PUBLIC:
     get_modification_timestamp(filename: Path | str) -> float
@@ -105,7 +105,7 @@ def check_excel_file_exists(filename: str) -> bool:
 
 # dir listing
 
-def list_files(path: str, extensions: list) -> list:
+def list_files(path: str, extensions: list) -> tuple[list, list]:
     files: list = []
     dirs = []
     try:

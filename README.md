@@ -4,15 +4,15 @@
 | :----------- | :---------: | :-------: |
 | audio.py     | 03.12.2024  | |
 | excel.py     | 03.12.2024  | |
-| file.py      | 01.12.2024  | |
-| files.py     | 25.11.2024  | rustfied  |
+| file.py      | 06.12.2024  | |
+| files.py     | 06.12.2024  | rustfied  |
 | format.py    | 03.12.2024  | |
 | log.py       | 03.12.2024  | |
 | metadata.py  | 03.12.2024  | |
 | metadata_mutagen.py | 03.12.2024 | |
-| prefs.py     | 10.11.2024  | |
+| prefs.py     | 04.12.2024  | |
 | text.py      | 10.11.2024  | |
-| trace.py     | 01.12.2024  | |
+| trace.py     | 06.12.2024  | |
 | util.py      | 03.12.2024  | |
 | utilities.py | 03.12.2024  | |
 | utils.py     | 16.11.2024  | |
