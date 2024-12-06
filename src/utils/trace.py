@@ -372,6 +372,7 @@ class Trace:
         bytes = (text_no_tabs + "\n").encode("utf-8", "backslashreplace")
         if hasattr(sys.stdout, "buffer"):
             sys.stdout.buffer.write(bytes)
+            sys.stdout.flush()
         else:
             text = bytes.decode("utf-8", "strict")
             sys.stdout.write(text)
