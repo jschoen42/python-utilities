@@ -1,15 +1,15 @@
 """
-    (c) Jürgen Schoenemeyer, 01.12.2024
+    (c) Jürgen Schoenemeyer, 06.12.2024
 
     PUBLIC:
     remove_colors(text: str) -> str:
 
-    @timeit(pre_text: str = "", rounds: int = 1)
+    @duration(pre_text: str = "", rounds: int = 1)
 
-    @timeit("argon2 (20 rounds)", 20) # test with 20 rounds => average duration for a round
+    @duration("argon2 (20 rounds)", 20) # test with 20 rounds => average duration for a round
 
-    @timeit("ttx => font '{0}'")      # 0 -> args
-    @timeit("ttx => font '{type}'")   # type -> kwargs
+    @duration("ttx => font '{0}'")      # 0    -> args
+    @duration("ttx => font '{type}'")   # type -> kwargs
 
     class Trace:
 
@@ -378,7 +378,7 @@ class Trace:
 
 # decorator for time measure
 
-def timeit(pre_text: str = "", rounds: int = 1):
+def duration(pre_text: str = "", rounds: int = 1):
     def decorator(func):
         def wrapper(*args, **kwargs):
             start_time = time.perf_counter()
