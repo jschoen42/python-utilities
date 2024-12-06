@@ -106,20 +106,24 @@ def check_excel_file_exists(filename: str) -> bool:
 # dir listing
 
 def list_files(path: str, extensions: list) -> list:
-    ret: list = []
-
+    files: list = []
+    dirs = []
     try:
         for filename in os.listdir(path):
-            if os.path.isfile(os.path.join(path, filename)):
+            filepath = os.path.join(path, filename)
+
+            if os.path.isfile(filepath):
                 for extention in extensions:
                     if "." + extention in filename:
-                        ret.append(filename)
+                        files.append(filename)
                         break
+            else:
+                dirs.append(filename)
 
     except OSError as err:
         Trace.error(f"{err}")
 
-    return ret
+    return files, dirs
 
 def list_directories(path: str) -> list:
     ret: list = []
