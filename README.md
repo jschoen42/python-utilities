@@ -10,7 +10,7 @@
 | log.py       | 03.12.2024  | |
 | metadata.py  | 03.12.2024  | |
 | metadata_mutagen.py | 03.12.2024 | |
-| prefs.py     | 04.12.2024  | |
+| prefs.py     | 07.12.2024  | |
 | text.py      | 10.11.2024  | |
 | trace.py     | 07.12.2024  | |
 | util.py      | 03.12.2024  | |
