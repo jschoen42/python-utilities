@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 04.12.2024
+    (c) Jürgen Schoenemeyer, 07.12.2024
 
     PUBLIC:
     class Prefs:
