@@ -50,6 +50,7 @@ import os
 import re
 import inspect
 import time
+import importlib.util
 
 from typing import Callable
 from enum import StrEnum
@@ -150,6 +151,24 @@ class Trace:
         for key, value in kwargs.items():
             if key in cls.settings:
                 cls.settings[key] = value
+
+                if key == "timezone" and isinstance(value, str):
+
+                    # tzdata installed ?
+
+                    if importlib.util.find_spec("tzdata") is None:
+                        print( f"{pattern["warning"]} install 'tzdata' for named timezones")
+                        cls.settings[key] = True
+                    else:
+
+                        # timezone valid ?
+
+                        try:
+                            _ = ZoneInfo(value)
+                        except ZoneInfoNotFoundError:
+                            print( f"{pattern['error']} tzdata '{value}' unknown timezone")
+                            cls.settings[key] = True
+
             else:
                 print(f"trace settings: unknown parameter {key}")
 
