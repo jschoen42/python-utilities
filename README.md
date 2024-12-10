@@ -3,7 +3,7 @@
 | File         | Last update | Note      |
 | :----------- | :---------: | :-------: |
 | audio.py     | 03.12.2024  | |
-| decorator.py | 08.12.2024  | |
+| decorator.py | 10.12.2024  | |
 | excel.py     | 03.12.2024  | |
 | file.py      | 10.12.2024  | |
 | files.py     | 06.12.2024  | rustfied  |
