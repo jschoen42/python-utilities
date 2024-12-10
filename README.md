@@ -5,7 +5,7 @@
 | audio.py     | 03.12.2024  | |
 | decorator.py | 08.12.2024  | |
 | excel.py     | 03.12.2024  | |
-| file.py      | 06.12.2024  | |
+| file.py      | 10.12.2024  | |
 | files.py     | 06.12.2024  | rustfied  |
 | format.py    | 03.12.2024  | |
 | log.py       | 03.12.2024  | |
