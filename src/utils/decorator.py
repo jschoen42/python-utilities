@@ -9,9 +9,11 @@
     @duration("ttx => font '{type}'")   # type -> kwargs
 
 """
+
 import contextlib
 import time
 import re
+
 from typing import Generator
 from collections.abc import Callable
 
