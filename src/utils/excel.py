@@ -1,10 +1,10 @@
 """
-    (c) Jürgen Schoenemeyer, 03.12.2024
+    (c) Jürgen Schoenemeyer, 12.12.2024
 
     PUBLIC:
-    get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: int = 0) -> Tuple[int, Workbook, int]
+    get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0) -> Tuple[int, Workbook, int]
 
-    get_excel_sheet(source_path: str, filename: str, sheet: str, comment: str, last_timestamp: int = 0) -> Tuple[bool, Worksheet, int]
+    get_excel_sheet(source_path: str, filename: str, sheet: str, comment: str, last_timestamp: float = 0.0) -> Tuple[bool, Worksheet, float]
     get_excel_sheet_special(workbook: Workbook, sheet: str, comment: str) -> Tuple[bool, None | Worksheet]
 
     get_cell_value(in_cell: cell) -> str
@@ -29,7 +29,7 @@ from src.utils.file  import get_modification_timestamp, check_excel_file_exists
 # UserWarning: Data Validation extension is not supported and will be removed
 warnings.simplefilter("ignore")
 
-def get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: int = 0) -> Tuple[int, Workbook, int]:
+def get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0.0) -> Tuple[int, Workbook, int]:
     file_path = source_path + filename
 
     if check_excel_file_exists(file_path) is False:
@@ -44,7 +44,7 @@ def get_excel_file(source_path: str, filename: str, comment: str, last_timestamp
 
     return (0, workbook, max(last_timestamp, get_modification_timestamp(file_path)))
 
-def get_excel_sheet(source_path: str, filename: str, sheet: str, comment: str, last_timestamp: int = 0) -> Tuple[bool, any, int]:
+def get_excel_sheet(source_path: str, filename: str, sheet: str, comment: str, last_timestamp: float = 0.0) -> Tuple[bool, any, float]:
     file_path = source_path + filename
 
     if check_excel_file_exists(file_path) is False:
