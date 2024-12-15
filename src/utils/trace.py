@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 08.12.2024
+    (c) Jürgen Schoenemeyer, 15.12.2024
 
     PUBLIC:
     class Trace:
@@ -216,6 +216,11 @@ class Trace:
     @classmethod
     def time(cls, message: str = "", *optional: any) -> None:
         pre = f"{cls.__get_time()}{cls.__get_pattern()}{cls.__get_custom_caller('duration')}"
+        cls.__show_message(cls.__check_file_output(), pre, message, *optional)
+
+    @classmethod
+    def custom(cls, message: str = "", *optional: any, path = "custom") -> None:
+        pre = f"{cls.__get_time()}{cls.__get_pattern()}{cls.__get_custom_caller(path)}"
         cls.__show_message(cls.__check_file_output(), pre, message, *optional)
 
     @classmethod
