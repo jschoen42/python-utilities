@@ -181,3 +181,9 @@ git branche -d feature/...
 
 ....
 git push origin main feature/...
+
+### install "git extras"
+--- git clone https://github.com/tj/git-extras.git
+--- open pwshell as admin in git-extras
+--- ./install.cmd "C:\Program Files\_prog\Git"
+--- git extras --version
