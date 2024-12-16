@@ -2,6 +2,8 @@ files:
   mandatory:
     - ___install.txt
     - ruff.toml
+    - .vscode/launch.json
+    - .vscode/settings.json
     - src/__init__.py
     - src/utils/__init__.py
     - src/utils/decorator.py

@@ -53,7 +53,7 @@ def copy_file_if_different( source, dest, name, filepath, mandatory ):
         if mandatory:
             shutil.copyfile(src, dst)
             set_modification_timestamp( dst, get_modification_timestamp(src) )
-            Trace.error( name, filepath )
+            Trace.result( name, filepath )
 
 
 if __name__ == "__main__":
