@@ -10,9 +10,9 @@ import shutil
 from pathlib import Path
 
 from src.utils.trace     import Trace, BASE_PATH
-from src.utils.decorator import duration
+# from src.utils.decorator import duration
 from src.utils.prefs     import Prefs
-
+from src.utils.file      import get_modification_timestamp, set_modification_timestamp
 SOURCE_PATH = BASE_PATH
 
 DRIVE = Path(__file__).drive
@@ -47,9 +47,12 @@ def copy_file_if_different( source, dest, name, filepath, mandatory ):
         if (source_md5 != dest_md5 ):
             shutil.copyfile(src, dst)
             Trace.result( name, filepath )
+            set_modification_timestamp( dst, get_modification_timestamp(src) )
+
     else:
         if mandatory:
             shutil.copyfile(src, dst)
+            set_modification_timestamp( dst, get_modification_timestamp(src) )
             Trace.error( name, filepath )
 
 
