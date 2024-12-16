@@ -1,0 +1,26 @@
+files:
+  mandatory:
+    - ___install.txt
+    - ruff.toml
+    - src/__init__.py
+    - src/utils/__init__.py
+    - src/utils/decorator.py
+    - src/utils/trace.py
+
+  optional:
+    - globals.py
+    - src/utils/
+    - src/utils/audio.py
+    - src/utils/excel.py
+    - src/utils/file.py
+    - src/utils/files.py
+    - src/utils/format.py
+    - src/utils/log.py
+    - src/utils/metadata.py
+    - src/utils/prefs.py
+    - src/utils/text.py
+    - src/utils/util.py
+    - src/utils/utilities.py
+    - src/utils/utils.py
+    - src/utils/xml.py
+    - src/utils/zip.py
