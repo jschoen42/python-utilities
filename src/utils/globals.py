@@ -1,3 +1,12 @@
+"""
+    (c) Jürgen Schoenemeyer, 17.12.2024
+
+    PUBLIC:
+     - DRIVE
+     - BASE_PATH
+     - SYSTEM_ENV_PATHS
+"""
+
 import os
 import sys
 from pathlib import Path
