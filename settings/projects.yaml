@@ -1,4 +1,7 @@
 projects:
+  - name: _empty
+    path: /Python
+
   - name: amazon-polly
     path: /Python/Amazon-AWS
 

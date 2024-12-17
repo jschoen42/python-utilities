@@ -8,9 +8,9 @@ files:
     - src/utils/__init__.py
     - src/utils/decorator.py
     - src/utils/trace.py
+    - src/utils/globals.py
 
   optional:
-    - globals.py
     - src/utils/
     - src/utils/audio.py
     - src/utils/excel.py
