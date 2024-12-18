@@ -92,6 +92,9 @@ projects:
   - name: storyline-zip-test
     path: /Python/Storyline
 
+  - name: import-starter
+    path: /Python/Storyline/impl
+
   - name: streamlit-try
     path: /Python/Streamlit
 
