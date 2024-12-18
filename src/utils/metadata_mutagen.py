@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 03.12.2024
+    (c) Jürgen Schoenemeyer, 18.12.2024
 
     PUBLIC:
     get_audioinfo_mutagen(filepath: str) -> dict:
@@ -18,12 +18,14 @@ import mutagen.mp4
 #from mutagen.wave import WAVE
 
 from src.utils.trace import Trace
+from src.utils.decorator import deprecation
 
 ###########################################
 #  mutagen
 #  https://pypi.org/project/mutagen/
 ###########################################
 
+@deprecation("licence does not fit")
 def get_audioinfo_mutagen(filepath: str) -> dict:
     metadata = mutagen.mp3.Open(filepath)
 
@@ -49,6 +51,7 @@ def get_audioinfo_mutagen(filepath: str) -> dict:
     }
     return info
 
+@deprecation("licence does not fit")
 def get_audio_metadata_mutagen(filepath: Path | str) -> dict | None:
 
     try:
@@ -73,6 +76,7 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> dict | None:
         "sampleRate":  sample_rate,
     }
 
+@deprecation("licence does not fit")
 def get_video_metadata_mutagen(filepath: Path | str) -> dict | None:
     try:
         metadata = mutagen.mp4.Open(Path(filepath))

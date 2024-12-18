@@ -3,7 +3,7 @@
 | File         | Last update | Note      |
 | :----------- | :---------: | :-------: |
 | audio.py     | 03.12.2024  | |
-| decorator.py | 15.12.2024  | |
+| decorator.py | 18.12.2024  | |
 | excel.py     | 12.12.2024  | |
 | file.py      | 10.12.2024  | |
 | files.py     | 06.12.2024  | rustedpy  |
@@ -11,7 +11,7 @@
 | globals.py   | 17.12.2024  | |
 | log.py       | 03.12.2024  | |
 | metadata.py  | 03.12.2024  | |
-| metadata_mutagen.py | 03.12.2024 | |
+| metadata_mutagen.py | 18.12.2024 | |
 | prefs.py     | 07.12.2024  | |
 | text.py      | 10.11.2024  | |
 | trace.py     | 17.12.2024  | |

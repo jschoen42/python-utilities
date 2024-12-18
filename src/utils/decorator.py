@@ -1,9 +1,11 @@
 """
-    (c) Jürgen Schoenemeyer, 15.12.2024
+    (c) Jürgen Schoenemeyer, 18.12.2024
 
     public
-     - def duration(pre_text: str="", rounds: int=1) -> Callable:
-     - def retry_exception(pre_text: str="", exception=Exception, delay: int|float=1, retries: int=5) -> Callable:
+     - @duration(pre_text: str="", rounds: int=1)
+     - @deprecation(message: str="")
+
+     - @retry_exception(pre_text: str="", exception=Exception, delay: int|float=1, retries: int=5)
 
     privat
       - def replace_arguments(match: Match, *args, **kwargs) -> str:
@@ -88,6 +90,29 @@ def duration(pre_text: str=None, rounds: int=1) -> Callable:
         return wrapper
     return decorator
 
+# @deprecation()
+# @deprecation("licence does not fit")
+
+def deprecation(message: str="") -> Callable:
+    def decorator(func: Callable) -> Callable:
+        @functools.wraps(func)
+        def wrapper(*args: any, **kwargs: any) -> any:
+
+            # before ...
+
+            if message == "":
+                Trace.custom(f"{Color.RED}'{func.__name__}' is deprecated{Color.RESET}", path="deprecation")
+            else:
+                Trace.custom(f"{Color.RED}'{func.__name__}' is deprecated ({message}){Color.RESET}", path="deprecation")
+
+            result = func(*args, **kwargs)
+
+            # after ...
+
+            return result
+        return wrapper
+    return decorator
+
 # @retry_exception(exception=ValueError)
 # @retry_exception("error limit '{0}'", exception=ValueError)
 # @retry_exception("ttx => font '{0}'", exception=ValueError, delay=2.5, retries=10)
@@ -123,7 +148,6 @@ def retry_exception(pre_text: str=None, exception=Exception, delay: int|float=1,
             raise exception
         return wrapper
     return decorator
-
 
 # https://www.youtube.com/watch?v=xI4TJyd8FGk&t=860s
 #
