@@ -4,6 +4,7 @@
 
 # python main.py
 
+import os
 import sys
 import hashlib
 import shutil
@@ -22,8 +23,13 @@ def main():
     optional  = Prefs.get("files.optional")
 
     for project in projects:
-        Trace.info( project["name"] )
         dest = Path(DRIVE + project["path"]) / project["name"]
+
+        if not os.path.exists(dest):
+            Trace.error(f"Project '{dest}' not found")
+            continue
+
+        Trace.action( project["name"] )
         for file in mandatory:
             copy_file_if_different( SOURCE_PATH, dest, project["name"], file, True )
 
@@ -33,6 +39,9 @@ def main():
 def copy_file_if_different( source, dest, name, filepath, mandatory ):
     src = source / filepath
     dst = dest / filepath
+
+    if not dst.parent.exists():
+        dst.parent.mkdir()
 
     if Path(dst).is_file():
         if not Path(src).is_file():
