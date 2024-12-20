@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 17.12.2024
+    (c) Jürgen Schoenemeyer, 20.12.2024
 
     PUBLIC:
     class Trace:
@@ -122,9 +122,9 @@ pattern = {
     "download":  ">>>>>",
 
     "warning":   "*****",
-    "error":     "#####", # + rot
-    "exception": "!!!!!", # + rot
-    "fatal":     "FATAL", # + rot
+    "error":     "#####", # + red
+    "exception": "!!!!!", # + red
+    "fatal":     "FATAL", # + red
 
     "debug":     "DEBUG", # only in debug mode
     "wait":      "WAIT ", # only in debug mode

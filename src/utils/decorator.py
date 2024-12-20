@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 18.12.2024
+    (c) Jürgen Schoenemeyer, 20.12.2024
 
     public
      - @duration(pre_text: str="", rounds: int=1)
@@ -8,7 +8,7 @@
      - @retry_exception(pre_text: str="", exception=Exception, delay: int|float=1, retries: int=5)
 
     privat
-      - def replace_arguments(match: Match, *args, **kwargs) -> str:
+      - def replace_arguments(match: Match, func_name: str, *args, **kwargs) -> str:
 """
 
 import contextlib
@@ -62,7 +62,7 @@ def my_decorator( ... ) -> Callable:
 
 def duration(pre_text: str=None, rounds: int=1) -> Callable:
     def decorator(func: Callable) -> Callable:
-        @functools.wraps(func)
+        @functools.wraps(replace_arguments)
         def wrapper(*args: any, **kwargs: any) -> any:
             start_time = time.perf_counter()
 
@@ -75,7 +75,7 @@ def duration(pre_text: str=None, rounds: int=1) -> Callable:
                 pretext = func.__name__
             else:
                 def replace(match: Match) -> str:
-                    return replace_arguments( match, *args, **kwargs )
+                    return replace_arguments( match, func.__name__, *args, **kwargs )
 
                 pattern = r"\{(.*?)\}"
                 pretext = re.sub(pattern, replace, pre_text)
@@ -126,7 +126,7 @@ def retry_exception(pre_text: str=None, exception=Exception, delay: int|float=1,
                 pretext = func.__name__
             else:
                 def replace(match: Match) -> str:
-                    return replace_arguments( match, *args, **kwargs )
+                    return replace_arguments( match, func.__name__, *args, **kwargs )
 
                 pattern = r"\{(.*?)\}"
                 pretext = re.sub(pattern, replace, pre_text)
@@ -191,10 +191,13 @@ def duration_cm(name: str) -> Generator[None, None, None]:
 
 # helper
 
-def replace_arguments(match: Match, *args, **kwargs) -> str:
+def replace_arguments(match: Match, func_name: str, *args, **kwargs) -> str:
     argument = match.group(1)
 
-    if argument.isnumeric():
+    if argument == "__name__":
+        return( func_name )
+
+    elif argument.isnumeric():
         # args
         pos = int(argument)
         if pos < len(args):
@@ -202,6 +205,7 @@ def replace_arguments(match: Match, *args, **kwargs) -> str:
         else:
             Trace.error(f"arg '{pos}' does not exist")
             return f"<'{pos}' not exist>"
+
     else:
         # kwargs
         if argument in kwargs:

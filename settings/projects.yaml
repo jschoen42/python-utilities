@@ -35,6 +35,9 @@ projects:
   - name: game-of-live
     path: /Python/Cython
 
+  - name: github-codepace-test
+    path: /Python
+
   - name: hyphenation-test
     path: /Python
 
