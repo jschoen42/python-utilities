@@ -16,7 +16,7 @@ import time
 import re
 import functools
 
-from typing import Generator, Match
+from typing import Any, Generator, Match
 from collections.abc import Callable
 
 from src.utils.trace import Trace, Color
@@ -25,7 +25,7 @@ from src.utils.trace import Trace, Color
 
 def my_decorator(func: Callable) -> Callable:
     @functools.wraps(func)
-    def wrapper(*args: any, **kwargs: any) -> any:
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
 
         # before ...
 
@@ -42,7 +42,7 @@ def my_decorator(func: Callable) -> Callable:
 def my_decorator( ... ) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
-        def wrapper(*args: any, **kwargs: any) -> any:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
 
             # before ...
 
@@ -63,7 +63,7 @@ def my_decorator( ... ) -> Callable:
 def duration(pre_text: str=None, rounds: int=1) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(replace_arguments)
-        def wrapper(*args: any, **kwargs: any) -> any:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             start_time = time.perf_counter()
 
             result = func(*args, **kwargs)
@@ -96,7 +96,7 @@ def duration(pre_text: str=None, rounds: int=1) -> Callable:
 def deprecation(message: str="") -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
-        def wrapper(*args: any, **kwargs: any) -> any:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
 
             # before ...
 
@@ -120,7 +120,7 @@ def deprecation(message: str="") -> Callable:
 def retry_exception(pre_text: str=None, exception=Exception, delay: int|float=1, retries: int=5) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
-        def wrapper(*args: any, **kwargs: any) -> any:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
 
             if pre_text is None:
                 pretext = func.__name__
@@ -158,7 +158,7 @@ def retry_exception(pre_text: str=None, exception=Exception, delay: int|float=1,
 def type_check(*expected_types) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
-        def wrapper(*args: any, **kwargs: any) -> any:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             result = func(*args, **kwargs)
 
             for arg, expected_type in zip(args, expected_types):
