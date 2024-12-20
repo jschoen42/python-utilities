@@ -1,2 +1,11 @@
 pyyaml
 tzdata
+result
+
+python-dateutil
+openpyxl
+xmltodict
+dicttoxml
+orjson
+pymediainfo
+mutagen

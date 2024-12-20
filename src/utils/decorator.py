@@ -1,13 +1,13 @@
 """
-    (c) Jürgen Schoenemeyer, 20.12.2024
+    © Jürgen Schoenemeyer, 20.12.2024
 
-    public
+    PUBLIC:
      - @duration(pre_text: str="", rounds: int=1)
      - @deprecation(message: str="")
 
      - @retry_exception(pre_text: str="", exception=Exception, delay: int|float=1, retries: int=5)
 
-    privat
+    PRIVAT:
       - def replace_arguments(match: Match, func_name: str, *args, **kwargs) -> str:
 """
 

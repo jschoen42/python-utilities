@@ -23,7 +23,7 @@ def main():
     optional  = Prefs.get("files.optional")
 
     for project in projects:
-        dest = Path(DRIVE + project["path"]) / project["name"]
+        dest = DRIVE / project["path"] / project["name"]
 
         if not os.path.exists(dest):
             Trace.error(f"Project '{dest}' not found")

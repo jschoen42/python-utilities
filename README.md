@@ -8,7 +8,7 @@
 | file.py      | 10.12.2024  | |
 | files.py     | 06.12.2024  | rustedpy  |
 | format.py    | 03.12.2024  | |
-| globals.py   | 17.12.2024  | |
+| globals.py   | 20.12.2024  | |
 | log.py       | 03.12.2024  | |
 | metadata.py  | 03.12.2024  | |
 | metadata_mutagen.py | 18.12.2024 | |
