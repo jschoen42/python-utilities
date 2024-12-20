@@ -2,7 +2,7 @@ pyyaml
 tzdata
 result
 
-python-dateutil
+arrow
 openpyxl
 xmltodict
 dicttoxml

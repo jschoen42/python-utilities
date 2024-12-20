@@ -1,0 +1,17 @@
+zz-utils v0.1.0
+├── arrow v1.3.0
+│   ├── python-dateutil v2.9.0.post0
+│   │   └── six v1.17.0
+│   └── types-python-dateutil v2.9.0.20241206
+├── dicttoxml v1.7.16
+├── mutagen v1.47.0
+├── openpyxl v3.1.5
+│   └── et-xmlfile v2.0.0
+├── orjson v3.10.12
+├── pymediainfo v6.1.0
+├── python-dateutil v2.9.0.post0 (*)
+├── pyyaml v6.0.2
+├── result v0.17.0
+├── tzdata v2024.2
+└── xmltodict v0.14.2
+(*) Package tree already displayed
