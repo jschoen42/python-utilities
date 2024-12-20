@@ -17,8 +17,8 @@ import mutagen.mp4
 #from mutagen.mp4 import MP4
 #from mutagen.wave import WAVE
 
-from src.utils.trace import Trace
-from src.utils.decorator import deprecation
+from utils.trace import Trace
+from utils.decorator import deprecation
 
 ###########################################
 #  mutagen
