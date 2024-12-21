@@ -12,6 +12,7 @@
 | log.py       | 20.12.2024  | |
 | metadata.py  | 20.12.2024  | |
 | metadata_mutagen.py | 20.12.2024 | |
+| pandas.py    | 21.12.2024  | |
 | prefs.py     | 21.12.2024  | |
 | text.py      | 20.12.2024  | |
 | trace.py     | 21.12.2024  | |

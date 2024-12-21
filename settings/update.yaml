@@ -19,6 +19,7 @@ files:
     - src/utils/format.py
     - src/utils/log.py
     - src/utils/metadata.py
+    - src/utils/pandas.py
     - src/utils/prefs.py
     - src/utils/text.py
     - src/utils/util.py
