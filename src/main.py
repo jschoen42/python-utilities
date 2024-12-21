@@ -83,6 +83,6 @@ if __name__ == "__main__":
     Trace.action(f"BASE_PATH: '{BASE_PATH.resolve()}'")
 
     Prefs.init("settings", "")
-    Prefs.read("projects.yaml")
-    Prefs.read("update.yaml")
+    Prefs.load("projects.yaml")
+    Prefs.load("update.yaml")
     main()
