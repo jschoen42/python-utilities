@@ -12,8 +12,8 @@ from pathlib import Path
 import pandas as pd
 from pandas import DataFrame
 
-from utils.trace     import Trace
-from utils.file import check_file_exists
+from utils.trace import Trace
+from utils.file  import check_file_exists
 
 # https://pandas.pydata.org/docs/user_guide/io.html
 

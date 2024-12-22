@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 20.12.2024
+    © Jürgen Schoenemeyer, 21.12.2024
 
     PUBLIC:
      - @duration(pre_text: str="", rounds: int=1)
@@ -62,7 +62,7 @@ def my_decorator( ... ) -> Callable:
 
 def duration(pre_text: str=None, rounds: int=1) -> Callable:
     def decorator(func: Callable) -> Callable:
-        @functools.wraps(replace_arguments)
+        @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             start_time = time.perf_counter()
 
@@ -169,7 +169,6 @@ def type_check(*expected_types) -> Callable:
         return wrapper
     return decorator
 
-
 ###### decorator with ContextManager
 
 # https://www.youtube.com/watch?v=_QXlbwRmqgI&t=260s
@@ -192,24 +191,23 @@ def duration_cm(name: str) -> Generator[None, None, None]:
 # helper
 
 def replace_arguments(match: Match, func_name: str, *args, **kwargs) -> str:
-    argument = match.group(1)
+    arguments = match.group(1)
 
-    if argument == "__name__":
+    if arguments == "__name__":
         return( func_name )
 
-    elif argument.isnumeric():
-        # args
-        pos = int(argument)
-        if pos < len(args):
-            return str(args[pos])  # {0} -> args[0]
-        else:
-            Trace.error(f"arg '{pos}' does not exist")
-            return f"<'{pos}' not exist>"
+    for argument in arguments.split("|"):
+        if argument.isnumeric():
+            # args
+            pos = int(argument)
+            if pos < len(args):
+                return str(args[pos])  # {0} -> args[0]
 
-    else:
-        # kwargs
-        if argument in kwargs:
-            return str(kwargs.get(argument)) # {type} -> kwargs["type"]
         else:
-            Trace.error(f"kwarg '{argument}' does not exist")
-            return f"<'{argument}' not exist>"
+            # kwargs
+            if argument in kwargs:
+                return str(kwargs.get(argument)) # {type} -> kwargs["type"]
+
+    # Trace.error(f"arg/kwarg '{arguments}' does not exist")
+    # return f"'{{{arguments}}} not exist'"
+    return ""
