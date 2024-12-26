@@ -137,6 +137,9 @@ projects:
   - name: try-stanza
     path: /Python/Whisper
 
+  - name: try-whisper
+    path: /Python/Whisper
+
   - name: whisper-datev-gitlab
     path: /Python/Whisper
 

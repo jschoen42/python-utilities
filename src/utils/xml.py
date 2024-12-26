@@ -1,25 +1,24 @@
 """
-    © Jürgen Schoenemeyer, 20.12.2024
+    © Jürgen Schoenemeyer, 26.12.2024
 
     PUBLIC:
-     - open_xml_as_dict(myzip: ZipFile, path: Path | str, comment: str = "[open_xml_as_dict]") -> dict | None
+     - open_xml_as_dict(myzip: ZipFile, path: Path | str) -> dict | None
 """
 
 from pathlib import Path
 from zipfile import ZipFile
 
 import xmltodict
+from xmltodict import ParsingInterrupted
 
 from utils.trace import Trace
-from utils.file import get_trace_path
 
-def open_xml_as_dict(myzip: ZipFile, path: Path | str, comment: str = "[open_xml_as_dict]") -> dict | None:
+def open_xml_as_dict(myzip: ZipFile, path: Path | str) -> dict | None:
     try:
         with myzip.open(path) as xml_file:
             data = xmltodict.parse(xml_file.read())
-    except OSError as err:
-        error = str(err).split(":")[0]
-        Trace.error(f"{error} '{get_trace_path(path)}'")
-        data = None
+    except (KeyError, ParsingInterrupted) as err:
+        Trace.error(f"{path} > {err}")
+        return None
 
     return data
