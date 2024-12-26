@@ -5,6 +5,7 @@ data/*
 !data/.gitkeep
 
 *.7z
+__history.txt
 
 ### Python
 
