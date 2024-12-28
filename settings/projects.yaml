@@ -1,3 +1,6 @@
+%YAML 1.1
+---
+
 projects:
   - name: _empty
     path: /Python
@@ -129,6 +132,9 @@ projects:
     path: /Python/Whisper
 
   - name: try-faster-whisper
+    path: /Python/Whisper
+
+  - name: patch-faster-whisper
     path: /Python/Whisper
 
   - name: try-spacy

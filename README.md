@@ -10,7 +10,7 @@
 | format.py    | 20.12.2024  | |
 | globals.py   | 20.12.2024  | |
 | log.py       | 20.12.2024  | |
-| metadata.py  | 20.12.2024  | |
+| metadata.py  | 28.12.2024  | |
 | metadata_mutagen.py | 20.12.2024 | |
 | pandas.py    | 21.12.2024  | |
 | prefs.py     | 23.12.2024  | |
