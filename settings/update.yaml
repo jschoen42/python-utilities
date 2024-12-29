@@ -5,6 +5,7 @@ files:
   mandatory:
     - ___install.txt
     - ruff.toml
+    - LICENSE
     - .vscode/launch.json
     - .vscode/settings.json
     - src/__init__.py

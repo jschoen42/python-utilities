@@ -89,6 +89,9 @@ projects:
   - name: rustedpy
     path: /Python
 
+  - name: normalize-wav
+    path: /Python/SciPy
+
   - name: sockets-client-server
     path: /Python
 
