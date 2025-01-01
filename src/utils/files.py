@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 20.12.2024
+    © Jürgen Schoenemeyer, 01.01.2025
 
     error channel -> rustedpy/result
 
@@ -24,6 +24,10 @@
      - .txt
      - .json (json or orjson)
      - .xml (minidom or xml.etree.ElementTree)
+     #
+     ------
+     check_path_exist(path: Path | str, case_sensitive: bool=False, debug: bool=False) -> Result[str, str]
+
 """
 
 import os
@@ -53,7 +57,7 @@ except ModuleNotFoundError:
 
 from result import Result, Ok, Err
 
-from utils.trace import Trace
+from utils.trace import Trace, Color
 
 TIMESTAMP = "%Y-%m-%d_%H-%M-%S"
 
@@ -415,3 +419,61 @@ def listdir_ext(dirpath: Path | str, extensions: list = None) -> Result[list, st
                 ret.append(file)
 
     return Ok(ret)
+
+def check_path_exist(path: Path | str, case_sensitive: bool=False, debug: bool=False) -> Result[str, str]:
+    if str(path)[-1] == ":":
+        path = str(path) + "/"
+
+    path = Path(path)
+
+    if path.exists():
+        if not case_sensitive:
+            return Ok(Color.GREEN + str(path.as_posix()) + Color.RESET)
+
+        if os.path.abspath(path) == os.path.realpath(path):
+            return Ok(Color.GREEN + str(path.as_posix()) + Color.RESET)
+
+    name = ""
+    suffix = path.suffix
+
+    if suffix != "":
+        name = path.name
+        path = path.parent
+
+    error = False
+    success = Path()
+
+    txt = Color.GREEN
+    for part in path.parts:
+        if not error:
+            if case_sensitive:
+                if (success / part).exists() and os.path.abspath(success / part) == os.path.realpath(success / part):
+                    success = success / part
+                else:
+                    error = True
+                    txt += Color.RED + Color.BOLD
+
+            else:
+                if (success / part).exists():
+                    success = success / part
+                else:
+                    error = True
+                    txt += Color.RED + Color.BOLD
+
+        txt += part + "/"
+
+    if name == "":
+        txt = txt[:-1]
+    else:
+        if error:
+            txt += name
+        else:
+            txt += Color.RED + Color.BOLD + name
+
+    txt += Color.RESET
+
+    txt = str(Path(txt).as_posix())
+    if debug:
+        Trace.error( f"path '{txt}' not found" )
+
+    return Err(f"{txt}")

@@ -85,4 +85,9 @@ if __name__ == "__main__":
     Prefs.init("settings", "")
     Prefs.load("projects.yaml")
     Prefs.load("update.yaml")
-    main()
+
+    try:
+        main()
+    except KeyboardInterrupt:
+        Trace.exception("KeyboardInterrupt")
+        sys.exit()

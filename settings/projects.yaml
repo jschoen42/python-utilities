@@ -14,6 +14,9 @@ projects:
   - name: audible-create-cue
     path: /Python
 
+  - name: beautify-files
+    path: /Python
+
   - name: circular-buffer
     path: /Python/PyTest
 

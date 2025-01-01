@@ -17,6 +17,7 @@ files:
   optional:
     - src/utils/
     - src/utils/audio.py
+    - src/utils/beautify.py
     - src/utils/excel.py
     - src/utils/file.py
     - src/utils/files.py
