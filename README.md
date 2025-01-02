@@ -6,7 +6,7 @@
 | beautify.py  | 01.01.2025  | |
 | decorator.py | 24.12.2024  | |
 | excel.py     | 21.12.2024  | |
-| file.py      | 21.12.2024  | |
+| file.py      | 02.01.2025  | |
 | files.py     | 01.01.2025  | rustedpy  |
 | format.py    | 20.12.2024  | |
 | globals.py   | 20.12.2024  | |

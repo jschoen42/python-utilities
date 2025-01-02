@@ -15,7 +15,6 @@ files:
     - src/utils/globals.py
 
   optional:
-    - src/utils/
     - src/utils/audio.py
     - src/utils/beautify.py
     - src/utils/excel.py
@@ -24,6 +23,7 @@ files:
     - src/utils/format.py
     - src/utils/log.py
     - src/utils/metadata.py
+    - src/utils/metadata_mutagen.py
     - src/utils/pandas.py
     - src/utils/prefs.py
     - src/utils/text.py
