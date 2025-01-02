@@ -14,7 +14,7 @@ from pathlib import Path
 from utils.globals   import DRIVE, BASE_PATH
 from utils.trace     import Trace
 from utils.prefs     import Prefs
-from utils.file      import get_modification_timestamp, set_modification_timestamp
+from utils.file      import get_modification_timestamp, set_modification_timestamp, delete_file
 
 SOURCE_PATH = BASE_PATH
 
@@ -23,6 +23,7 @@ def main():
     mandatory = Prefs.get("files.mandatory")
     optional  = Prefs.get("files.optional")
     new       = Prefs.get("files.new")
+    delete    = Prefs.get("files.delete")
 
     for project in projects:
         dest = DRIVE / project["path"] / project["name"]
@@ -40,6 +41,9 @@ def main():
 
         for file in new:
             copy_file_special( SOURCE_PATH, dest, project["name"], file, "new" )
+
+        for file in delete:
+            delete_file( dest, file )
 
 def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, type: str ):
     src = source / filepath

@@ -3,7 +3,7 @@
 
 files:
   mandatory:
-    - ___install.txt
+    - ___cheatsheet.txt
     - ruff.toml
     - LICENSE
     - .vscode/launch.json
@@ -36,3 +36,7 @@ files:
   new:
     - ___start.txt
     - .gitignore
+
+  delete:
+    - ___install.txt
+
