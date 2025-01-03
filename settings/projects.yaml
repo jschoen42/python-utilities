@@ -38,6 +38,9 @@ projects:
   - name: fastapi-tests
     path: /Python/FastAPI
 
+  - name: elevenlabs-api
+    path: /Python/ElevenLabs
+
   - name: flask-api
     path: /Python/Flask
 
@@ -121,6 +124,12 @@ projects:
 
   - name: svg-wrapper
     path: /Python
+
+  - name: custom-tkinter-try
+    path: /Python/Tkinter
+
+  - name: pygubu-try
+    path: /Python/Tkinter
 
   - name: try-pandas
     path: /Python/Pandas
