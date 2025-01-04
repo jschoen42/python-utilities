@@ -78,7 +78,7 @@ def format_timestamp(seconds: float, always_include_hours: bool=False, decimal_m
         f"{hours_marker}{minutes:02d}:{seconds:02d}{decimal_marker}{milliseconds:03d}"
    )
 
-def import_text(folderpath: Path | str, filename: Path|str, encoding: str="utf-8", show_error: bool=True) -> str | None:
+def import_text(folderpath: Path | str, filename: Path | str, encoding: str="utf-8", show_error: bool=True) -> str | None:
     filepath = Path(folderpath, filename)
 
     if filepath.is_file():
@@ -101,14 +101,14 @@ def import_text(folderpath: Path | str, filename: Path|str, encoding: str="utf-8
         return None
 
 def import_json_timestamp(folderpath: Path | str, filename: str, show_error: bool=True) -> Tuple[dict | None, float | None]:
-    ret = import_json(folderpath, filename, show_error )
+    ret = import_json(folderpath, filename, show_error=show_error)
     if ret:
         return ret, get_modification_timestamp(Path(folderpath, filename))
     else:
         return None, None
 
 def import_json(folderpath: Path | str, filename: str, show_error: bool=True) -> dict | None:
-    result = import_text(folderpath, filename, show_error)
+    result = import_text(folderpath, filename, show_error=show_error)
     if result:
         return json.loads(result)
     else:

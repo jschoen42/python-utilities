@@ -4,7 +4,7 @@
 | :----------- | :---------: | :-------: |
 | audio.py     | 20.12.2024  | |
 | beautify.py  | 01.01.2025  | |
-| decorator.py | 24.12.2024  | |
+| decorator.py | 04.01.2025  | |
 | excel.py     | 21.12.2024  | |
 | file.py      | 03.01.2025  | |
 | files.py     | 01.01.2025  | rustedpy  |
