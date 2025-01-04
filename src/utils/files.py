@@ -76,7 +76,7 @@ def get_timestamp(filepath: Path | str) -> Result[float, str]:
 
     if not filepath.exists():
         err = f"'{filepath}' does not exist"
-        Trace.debug(f"{err}")
+        Trace.debug(err)
         return Err(err)
 
     try:
@@ -136,7 +136,7 @@ def get_files_dirs(path: str, extensions: list) -> Result[Tuple[list, list], str
         Trace.error(f"{err}")
         return Err(f"{err}")
 
-    return Ok(files, dirs)
+    return Ok((files, dirs))
 
 def read_file(filepath: Path | str, encoding: str="utf-8") -> Result[Any, str]:
     """
@@ -225,10 +225,14 @@ def read_file(filepath: Path | str, encoding: str="utf-8") -> Result[Any, str]:
             # data = ET.fromstring(text)
             data = minidom.parseString(text)
         except (TypeError, AttributeError) as err:
-            err = f"ParseError: {err}"
-            Trace.debug(err)
-            return Err(err)
+            error = f"ParseError: {err}"
+            Trace.debug(error)
+            return Err(error)
         return Ok(data)
+
+    else:
+        Trace.error(f"Type '{type}' is not supported")
+        return Err(f"Type '{type}' is not supported")
 
 
 def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False, timestamp: int|float = 0, encoding: str="utf-8", newline: str="\n", create_dir: bool = True, show_message: bool=True) -> Result[str, str]:
@@ -300,8 +304,9 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
                 else:
                     text = json.dumps(data, default=serialize_sets, indent=2, ensure_ascii=False)
             except TypeError as err:
-                Trace.error(f"TypeError: {err}")
-                return Err(err)
+                error = f"TypeError: {err}"
+                Trace.error(error)
+                return Err(error)
         else:
             error = f"Type '{type(data)}' is not supported for '{suffix}'"
             Trace.error(error)
@@ -327,7 +332,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
         else:
             error = f"Type '{type(data)}' is not supported for '{suffix}'"
-            Trace.debug(error)
+            Trace.debug(f"{error}")
             return Err(error)
 
     else:
