@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.01.2025
+    © Jürgen Schoenemeyer, 04.01.2025
 
     PUBLIC:
      - beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool:
@@ -195,4 +195,7 @@ def beautify_file( file_type: str, source_path: Path | str, source_filename: str
         Trace.error( f"unknown file type '{file_type}'" )
         return False
 
-    return export_text(dest.parent, dest.name, data, timestamp = mtime)
+    if export_text(dest.parent, dest.name, data, timestamp = mtime):
+        return True
+    else:
+        return False

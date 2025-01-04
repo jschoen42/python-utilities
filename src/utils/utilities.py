@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 20.12.2024
+    © Jürgen Schoenemeyer, 04.01.2025
 
     PUBLIC:
      - clean_import_json(text: str) -> str | bool
@@ -16,7 +16,7 @@ import functools
 import traceback
 import re
 
-from typing import Any
+from typing import Any, Callable
 from collections import OrderedDict
 
 from utils.prefs import Prefs
@@ -68,13 +68,13 @@ def check_html(text_id: str, text: str) -> None:
 # http://www.blog.pythonlibrary.org/2016/06/09/python-how-to-create-an-exception-logging-decorator/
 # https://stackoverflow.com/questions/14527819/traceback-shows-up-until-decorator
 
-def exception(function):
+def exception(function: Callable) -> Callable:
     """
     A decorator that wraps the passed in function and logs
     exceptions should one occur
     """
     @functools.wraps(function)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         try:
             return function(*args, **kwargs)
         except Exception:
@@ -97,7 +97,7 @@ def check_url(url: str) -> bool:
     ret = re.match(regex, url) is not None
     return ret
 
-def insert_meta_node(data: OrderedDict, in_type: str, language: str = None) -> None:
+def insert_meta_node(data: OrderedDict, in_type: str, language: str | None = None) -> None:
     if ".meta" not in data:
         data[".meta"] = OrderedDict()
 

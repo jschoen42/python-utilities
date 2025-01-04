@@ -335,20 +335,20 @@ class Trace:
             return datetime.now().strftime("%H:%M:%S.%f")[:-3]
 
         elif tz is True:
-            tz = datetime.now().astimezone()
-            return tz.strftime("%H:%M:%S.%f")[:-3] + tz.strftime("%z")
+            d = datetime.now().astimezone()
+            return tz.strftime("%H:%M:%S.%f")[:-3] + d.strftime("%z")
 
         else:
             try:
                 timezone = ZoneInfo(tz)
-                tz = datetime.now().astimezone(timezone)
-                return tz.strftime("%H:%M:%S.%f")[:-3] + tz.strftime("%z")
+                d = datetime.now().astimezone(timezone)
+                return d.strftime("%H:%M:%S.%f")[:-3] + d.strftime("%z")
 
             # "tzdata" not installed
 
             except ZoneInfoNotFoundError:
-                tz = datetime.now().astimezone()
-                return tz.strftime("%H:%M:%S.%f")[:-3] + tz.strftime("%z")
+                d = datetime.now().astimezone()
+                return d.strftime("%H:%M:%S.%f")[:-3] + d.strftime("%z")
 
     @classmethod
     def __get_time(cls) -> str:
@@ -412,7 +412,7 @@ class Trace:
 
         # https://docs.python.org/3/library/io.html#io.IOBase.isatty
 
-        def is_redirected(stream):
+        def is_redirected(stream: Any) -> bool:
             return not hasattr(stream, "isatty") or not stream.isatty()
 
         if not cls.settings["color"] or is_redirected(sys.stdout):

@@ -75,7 +75,7 @@ def get_media_info(filepath: str | BytesIO) -> None | dict:
         Trace.error(f"MediaInfo: {error}")
         return None
 
-def get_audio_duration(filepath: str) -> float:
+def get_audio_duration(filepath: str | BytesIO) -> float:
     duration = -1
 
     media_info = MediaInfo.parse(filepath)
@@ -85,7 +85,7 @@ def get_audio_duration(filepath: str) -> float:
 
     return duration
 
-def get_media_trackinfo(filepath: str) -> None | dict:
+def get_media_trackinfo(filepath: str | BytesIO) -> None | dict:
     ret = None
 
     media_info = MediaInfo.parse(filepath)
@@ -95,7 +95,7 @@ def get_media_trackinfo(filepath: str) -> None | dict:
 
     return ret
 
-def get_video_metadata_mediainfo(filepath: str) -> None |dict:
+def get_video_metadata_mediainfo(filepath: str | BytesIO) -> None |dict:
 
     info = {
         "width":    "",

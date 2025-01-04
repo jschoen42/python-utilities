@@ -97,7 +97,7 @@ def bin_nibble(val: int) -> str:
     b = bin(val)[2:]
     return  ".".join([b[::-1][i:i+4][::-1] for i in range(0, len(b), 4)][::-1])
 
-def to_bool(in_text: str) -> bool:
+def to_bool(in_text: str) -> None | bool:
     if in_text.lower() == "true":
         return True
     elif in_text.lower() == "false":

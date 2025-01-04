@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 20.12.2024
+    © Jürgen Schoenemeyer, 04.01.2025
 
     PUBLIC:
      - check_zip(in_zip, path: str, files: list) -> dict[str]
@@ -16,7 +16,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 from utils.trace import Trace
 from utils.file  import get_trace_path
 
-def check_zip(myzip, path: str | Path, files: list) -> dict[str]:
+def check_zip(myzip: ZipFile, path: Path | str, files: list) -> dict[str]:
     path = Path(path)
 
     errors = {}
@@ -29,7 +29,7 @@ def check_zip(myzip, path: str | Path, files: list) -> dict[str]:
 
     return errors
 
-def expand_zip(source_path: str | Path, dest_path: str | Path) -> bool:
+def expand_zip(source_path: Path | str, dest_path: Path | str) -> bool:
     source_path = Path(source_path)
     dest_path = Path(dest_path)
 
@@ -45,7 +45,7 @@ def expand_zip(source_path: str | Path, dest_path: str | Path) -> bool:
         Trace.error(f"file not exist: '{get_trace_path(dest_path)}'")
         return False
 
-def create_zip(source_path: str | Path, dest_path: str | Path, filename: str, compression = 6) -> bool:
+def create_zip(source_path: Path | str, dest_path: Path | str, filename: str, compression: int = 6) -> bool:
     source_path = Path(source_path)
     dest_path = Path(dest_path)
 

@@ -89,7 +89,7 @@ def my_decorator(function=None, *, ... ) -> Callable:
 # @duration("{__name__} 1: {0|name} {1|number} {2|type}", rounds=1)
 # @duration(text="{__name__} 0: {0} {1} {2}", rounds=1)
 
-def duration(special: Callable[..., Any] | str = None, *, text: str | None = None, rounds: int=1) -> Callable:
+def duration(special: Callable[..., Any] | str | None = None, *, text: str | None = None, rounds: int=1) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:

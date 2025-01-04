@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.01.2025
+    © Jürgen Schoenemeyer, 04.01.2025
 
     error channel -> rustedpy/result
 
@@ -27,7 +27,6 @@
      #
      ------
      check_path_exist(path: Path | str, case_sensitive: bool=False, debug: bool=False) -> Result[str, str]
-
 """
 
 import os
@@ -72,6 +71,8 @@ def get_timestamp(filepath: Path | str) -> Result[float, str]:
      - Ok: timestamp as float
      - Err: errortext as str
     """
+
+    filepath = Path(filepath)
 
     if not filepath.exists():
         err = f"'{filepath}' does not exist"
@@ -206,17 +207,17 @@ def read_file(filepath: Path | str, encoding: str="utf-8") -> Result[Any, str]:
             try:
                 data = orjson.loads(text)
             except orjson.JSONDecodeError as err:
-                err = f"JSONDecodeError: {filepath} => {err}"
-                Trace.debug(err)
-                return Err(err)
+                error = f"JSONDecodeError: {filepath} => {err}"
+                Trace.debug(error)
+                return Err(error)
             return Ok(data)
         else:
             try:
                 data = json.loads(text)
             except json.JSONDecodeError as err:
-                err = f"JSONDecodeError: {filepath} => {err}"
-                Trace.debug(err)
-                return Err(err)
+                error = f"JSONDecodeError: {filepath} => {err}"
+                Trace.debug(error)
+                return Err(error)
             return Ok(data)
 
     elif type == "xml":
@@ -286,7 +287,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
         # json -> json
 
-        def serialize_sets(obj):
+        def serialize_sets(obj: Any) -> Any:
             if isinstance(obj, set):
                 return sorted(obj)
 
@@ -302,9 +303,9 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
                 Trace.error(f"TypeError: {err}")
                 return Err(err)
         else:
-            err = f"Type '{type(data)}' is not supported for '{suffix}'"
-            Trace.error(err)
-            return Err(err)
+            error = f"Type '{type(data)}' is not supported for '{suffix}'"
+            Trace.error(error)
+            return Err(error)
 
     elif suffix == ".xml":
 
@@ -325,14 +326,14 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
             text = text.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
 
         else:
-            err = f"Type '{type(data)}' is not supported for '{suffix}'"
-            Trace.debug(err)
-            return Err(err)
+            error = f"Type '{type(data)}' is not supported for '{suffix}'"
+            Trace.debug(error)
+            return Err(error)
 
     else:
-        err = f"Type '{suffix}' is not supported"
-        Trace.debug(err)
-        return Err(err)
+        error = f"Type '{suffix}' is not supported"
+        Trace.debug(error)
+        return Err(error)
 
     # 2. directory check
 
@@ -392,7 +393,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
     return Ok("")
 
-def listdir_ext(dirpath: Path | str, extensions: list = None) -> Result[list, str]:
+def listdir_ext(dirpath: Path | str, extensions: list | None = None) -> Result[list, str]:
     """
     ### list all files in directory which matches the extentions
 

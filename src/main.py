@@ -11,6 +11,27 @@ import hashlib
 import shutil
 from pathlib import Path
 
+import utils.audio
+import utils.beautify
+import utils.decorator
+import utils.excel
+import utils.file
+import utils.files
+import utils.format
+import utils.globals
+import utils.log
+import utils.metadata
+import utils.metadata_mutagen
+import utils.pandas
+import utils.prefs
+import utils.text
+import utils.trace
+import utils.util
+import utils.utilities
+import utils.utils
+import utils.xml
+import utils.zip
+
 from utils.globals   import DRIVE, BASE_PATH
 from utils.trace     import Trace
 from utils.prefs     import Prefs
@@ -18,7 +39,7 @@ from utils.file      import get_modification_timestamp, set_modification_timesta
 
 SOURCE_PATH = BASE_PATH
 
-def main():
+def main() -> None:
     projects  = Prefs.get("projects")
     mandatory = Prefs.get("files.mandatory")
     optional  = Prefs.get("files.optional")
@@ -45,7 +66,7 @@ def main():
         for file in delete:
             delete_file( dest, file )
 
-def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, type: str ):
+def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, type: str ) -> None:
     src = source / filepath
     dst = dest / filepath
 

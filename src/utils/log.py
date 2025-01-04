@@ -160,4 +160,4 @@ class DictionaryLog:
                 self.spelling[key] = value
 
     def get(self) -> Tuple[dict, dict, dict]:
-        return (self.excel_used, self.word_replaced, self.spelling)
+        return self.excel_used, self.word_replaced, self.spelling
