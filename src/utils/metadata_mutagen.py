@@ -18,14 +18,14 @@ import mutagen.mp4
 #from mutagen.wave import WAVE
 
 from utils.trace import Trace
-from utils.decorator import deprecation
+from utils.decorator import deprecated
 
 ###########################################
 #  mutagen
 #  https://pypi.org/project/mutagen/
 ###########################################
 
-@deprecation("licence does not fit")
+@deprecated("licence does not fit")
 def get_audioinfo_mutagen(filepath: str) -> dict:
     metadata = mutagen.mp3.Open(filepath)
 
@@ -51,7 +51,7 @@ def get_audioinfo_mutagen(filepath: str) -> dict:
     }
     return info
 
-@deprecation("licence does not fit")
+@deprecated("licence does not fit")
 def get_audio_metadata_mutagen(filepath: Path | str) -> dict | None:
 
     try:
@@ -76,7 +76,7 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> dict | None:
         "sampleRate":  sample_rate,
     }
 
-@deprecation("licence does not fit")
+@deprecated("licence does not fit")
 def get_video_metadata_mutagen(filepath: Path | str) -> dict | None:
     try:
         metadata = mutagen.mp4.Open(Path(filepath))
