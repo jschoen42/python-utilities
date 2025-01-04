@@ -32,7 +32,7 @@
 import os
 import sys
 
-from typing import Any, Tuple
+from typing import Any, Dict, Tuple
 from datetime import datetime
 from pathlib import Path
 
@@ -297,7 +297,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
             return obj
 
-        if isinstance(data, dict) or isinstance(data, list):
+        if isinstance(data, Dict) or isinstance(data, list):
             try:
                 if "orjson" in sys.modules:
                     text = orjson.dumps(data, default=serialize_sets, option=orjson.OPT_INDENT_2).decode("utf-8")
@@ -326,7 +326,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
         # json -> xml
 
-        elif isinstance(data, dict):
+        elif isinstance(data, Dict):
             text = minidom.parseString(dicttoxml(data)).toprettyxml(indent="  ")
             text = text.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
 
@@ -434,10 +434,10 @@ def check_path_exist(path: Path | str, case_sensitive: bool=False, debug: bool=F
 
     if path.exists():
         if not case_sensitive:
-            return Ok(Color.GREEN + str(path.as_posix()) + Color.RESET)
+            return Ok(f"{Color.GREEN}{path.as_posix()}{Color.RESET}")
 
         if os.path.abspath(path) == os.path.realpath(path):
-            return Ok(Color.GREEN + str(path.as_posix()) + Color.RESET)
+            return Ok(f"{Color.GREEN}{path.as_posix()}{Color.RESET}")
 
     name = ""
     suffix = path.suffix
@@ -449,7 +449,7 @@ def check_path_exist(path: Path | str, case_sensitive: bool=False, debug: bool=F
     error = False
     success = Path()
 
-    txt = Color.GREEN
+    txt = f"{Color.GREEN}"
     for part in path.parts:
         if not error:
             if case_sensitive:
@@ -457,14 +457,14 @@ def check_path_exist(path: Path | str, case_sensitive: bool=False, debug: bool=F
                     success = success / part
                 else:
                     error = True
-                    txt += Color.RED + Color.BOLD
+                    txt += f"{Color.RED}{Color.BOLD}"
 
             else:
                 if (success / part).exists():
                     success = success / part
                 else:
                     error = True
-                    txt += Color.RED + Color.BOLD
+                    txt += f"{Color.RED}{Color.BOLD}"
 
         txt += part + "/"
 
@@ -474,9 +474,9 @@ def check_path_exist(path: Path | str, case_sensitive: bool=False, debug: bool=F
         if error:
             txt += name
         else:
-            txt += Color.RED + Color.BOLD + name
+            txt += f"{Color.RED}{Color.BOLD}{name}"
 
-    txt += Color.RESET
+    txt += f"{Color.RESET}"
 
     txt = str(Path(txt).as_posix())
     if debug:

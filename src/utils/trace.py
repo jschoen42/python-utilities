@@ -40,7 +40,7 @@ import re
 import inspect
 import importlib.util
 
-from typing import Any, Callable
+from typing import Any, Callable, Dict
 from enum import StrEnum
 from pathlib import Path
 from datetime import datetime
@@ -56,8 +56,8 @@ else:
 
 # https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 
-def ansi_code(code: int, modifier: int = 0) -> str:
-    return f"\033[{modifier};{code}m"
+def ansi_code(code: int) -> str:
+    return f"\033[{code}m"
 
 class Color(StrEnum):
     RESET            = ansi_code(0)
@@ -139,7 +139,7 @@ class Trace:
     default_base = BASE_PATH.resolve()
     default_base_folder = str(default_base).replace("\\", "/")
 
-    settings: dict = {
+    settings: Dict = {
         "appl_folder":    default_base_folder + "/",
 
         "color":          True,

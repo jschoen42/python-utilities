@@ -2,9 +2,9 @@
     © Jürgen Schoenemeyer, 26.12.2024
 
     PUBLIC:
-     - open_xml_as_dict(myzip: ZipFile, path: Path | str) -> dict | None
+     - open_xml_as_dict(myzip: ZipFile, path: Path | str) -> Dict | None
 """
-
+from typing import Dict
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -13,7 +13,7 @@ from xmltodict import ParsingInterrupted
 
 from utils.trace import Trace
 
-def open_xml_as_dict(myzip: ZipFile, path: Path | str) -> dict | None:
+def open_xml_as_dict(myzip: ZipFile, path: Path | str) -> Dict | None:
     try:
         with myzip.open(path) as xml_file:
             data = xmltodict.parse(xml_file.read())

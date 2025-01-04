@@ -14,6 +14,7 @@
 import os
 import json
 
+from typing import Dict
 from pathlib import Path
 
 import jsbeautifier
@@ -24,7 +25,7 @@ from utils.trace     import Trace
 from utils.decorator import duration
 from utils.util      import import_text, export_text
 
-expand_data_js: dict = {
+expand_data_js: Dict = {
     "!0":  "true",
     "!1":  "false",
 
@@ -134,7 +135,7 @@ expand_data_js: dict = {
     "~~(": "Math.floor(",
 }
 
-expand_data_css: dict = {
+expand_data_css: Dict = {
     ">":      " > ",
     "  >  ":  " > ",
 
