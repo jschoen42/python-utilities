@@ -111,7 +111,7 @@ def check_excel_file_exists(filename: Path|str) -> bool:
 
 # dir Listing
 
-def List_files(path: str, extensions: List) -> Tuple[List, List]:
+def list_files(path: str, extensions: List) -> Tuple[List, List]:
     files: List = []
     dirs = []
     try:
@@ -131,7 +131,7 @@ def List_files(path: str, extensions: List) -> Tuple[List, List]:
 
     return files, dirs
 
-def List_directories(path: str) -> List:
+def list_directories(path: str) -> List:
     ret: List = []
 
     try:
@@ -143,7 +143,7 @@ def List_directories(path: str) -> List:
 
     return ret
 
-def Listdir_match_extention(folder_path: Path | str, extensions: List | None = None) -> List:
+def listdir_match_extention(folder_path: Path | str, extensions: List | None = None) -> List:
 
     #  extensions: [".zip", ".story", ".xlsx", ".docx"], None => all
 
