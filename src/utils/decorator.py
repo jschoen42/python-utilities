@@ -89,7 +89,7 @@ def my_decorator(function=None, *, ... ) -> Callable:
 # @duration("{__name__} 1: {0|name} {1|number} {2|type}", rounds=1)
 # @duration(text="{__name__} 0: {0} {1} {2}", rounds=1)
 
-def duration(special: Callable | str=None, *, text: str=None, rounds: int=1) -> Callable:
+def duration(special: Callable[..., Any] | str = None, *, text: str | None = None, rounds: int=1) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -143,7 +143,7 @@ def duration(special: Callable | str=None, *, text: str=None, rounds: int=1) -> 
 # @deprecated( "licence does not fit" )
 # @deprecated( message="licence does not fit" )
 
-def deprecated(special: Callable | str=None, *, message: str=None) -> Callable:
+def deprecated(special: Callable[..., Any] | str | None = None, *, message: str | None = None) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -201,7 +201,7 @@ def deprecated(message: str="") -> Callable:
 # @retry_exception("error limit '{0}'", exception=ValueError)
 # @retry_exception("ttx => font '{0}'", exception=ValueError, delay=2.5, retries=10)
 
-def retry_exception(text: str=None, exception=Exception, delay: int|float=1, retries: int=5) -> Callable:
+def retry_exception(text: str | None = None, exception: type = Exception, delay: int|float=1, retries: int=5) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -301,7 +301,7 @@ def type_check(*expected_types: type) -> Callable:
 # BUT: arg, *kwarg not available
 
 @contextlib.contextmanager
-def duration_cm(name: str) -> Generator[None, None, None, None]:
+def duration_cm(name: str) -> Generator[None, None, None]:
     start_time = time.perf_counter()
     try:
         yield
