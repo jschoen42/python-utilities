@@ -7,7 +7,7 @@
      - exception(function)
      - check_url(url: str) -> bool
      - insert_meta_node(data: OrderedDict, in_type: str, language: str = None) -> None
-     - insert_data_node(data: OrderedDict, paths: list, key: str, value: Any) -> None
+     - insert_data_node(data: OrderedDict, paths: List, key: str, value: Any) -> None
      - prepare_smart_sort(text:str, count:int = 6) -> str:
 """
 
@@ -16,7 +16,7 @@ import functools
 import traceback
 import re
 
-from typing import Any, Callable
+from typing import Any, Callable, List
 from collections import OrderedDict
 
 from utils.prefs import Prefs
@@ -111,7 +111,7 @@ def insert_meta_node(data: OrderedDict, in_type: str, language: str | None = Non
     data[".meta"]["eventName"] = Prefs.get("eventName")
     data[".meta"]["font"]      = Prefs.get("eventFont")
 
-def insert_data_node(data: OrderedDict, paths: list, key: str, value: Any) -> None:
+def insert_data_node(data: OrderedDict, paths: List, key: str, value: Any) -> None:
     curr_node = data
 
     for node in paths:

@@ -7,7 +7,7 @@
      - result = get_timestamp(filepath: Path | str) -> Result[float, str]:
      - result = set_timestamp(filepath: Path | str, timestamp: float) -> Result[(), str]:
     #
-     - result = get_files_dirs(path: str, extensions: list) -> Result[Tuple[list, list], str]:
+     - result = get_files_dirs(path: str, extensions: List) -> Result[Tuple[List, List], str]:
     #
      - result = read_file(filepath: Path | str, encoding: str="utf-8" ) -> Result[Any, str]
      - result = write_file(filepath: Path | str, data: Any, encoding: str="utf-8", create_dir: bool = True, show_message: bool=True) -> Result[str, str]:
@@ -32,7 +32,7 @@
 import os
 import sys
 
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, List, Tuple
 from datetime import datetime
 from pathlib import Path
 
@@ -115,10 +115,10 @@ def set_timestamp(filepath: Path | str, timestamp: int|float) -> Result[str, str
 
     return Ok("")
 
-# dir listing -> list of files and dirs
+# dir Listing -> List of files and dirs
 
-def get_files_dirs(path: str, extensions: list) -> Result[Tuple[list, list], str]:
-    files: list = []
+def get_files_dirs(path: str, extensions: List) -> Result[Tuple[List, List], str]:
+    files: List = []
     dirs = []
     try:
         for filename in os.listdir(path):
@@ -297,7 +297,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
             return obj
 
-        if isinstance(data, Dict) or isinstance(data, list):
+        if isinstance(data, Dict) or isinstance(data, List):
             try:
                 if "orjson" in sys.modules:
                     text = orjson.dumps(data, default=serialize_sets, option=orjson.OPT_INDENT_2).decode("utf-8")
@@ -398,16 +398,16 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
     return Ok("")
 
-def listdir_ext(dirpath: Path | str, extensions: list | None = None) -> Result[list, str]:
+def Listdir_ext(dirpath: Path | str, extensions: List | None = None) -> Result[List, str]:
     """
-    ### list all files in directory which matches the extentions
+    ### List all files in directory which matches the extentions
 
     #### Arguments
      - dirpath: Path or str
      - extensions: e.g. str [".zip", ".story", ".xlsx", ".docx"], None => all
 
     #### Return [rustedpy]
-     - Ok: files as list
+     - Ok: files as List
      - Err: errortext as str
     """
 

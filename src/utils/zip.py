@@ -2,7 +2,7 @@
     © Jürgen Schoenemeyer, 04.01.2025
 
     PUBLIC:
-     - check_zip(in_zip, path: str, files: list) -> Dict[str]
+     - check_zip(in_zip, path: str, files: List) -> Dict[str]
      - expand_zip(source_path: str, dest_path: str) -> bool
      - create_zip(source_path: str, dest_path: str, filename: str, compression = 6) -> bool
 """
@@ -10,14 +10,14 @@
 import shutil
 import os
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
 from utils.trace import Trace
 from utils.file  import get_trace_path
 
-def check_zip(myzip: ZipFile, path: Path | str, files: list) -> Dict[str, Any]:
+def check_zip(myzip: ZipFile, path: Path | str, files: List) -> Dict[str, Any]:
     path = Path(path)
 
     errors = {}
