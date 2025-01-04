@@ -52,7 +52,7 @@ class Prefs:
             with open( Path(cls.pref_path, pref_name), "r", encoding="utf-8") as file:
                 data = yaml.safe_load(file)
 
-            cls.data = Dict(merge_dicts(cls.data, data))
+            cls.data = dict(merge_dicts(cls.data, data))
             # cls.data = merge(dict(cls.data), data) # -> Exception: Conflict at trainingCompany
 
         except yaml.parser.ParserError as err:

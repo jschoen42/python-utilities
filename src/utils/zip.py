@@ -10,14 +10,14 @@
 import shutil
 import os
 
-from typing import Dict
+from typing import Any, Dict
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
 from utils.trace import Trace
 from utils.file  import get_trace_path
 
-def check_zip(myzip: ZipFile, path: Path | str, files: list) -> Dict[str]:
+def check_zip(myzip: ZipFile, path: Path | str, files: list) -> Dict[str, Any]:
     path = Path(path)
 
     errors = {}
