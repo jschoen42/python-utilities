@@ -17,8 +17,8 @@ import json
 from typing import Dict
 from pathlib import Path
 
-import jsbeautifier
-import cssbeautifier
+import jsbeautifier     # type: ignore # mypy
+import cssbeautifier    # type: ignore # mypy
 from lxml import etree
 
 from utils.trace     import Trace

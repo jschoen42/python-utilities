@@ -45,7 +45,7 @@ except ModuleNotFoundError:
     pass
 
 try:
-    import dicttoxml
+    import dicttoxml  # type: ignore # mypy
 except ModuleNotFoundError:
     pass
 
