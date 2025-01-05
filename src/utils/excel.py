@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 04.01.2025
+    (c) Jürgen Schoenemeyer, 05.01.2025
 
     PUBLIC:
     get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0) -> Tuple[int, Workbook, int]
@@ -20,8 +20,11 @@ import warnings
 
 from typing import Any, Tuple
 
-from openpyxl import Workbook, cell
+
 from openpyxl import load_workbook
+from openpyxl.worksheet.worksheet import Worksheet
+from openpyxl.workbook.workbook import Workbook
+from openpyxl.cell.cell import Cell
 
 from utils.trace import Trace
 from utils.file  import get_modification_timestamp, check_excel_file_exists
@@ -29,7 +32,7 @@ from utils.file  import get_modification_timestamp, check_excel_file_exists
 # UserWarning: Data Validation extension is not supported and will be removed
 warnings.simplefilter("ignore")
 
-def get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0.0) -> Tuple[int, None | Workbook, int]:
+def get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0.0) -> Tuple[int, None | Workbook, float]:
     file_path = source_path + filename
 
     if check_excel_file_exists(file_path) is False:
@@ -44,7 +47,7 @@ def get_excel_file(source_path: str, filename: str, comment: str, last_timestamp
 
     return (0, workbook, max(last_timestamp, get_modification_timestamp(file_path)))
 
-def get_excel_sheet(source_path: str, filename: str, sheet: str, comment: str, last_timestamp: float = 0.0) -> Tuple[bool, None | Any, float]:
+def get_excel_sheet(source_path: str, filename: str, sheetname: str, comment: str, last_timestamp: float = 0.0) -> Tuple[bool, None | Any, float]:
     file_path = source_path + filename
 
     if check_excel_file_exists(file_path) is False:
@@ -58,12 +61,12 @@ def get_excel_sheet(source_path: str, filename: str, sheet: str, comment: str, l
         return (True, None, 0)
 
     try:
-        sheet = workbook[sheet]
+        sheet = workbook[sheetname]
     except KeyError as err:
         Trace.error(f"{comment} - importExcel '{filename}' {err}")
         return (True, None, 0)
 
-    check_hidden(sheet, sheet)
+    check_hidden(sheet, "get_excel_sheet")
 
     return (
         False,
@@ -71,14 +74,14 @@ def get_excel_sheet(source_path: str, filename: str, sheet: str, comment: str, l
         max(last_timestamp, get_modification_timestamp(file_path))
     )
 
-def get_excel_sheet_special(workbook: Workbook, sheet: str, comment: str) -> Tuple[bool, None | Any]:
+def get_excel_sheet_special(workbook: Workbook, sheetname: str, comment: str) -> Tuple[bool, None | Any]:
     try:
-        sheet = workbook[sheet]
+        sheet = workbook[sheetname]
     except KeyError as err:
         Trace.error(f"{comment} - importExcel {err}")
         return True, None
 
-    check_hidden(sheet, sheet)
+    check_hidden(sheet, "get_excel_sheet_special")
     return False, sheet
 
 ######################################################################################
@@ -92,7 +95,7 @@ def get_excel_sheet_special(workbook: Workbook, sheet: str, comment: str) -> Tup
 #  - [hide] -> <hide> (custom)
 ######################################################################################
 
-def get_cell_value(in_cell: cell) -> bool | str:
+def get_cell_value(in_cell: Cell) -> bool | str:
     if in_cell.value is None:
         return ""
 
@@ -133,7 +136,7 @@ def check_quotes( wb_name: str, word: str, line_number: int, function_name: str 
         Trace.error( f"[{function_name}] '{wb_name}': line {line_number} quotes missing: '{word}'")
         return ""
 
-def check_hidden(sheet: Any, comment: str) -> None:
+def check_hidden(sheet: Worksheet, comment: str) -> None:
     for key, value in sheet.column_dimensions.items():
         if value.hidden is True:
             if key != "A":
@@ -143,7 +146,7 @@ def check_hidden(sheet: Any, comment: str) -> None:
         if row_dimension.hidden is True:
             Trace.warning( f"{comment}:  hidden row: {row_num}")
 
-def excel_date(date: datetime, time_zone: str) -> float:
+def excel_date(date: Any, time_zone: str) -> float:
     day_in_seconds = 86400
 
     # 30.12.1899 (+ 1 day)

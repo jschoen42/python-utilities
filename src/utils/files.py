@@ -115,7 +115,7 @@ def set_timestamp(filepath: Path | str, timestamp: int|float) -> Result[str, str
 
     return Ok("")
 
-# dir Listing -> List of files and dirs
+# dir listing -> list of files and dirs
 
 def get_files_dirs(path: str, extensions: List) -> Result[Tuple[List, List], str]:
     files: List = []

@@ -9,9 +9,9 @@
      - check_file_exists(filepath: str, filename: str) -> bool
      - check_excel_file_exists(filename: str) -> bool
     #
-     - List_files(path: str, extensions: List) -> List
-     - List_directories(path: str) -> List
-     - Listdir_match_extention(folder_path: Path | str, extensions: List=None) -> List
+     - list_files(path: str, extensions: List) -> List
+     - list_directories(path: str) -> List
+     - listdir_match_extention(folder_path: Path | str, extensions: List=None) -> List
     #
      - clear_folder(path: str) -> None
      - delete_folder_tree(dest_path: str, relax: bool = False) -> bool

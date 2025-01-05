@@ -170,8 +170,10 @@ class CacheJSON:
 
         if Path(self.path, self.name).is_file():
             if not reset:
-                self.cache = import_json(self.path, self.name)
-                Trace.info(f"{self.path}")
+                json = import_json(self.path, self.name)
+                if json:
+                    self.cache = json
+                    Trace.info(f"{self.path}")
         else:
             create_folder(self.path)
 

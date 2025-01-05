@@ -233,4 +233,16 @@ git undo 3
 
 ###################### mypy ########################
 
+https://github.com/python/typeshed/tree/main/stubs
+
+[dependency-groups]
+dev = [
+    "mypy>=1.14.1",
+    "lxml-stubs>=0.5.1",
+    "pandas-stubs>=2.2.3.241126",
+    "types-openpyxl>=3.1.5.20241225",
+    "types-pyyaml>=6.0.12.20241230",
+    "types-xmltodict>=0.14.0.20241009",
+]
+
 mypy --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs main.py > ../__mypy-result-1.txt
