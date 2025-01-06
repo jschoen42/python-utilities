@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 05.01.2025
+    (c) Jürgen Schoenemeyer, 06.01.2025
 
     PUBLIC:
     get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0) -> Tuple[int, Workbook, int]
@@ -8,6 +8,8 @@
     get_excel_sheet_special(workbook: Workbook, sheet: str, comment: str) -> Tuple[bool, None | Worksheet]
 
     get_cell_value(in_cell: cell) -> str
+    check_quotes( wb_name: str, word: str, line_number: int, function_name: str ) -> str
+    check_quotes_error(wb_name: str, word: str, line_number: int, function_name: str) -> Tuple[dict | bool, str]
     check_hidden(sheet, comment: str) -> None
     excel_date(date, time_zone) -> float
 """
@@ -136,6 +138,16 @@ def check_quotes( wb_name: str, word: str, line_number: int, function_name: str 
         Trace.error( f"[{function_name}] '{wb_name}': line {line_number} quotes missing: '{word}'")
         return ""
 
+def check_quotes_error(wb_name: str, word: str, line_number: int, function_name: str) -> Tuple[dict | bool, str]:
+    if word == "":
+        return False, ""
+
+    if word[:1] == '"' and word[-1:] == '"':
+        return False, word[1:-1]
+    else:
+        Trace.error(f"{function_name} '{wb_name}': line {line_number} quotes missing: '{word}'")
+        return True, ""
+
 def check_hidden(sheet: Worksheet, comment: str) -> None:
     for key, value in sheet.column_dimensions.items():
         if value.hidden is True:
@@ -152,5 +164,6 @@ def excel_date(date: Any, time_zone: str) -> float:
     # 30.12.1899 (+ 1 day)
     # https://forum.openoffice.org/en/forum/viewtopic.php?t=108820#post_content529967
 
-    delta = date - datetime.datetime(1899, 12, 30, 0, 0, 0, 0, time_zone)
+    tz = datetime.timezone.utc if time_zone == "UTC" else None
+    delta = date - datetime.datetime(1899, 12, 30, 0, 0, 0, 0, tzinfo=tz)
     return float(delta.days) + (float(delta.seconds) / day_in_seconds)

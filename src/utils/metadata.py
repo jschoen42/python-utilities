@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 04.01.2025
+    © Jürgen Schoenemeyer, 06.01.2025
 
     PUBLIC:
      - get_media_info(filepath: str | BytesIO) -> None | Dict
@@ -131,9 +131,6 @@ def get_video_metadata_mediainfo(filepath: str | BytesIO) -> None | Dict:
 
         for track in media_info.tracks:
             if track.track_type == "Video":
-                # print("######### VIDEO # ######")
-                # print(track.__dict__)
-                # print("########################")
 
                 info["width"]  = track.width
                 info["height"] = track.height
@@ -159,9 +156,6 @@ def get_video_metadata_mediainfo(filepath: str | BytesIO) -> None | Dict:
                 info["video"]["colorInfo"] = track.color_space + " " + track.chroma_subsampling
 
             if track.track_type == "Audio":
-                # print("####### AUDIO #########")
-                # print(track.__dict__)
-                # print("#######################")
 
                 info["tracks"] += 1
                 info["audio"]["trackID"] = track.track_id

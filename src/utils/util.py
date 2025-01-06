@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 04.01.2025
+    © Jürgen Schoenemeyer, 06.01.2025
 
     PUBLIC:
      - format_subtitle( start_time: float, end_time: float, text: str, color=True ) -> str
@@ -37,7 +37,7 @@ def format_subtitle( start_time: float, end_time: float, text: str, color: bool=
     end   = format_timestamp(end_time)
 
     if color:
-        return f"{Color.BOLD.value}{Color.MAGENTA.value}[{start} --> {end}]{Color.NORMAL.value}{text}{Color.RESET.value}"
+        return f"{Color.BOLD}{Color.MAGENTA}[{start} --> {end}]{Color.NORMAL}{text}{Color.RESET}"
     else:
         return f"[{start} --> {end}]{text}"
 

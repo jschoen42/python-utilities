@@ -245,4 +245,19 @@ dev = [
     "types-xmltodict>=0.14.0.20241009",
 ]
 
-mypy --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs main.py > ../__mypy-result-1.txt
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+explicit_package_bases = true
+namespace_packages = true
+
+[[tool.mypy.overrides]]
+module = "faster_whisper.*"
+ignore_errors = true
+ignore_missing_imports = true
+
+mypy --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs src/main.py > __mypy-result-0.txt
+
+python __mypy.py > __mypy-result-0.txt
+
+# type: ignore # mypy

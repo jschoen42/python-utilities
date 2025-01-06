@@ -30,7 +30,7 @@ import utils.util
 import utils.utilities
 import utils.utils
 import utils.xml
-import utils.zip
+import utils.zip  # noqa: F401
 
 from utils.globals   import DRIVE, BASE_PATH
 from utils.trace     import Trace

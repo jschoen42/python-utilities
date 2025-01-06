@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 20.12.2024
+    © Jürgen Schoenemeyer, 06.01.2025
 
     PUBLIC:
      - floor(number: float, decimals: int=2) -> int
@@ -97,15 +97,25 @@ def bin_nibble(val: int) -> str:
     b = bin(val)[2:]
     return  ".".join([b[::-1][i:i+4][::-1] for i in range(0, len(b), 4)][::-1])
 
-def to_bool(in_text: str) -> None | bool:
-    if in_text.lower() == "true":
-        return True
-    elif in_text.lower() == "false":
-        return False
-
-    return None
-
-def str_to_bool(value: str) -> bool:
+def to_bool(value: None | str) -> None | bool:
     if not value:
+        return None
+
+    if value.lower() == "true":
+        return True
+    elif value.lower() == "false":
         return False
-    return str(value).lower() in ["y", "yes", "t", "true", "on", "1"]
+    else:
+        return None
+
+def str_to_bool(value: None | str) -> None | bool:
+    if not value:
+        return None
+
+    if value.lower() in ["y", "yes", "t", "true", "on", "1"]:
+        return True
+    elif value.lower() in ["n", "no", "f", "false", "off", "0"]:
+        return False
+    else:
+        return None
+

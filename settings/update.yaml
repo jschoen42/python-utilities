@@ -8,6 +8,7 @@ files:
     - LICENSE
     - .vscode/launch.json
     - .vscode/settings.json
+    - __mypy.py
     - src/__init__.py
     - src/utils/__init__.py
     - src/utils/decorator.py
