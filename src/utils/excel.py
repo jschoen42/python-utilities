@@ -1,5 +1,5 @@
 """
-    (c) Jürgen Schoenemeyer, 06.01.2025
+    © Jürgen Schoenemeyer, 06.01.2025
 
     PUBLIC:
     get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0) -> Tuple[int, Workbook, int]

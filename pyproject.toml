@@ -28,8 +28,8 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "lxml-stubs>=0.5.1",
     "mypy>=1.14.1",
+    "lxml-stubs>=0.5.1",
     "openpyxl-stubs>=0.1.25",
     "pandas-stubs>=2.2.3.241126",
     "types-openpyxl>=3.1.5.20241225",

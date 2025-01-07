@@ -8,14 +8,20 @@
      - get_video_metadata_mediainfo(filepath: str) -> None | Dict
 """
 
+from typing import Any, Dict, Protocol, cast
 from io import BytesIO
-from typing import Any, Dict
 
 from pymediainfo import MediaInfo # type: ignore # mypy
 
 from utils.trace import Trace
 
-def get_media_info(filepath: str | BytesIO) -> None | Dict:
+class AudioTrack(Protocol):  # -> mypy
+    duration: float
+    channel_s: int
+    sampling_rate: int
+    track_type: str
+
+def get_media_info(filepath: str | BytesIO) -> None | dict[str, int | float]:
     """
     {
         "track_type": "Audio",
@@ -66,11 +72,16 @@ def get_media_info(filepath: str | BytesIO) -> None | Dict:
     """
 
     try:
-        ret = get_media_trackinfo(filepath)
+        track = get_media_trackinfo(filepath)
+        if track is None:
+            return None
+
+        audio_track = cast(AudioTrack, track) # -> mypy
+
         return {
-            "duration":     round(ret.duration/1000, 3),
-            "channels":     ret.channel_s,
-            "samplingRate": ret.sampling_rate,
+            "duration": round(audio_track.duration/1000, 3),
+            "channels": audio_track.channel_s,
+            "samplingRate": audio_track.sampling_rate,
         }
     except Exception as error: # pylint: disable=broad-except
         Trace.error(f"MediaInfo: {error}")

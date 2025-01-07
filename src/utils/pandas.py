@@ -62,7 +62,11 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
         data_frame = pd.read_pickle(data_path)
 
     elif import_type == "hdf":
-        data_frame = pd.read_hdf(data_path, key=key)
+        result = pd.read_hdf(data_path, key=key)
+        if isinstance(result, pd.Series):
+            data_frame = result.to_frame()
+        else:
+            data_frame = result
 
     elif import_type == "xlsx":
         if sheet_name == "":
