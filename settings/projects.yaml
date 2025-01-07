@@ -59,6 +59,9 @@ projects:
   - name: mathplotlib-examples
     path: /Python/Mathplotlib
 
+  - name: media-info-try
+    path: /Python/MediaInfo
+
   - name: password-hash
     path: /Python
 

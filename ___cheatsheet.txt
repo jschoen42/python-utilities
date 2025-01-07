@@ -256,8 +256,6 @@ module = "faster_whisper.*"
 ignore_errors = true
 ignore_missing_imports = true
 
-mypy --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs src/main.py > __mypy-result-0.txt
-
-python __mypy.py > __mypy-result-0.txt
+python __mypy.py > __mypy-result.txt
 
 # type: ignore # mypy

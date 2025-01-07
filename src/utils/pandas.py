@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 21.12.2024
+    © Jürgen Schoenemeyer, 07.01.2025
 
     PUBLIC:
       - load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = "") -> DataFrame:
