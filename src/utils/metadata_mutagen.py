@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 07.02.2025
+    © Jürgen Schoenemeyer, 08.01.2025
 
     PUBLIC:
      - get_audioinfo_mutagen(filepath: str) -> None | Dict
@@ -10,9 +10,9 @@
 from typing import Any, Dict, Protocol, cast
 from pathlib import Path
 
-from mutagen import MutagenError  # type: ignore # mypy
-from mutagen.mp3 import MP3       # type: ignore # mypy
-from mutagen.mp4 import MP4       # type: ignore # mypy
+from mutagen import MutagenError
+from mutagen.mp3 import MP3
+from mutagen.mp4 import MP4
 
 from utils.trace import Trace
 from utils.decorator import deprecated
@@ -47,8 +47,6 @@ def get_audioinfo_mutagen(filepath: str) -> None | Dict:
         return None
 
     mp3_info = cast(MP3Info, metadata)
-    if mp3_info is None:
-        return None
 
     duration = mp3_info.info.length
     if mp3_info.info.mode == 3:
@@ -80,8 +78,6 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict:
         return None
 
     mp3_info = cast(MP3Info, metadata)
-    if mp3_info is None:
-        return None
 
     duration     = mp3_info.info.length
     channels     = mp3_info.info.channels
@@ -108,8 +104,6 @@ def get_video_metadata_mutagen(filepath: Path | str) -> None | Dict:
         return None
 
     mp4_info = cast(MP4Info, metadata)
-    if mp4_info is None:
-        return None
 
     duration    = mp4_info.info.length
     mode        = ["STEREO", "JOINTSTEREO", "DUALCHANNEL", "MONO"][mp4_info.mode]

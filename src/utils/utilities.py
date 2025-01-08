@@ -1,13 +1,13 @@
 """
-    © Jürgen Schoenemeyer, 04.01.2025
+    © Jürgen Schoenemeyer, 08.01.2025
 
     PUBLIC:
      - clean_import_json(text: str) -> str | bool
      - check_html(text_id: str, text: str) -> None
      - exception(function)
      - check_url(url: str) -> bool
-     - insert_meta_node(data: OrderedDict, in_type: str, language: str = None) -> None
-     - insert_data_node(data: OrderedDict, paths: List, key: str, value: Any) -> None
+     - insert_meta_node(data: Dict, in_type: str, language: str = None) -> None
+     - insert_data_node(data: Dict, paths: List, key: str, value: Any) -> None
      - prepare_smart_sort(text:str, count:int = 6) -> str:
 """
 
@@ -16,8 +16,7 @@ import functools
 import traceback
 import re
 
-from typing import Any, Callable, List
-from collections import OrderedDict
+from typing import Any, Callable, Dict, List
 
 from utils.prefs import Prefs
 from utils.trace import Trace
@@ -97,9 +96,9 @@ def check_url(url: str) -> bool:
     ret = re.match(regex, url) is not None
     return ret
 
-def insert_meta_node(data: OrderedDict, in_type: str, language: str | None = None) -> None:
+def insert_meta_node(data: Dict, in_type: str, language: str | None = None) -> None:
     if ".meta" not in data:
-        data[".meta"] = OrderedDict()
+        data[".meta"] = {}
 
     data[".meta"]["type"] = in_type
     if language:
@@ -111,12 +110,12 @@ def insert_meta_node(data: OrderedDict, in_type: str, language: str | None = Non
     data[".meta"]["eventName"] = Prefs.get("eventName")
     data[".meta"]["font"]      = Prefs.get("eventFont")
 
-def insert_data_node(data: OrderedDict, paths: List, key: str, value: Any) -> None:
+def insert_data_node(data: Dict, paths: List, key: str, value: Any) -> None:
     curr_node = data
 
     for node in paths:
         if node not in curr_node:
-            curr_node[node] = OrderedDict()
+            curr_node[node] = {}
         curr_node = curr_node[node]
 
     curr_node[key] = value
@@ -147,13 +146,7 @@ def prepare_smart_sort(text:str, count:int = 6) -> str:
     num = None
     for char in text:
         if char.isdigit():
-            if num is True:
-                tmp += char
-            elif num is False:
-                split.append(tmp)
-                tmp = char
-            else:
-                tmp = char
+            tmp = char
             num = True
         else:
             if num is False:
