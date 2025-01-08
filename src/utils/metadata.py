@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 07.01.2025
+    © Jürgen Schoenemeyer, 08.01.2025
 
     PUBLIC:
      - get_media_info(filepath: str | BytesIO) -> None | Dict
@@ -91,7 +91,7 @@ class VideoTrack(Protocol):
     unique_id: str                         # "8640863827297483320"
     width: int                             # 1920
 
-def get_media_info(filepath: str | BytesIO) -> None | dict[str, int | float]:
+def get_media_info(filepath: str | BytesIO) -> None | Dict[str, int | float]:
 
     track = get_media_trackinfo(filepath)
 
