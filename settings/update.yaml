@@ -27,6 +27,7 @@ files:
     - src/utils/metadata_mutagen.py
     - src/utils/pandas.py
     - src/utils/prefs.py
+    - src/utils/result.py
     - src/utils/text.py
     - src/utils/util.py
     - src/utils/utilities.py
