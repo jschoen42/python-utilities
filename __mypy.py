@@ -39,11 +39,10 @@ def run_mypy() -> None:
         # "--show-error-end",
         # "--show-error-code-links".
         # "--pretty",
-        "--force-uppercase-builtins",
+        # "--force-uppercase-builtins",
 
         # Advanced options
-        "--show-traceback",
-
+        # "--show-traceback",
         # "--strict",
     ]
 

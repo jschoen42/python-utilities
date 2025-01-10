@@ -22,7 +22,6 @@ import yaml
 
 from utils.globals import BASE_PATH
 from utils.trace   import Trace
-from utils.file    import beautify_path
 
 class Prefs:
     pref_path: Path = BASE_PATH / "prefs"
@@ -144,6 +143,9 @@ def read_pref( pref_path: Path, pref_name: str ) -> Tuple[bool, Dict[Any, Any]]:
     except OSError as err:
         Trace.error( f"{beautify_path(str(err))}" )
         return True, {}
+
+def beautify_path( path: Path | str ) -> str:
+    return str( path ).replace("\\\\", "/")
 
 # https://stackoverflow.com/questions/7204805/deep-merge-dictionaries-of-dictionaries-in-python?page=1&tab=scoredesc#answer-7205672
 
