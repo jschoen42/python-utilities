@@ -3,15 +3,42 @@ zz-utils v0.1.0
 │   ├── python-dateutil v2.9.0.post0
 │   │   └── six v1.17.0
 │   └── types-python-dateutil v2.9.0.20241206
+├── cssbeautifier v1.15.1
+│   ├── editorconfig v0.17.0
+│   ├── jsbeautifier v1.15.1
+│   │   ├── editorconfig v0.17.0
+│   │   └── six v1.17.0
+│   └── six v1.17.0
 ├── dicttoxml v1.7.16
+├── jsbeautifier v1.15.1 (*)
+├── lxml v5.3.0
 ├── mutagen v1.47.0
 ├── openpyxl v3.1.5
 │   └── et-xmlfile v2.0.0
-├── orjson v3.10.12
+├── orjson v3.10.14
+├── pandas v2.2.3
+│   ├── numpy v2.2.1
+│   ├── python-dateutil v2.9.0.post0 (*)
+│   ├── pytz v2024.2
+│   └── tzdata v2024.2
 ├── pymediainfo v6.1.0
 ├── python-dateutil v2.9.0.post0 (*)
 ├── pyyaml v6.0.2
 ├── result v0.17.0
 ├── tzdata v2024.2
-└── xmltodict v0.14.2
+├── xmltodict v0.14.2
+├── lxml-stubs v0.5.1 (group: dev)
+├── mypy v1.14.1 (group: dev)
+│   ├── mypy-extensions v1.0.0
+│   └── typing-extensions v4.12.2
+├── openpyxl-stubs v0.1.25 (group: dev)
+│   ├── mypy v1.14.1 (*)
+│   ├── openpyxl v3.1.5 (*)
+│   └── typing-extensions v4.12.2
+├── pandas-stubs v2.2.3.241126 (group: dev)
+│   ├── numpy v2.2.1
+│   └── types-pytz v2024.2.0.20241221
+├── types-openpyxl v3.1.5.20241225 (group: dev)
+├── types-pyyaml v6.0.12.20241230 (group: dev)
+└── types-xmltodict v0.14.0.20241009 (group: dev)
 (*) Package tree already displayed
