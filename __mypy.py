@@ -36,13 +36,15 @@ def run_mypy() -> None:
         # Configuring error messages
         # "--show-error-context"
         "--show-column-numbers",
-        "--show-error-end",
+        # "--show-error-end",
         # "--show-error-code-links".
         # "--pretty",
         "--force-uppercase-builtins",
 
         # Advanced options
         "--show-traceback",
+
+        # "--strict",
     ]
 
     filepath = Path(sys.argv[1]).stem

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 08.01.2025
+    © Jürgen Schoenemeyer, 10.01.2025
 
     PUBLIC:
      - get_audioinfo_mutagen(filepath: str) -> None | Dict
@@ -10,12 +10,14 @@
 from typing import Any, Dict, Protocol, cast
 from pathlib import Path
 
-from mutagen import MutagenError
+import mutagen
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 
 from utils.trace import Trace
 from utils.decorator import deprecated
+
+MutagenError = getattr(mutagen, "MutagenError")
 
 class MP3Info(Protocol): # -> mypi
     info:         Any
@@ -39,9 +41,9 @@ class MP4Info(Protocol): # -> mypi
 ###########################################
 
 @deprecated("licence does not fit")
-def get_audioinfo_mutagen(filepath: str) -> None | Dict:
+def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
     try:
-        metadata = MP3.Open(filepath)  # type: ignore
+        metadata = MP3.Open(filepath) # type: ignore
     except MutagenError as err:
         Trace.error(f"MutagenError: {err}")
         return None
@@ -70,7 +72,7 @@ def get_audioinfo_mutagen(filepath: str) -> None | Dict:
     }
 
 @deprecated("licence does not fit")
-def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict:
+def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
     try:
         metadata = MP3.Open(filepath)  # type: ignore
     except MutagenError as err:
@@ -96,7 +98,7 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict:
     }
 
 @deprecated("licence does not fit")
-def get_video_metadata_mutagen(filepath: Path | str) -> None | Dict:
+def get_video_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
     try:
         metadata = MP4.Open(filepath)  # type: ignore
     except MutagenError as err:

@@ -27,7 +27,7 @@ from utils.file    import beautify_path
 class Prefs:
     pref_path: Path = BASE_PATH / "prefs"
     pref_prefix: str = ""
-    data: Dict = {}
+    data: Dict[Any, Any] = {}
 
     @classmethod
     def init(cls, pref_path: Path | str | None = None, pref_prefix: str | None = None ) -> None:
@@ -68,7 +68,7 @@ class Prefs:
         return True
 
     @classmethod
-    def get_all(cls) -> Dict:
+    def get_all(cls) -> Dict[Any, Any]:
         return cls.data
 
     @classmethod
@@ -128,12 +128,12 @@ def get_pref_special(pref_path: Path, pref_prexix: str, pref_name: str, key: str
         return ""
 
     if key in pref:
-        return pref[key]
+        return str(pref[key])
     else:
         Trace.error(f"unknown pref: {pref_name} / {key}")
         return ""
 
-def read_pref( pref_path: Path, pref_name: str ) -> Tuple[bool, Dict]:
+def read_pref( pref_path: Path, pref_name: str ) -> Tuple[bool, Dict[Any, Any]]:
     try:
         with open( Path(pref_path, pref_name), "r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
@@ -147,7 +147,7 @@ def read_pref( pref_path: Path, pref_name: str ) -> Tuple[bool, Dict]:
 
 # https://stackoverflow.com/questions/7204805/deep-merge-dictionaries-of-dictionaries-in-python?page=1&tab=scoredesc#answer-7205672
 
-def merge_dicts(a: Dict, b: Dict) -> Any:
+def merge_dicts(a: Dict[Any, Any], b: Dict[Any, Any]) -> Any:
     for k in set(a.keys()).union(b.keys()):
         if k in a and k in b:
             if isinstance(a[k], dict) and isinstance(b[k], Dict):
@@ -164,7 +164,7 @@ def merge_dicts(a: Dict, b: Dict) -> Any:
 
 # https://stackoverflow.com/questions/7204805/deep-merge-dictionaries-of-dictionaries-in-python?page=1&tab=scoredesc#answer-7205107
 
-def merge(a: Dict, b: Dict, path: List[str] = []) -> Any:
+def merge(a: Dict[Any, Any], b: Dict[Any, Any], path: List[str] = []) -> Any:
     for key in b:
         if key in a:
             if isinstance(a[key], dict) and isinstance(b[key], Dict):
@@ -175,7 +175,7 @@ def merge(a: Dict, b: Dict, path: List[str] = []) -> Any:
             a[key] = b[key]
     return a
 
-def build_tree(tree: List, in_key: str, value: str) -> Dict:
+def build_tree(tree: List[str], in_key: str, value: str) -> Dict[str, Any]:
     if tree:
         return {tree[0]: build_tree(tree[1:], in_key, value)}
 

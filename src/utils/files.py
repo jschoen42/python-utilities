@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 09.01.2025
+    © Jürgen Schoenemeyer, 10.01.2025
 
     error channel -> rustedpy/result
 
@@ -46,7 +46,7 @@ except ModuleNotFoundError:
     pass
 
 try:
-    import dicttoxml  # type: ignore # mypy
+    import dicttoxml # type: ignore # -> mypy
 except ModuleNotFoundError:
     pass
 
@@ -118,9 +118,9 @@ def set_timestamp(filepath: Path | str, timestamp: int|float) -> Result[str, str
 
 # dir listing -> list of files and dirs
 
-def get_files_dirs(path: str, extensions: List) -> Result[Tuple[List, List], str]:
-    files: List = []
-    dirs = []
+def get_files_dirs(path: str, extensions: List[str]) -> Result[Tuple[List[str], List[str]], str]:
+    files: List[str] = []
+    dirs: List[str] = []
     try:
         for filename in os.listdir(path):
             filepath = os.path.join(path, filename)
@@ -399,7 +399,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
     return Ok("")
 
-def listdir_ext(dirpath: Path | str, extensions: List | None = None) -> Result[List, str]:
+def listdir_ext(dirpath: Path | str, extensions: List[str] | None = None) -> Result[List[str], str]:
     """
     ### List all files in directory which matches the extentions
 

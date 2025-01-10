@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 08.01.2025
+    © Jürgen Schoenemeyer, 10.01.2025
 
     PUBLIC:
     get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0) -> Tuple[Workbook, int]
@@ -22,7 +22,7 @@ import datetime
 
 import warnings
 
-from typing import Any, Tuple
+from typing import Any, Dict, Tuple
 
 
 from openpyxl import load_workbook
@@ -165,7 +165,7 @@ def check_quotes( wb_name: str, word: str, line_number: int, function_name: str 
         Trace.error( f"[{function_name}] '{wb_name}': line {line_number} quotes missing: '{word}'")
         return ""
 
-def check_quotes_error(wb_name: str, word: str, line_number: int, function_name: str) -> Tuple[dict | bool, str]:
+def check_quotes_error(wb_name: str, word: str, line_number: int, function_name: str) -> Tuple[Dict[str, Any] | bool, str]:
     if word == "":
         return False, ""
 

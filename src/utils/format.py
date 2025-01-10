@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 06.01.2025
+    © Jürgen Schoenemeyer, 10.01.2025
 
     PUBLIC:
      - floor(number: float, decimals: int=2) -> int
@@ -21,13 +21,11 @@
 import math
 import datetime
 
+from typing import Any
 from dateutil.parser import parse
 # from utils.trace import Trace
 
 def floor(number: float, decimals: int=2) -> int:
-    if not isinstance(decimals, int):
-        raise TypeError("decimal places must be an integer")
-
     if decimals < 0:
         raise ValueError("decimal places has to be 0 or more")
 
@@ -35,7 +33,7 @@ def floor(number: float, decimals: int=2) -> int:
         return math.floor(number)
 
     factor = 10 ** decimals
-    return math.floor(number * factor) / factor
+    return int(math.floor(number * factor) / factor)
 
 def convert_date_time(time_string: str) -> int:
     my_time_string = parse(time_string.replace("UTC", ""))

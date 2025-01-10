@@ -113,7 +113,7 @@ def get_media_info(filepath: str | BytesIO) -> None | Dict[str, int | float]:
         "samplingRate": audio_track.sampling_rate,
     }
 
-def get_media_trackinfo(filepath: str | BytesIO) -> None | Dict:
+def get_media_trackinfo(filepath: str | BytesIO) -> None | Dict[str, Any]:
     ret = None
 
     try:
@@ -157,7 +157,7 @@ def get_audio_duration(filepath: str | BytesIO) -> float:
 
     return duration
 
-def get_video_metadata(filepath: str | BytesIO) -> None | Dict:
+def get_video_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]:
 
     info: Dict[str, Any] = {
         "width":    0,
@@ -243,7 +243,7 @@ def get_video_metadata(filepath: str | BytesIO) -> None | Dict:
 
     return info
 
-def get_audio_metadata(filepath: str | BytesIO) -> None | Dict:
+def get_audio_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]:
 
     info: Dict[str, Any] = {
         "duration":     0,

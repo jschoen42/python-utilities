@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 08.01.2025
+    © Jürgen Schoenemeyer, 10.01.2025
 
     PUBLIC:
      - clean_import_json(text: str) -> str | bool
@@ -67,7 +67,7 @@ def check_html(text_id: str, text: str) -> None:
 # http://www.blog.pythonlibrary.org/2016/06/09/python-how-to-create-an-exception-logging-decorator/
 # https://stackoverflow.com/questions/14527819/traceback-shows-up-until-decorator
 
-def exception(function: Callable) -> Callable:
+def exception(function: Callable[[Any], Any]) -> Callable[[Any], Any]:
     """
     A decorator that wraps the passed in function and logs
     exceptions should one occur
@@ -96,7 +96,7 @@ def check_url(url: str) -> bool:
     ret = re.match(regex, url) is not None
     return ret
 
-def insert_meta_node(data: Dict, in_type: str, language: str | None = None) -> None:
+def insert_meta_node(data: Dict[Any, Any], in_type: str, language: str | None = None) -> None:
     if ".meta" not in data:
         data[".meta"] = {}
 
@@ -110,7 +110,7 @@ def insert_meta_node(data: Dict, in_type: str, language: str | None = None) -> N
     data[".meta"]["eventName"] = Prefs.get("eventName")
     data[".meta"]["font"]      = Prefs.get("eventFont")
 
-def insert_data_node(data: Dict, paths: List, key: str, value: Any) -> None:
+def insert_data_node(data: Dict[Any, Any], paths: List[str], key: str, value: Any) -> None:
     curr_node = data
 
     for node in paths:

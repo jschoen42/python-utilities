@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 04.01.2025
+    © Jürgen Schoenemeyer, 10.01.2025
 
     PUBLIC:
      - check_zip(in_zip, path: str, files: List) -> Dict[str]
@@ -17,7 +17,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 from utils.trace import Trace
 from utils.file  import get_trace_path
 
-def check_zip(myzip: ZipFile, path: Path | str, files: List) -> Dict[str, Any]:
+def check_zip(myzip: ZipFile, path: Path | str, files: List[str]) -> Dict[str, Any]:
     path = Path(path)
 
     errors = {}
