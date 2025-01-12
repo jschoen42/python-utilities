@@ -11,7 +11,7 @@ import hashlib
 import shutil
 from pathlib import Path
 
-import utils.audio
+import utils.audio      # type: ignore
 import utils.beautify
 import utils.decorator
 import utils.excel

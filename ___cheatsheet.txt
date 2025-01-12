@@ -271,4 +271,7 @@ exclude = ["**/node_modules",
 pythonVersion = "3.13"
 
 
-uv run __pyright.py src/main.py
+uv run __pyright.py src
+uv run __pyright.py src/main
+uv run __pyright.py src/helper
+uv run __pyright.py src/utils

@@ -99,7 +99,7 @@ def run_mypy() -> None:
     with open(f"__mypy-{filepath}.txt", "w") as file:
         file.write(text)
 
-    print(f"{sys.argv[1:][0]}: {summary}")
+    print(f"[MyPy] {sys.argv[1:][0]}: {summary} -> __mypy-{filepath}.txt")
     sys.exit(result.returncode)
 
 if __name__ == "__main__":

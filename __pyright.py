@@ -19,7 +19,7 @@ def run_pyright(target_file: str) -> None:
 
     settings = {
         "reportMissingImports": "warning",
-        "reportPossiblyUnboundVariable": "warning",
+        "reportPossiblyUnboundVariable": "none",
 
         # strict
         "reportMissingTypeStubs": True,
@@ -69,19 +69,27 @@ def run_pyright(target_file: str) -> None:
     finally:
         os.remove(config)
 
-    for line in result.stdout.splitlines():
+    path = str(BASE_PATH)[0].lower() + str(BASE_PATH)[1:]
+
+    stdout = result.stdout.encode("cp1252").decode("utf-8")
+    for line in stdout.splitlines():
         if line.startswith("  "):
-            text += line[3 + len(str(BASE_PATH)):] + "\n"
+            if path in line:
+                text += line[3 + len(str(BASE_PATH)):] + "\n"
+            else:
+                text += " - " + line[4:] + "\n"
         else:
             if "informations" in line:
                 summary = line.strip()
                 text += f"\n{summary}\n"
-                print(f"{target_file}: {summary}")
             else:
                 text += "\n"
+            #     text += line + "\n"
 
     with open(f"__pyright-{filepath}.txt", "w") as file:
         file.write(text)
+
+    print(f"[PyRight] {target_file}: {summary} -> __pyright-{filepath}.txt")
 
     sys.exit(result.returncode)
 

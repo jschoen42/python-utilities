@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 12.01.2025
 
     PUBLIC:
     get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0) -> Tuple[Workbook, int]
@@ -24,10 +24,11 @@ import warnings
 
 from typing import Any, Dict, Tuple
 
-
 from openpyxl import load_workbook
-from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
+from openpyxl.worksheet.worksheet import Worksheet
+from openpyxl.worksheet._read_only import ReadOnlyWorksheet
+from openpyxl.chartsheet.chartsheet import Chartsheet
 from openpyxl.cell.cell import Cell, MergedCell
 
 from utils.trace import Trace
@@ -59,33 +60,37 @@ def get_excel_sheet(source_path: str, filename: str, sheet_name: str, comment: s
         return (None, 0)
 
     try:
-        workbook = load_workbook(filename = file_path)
+        workbook: Workbook = load_workbook(filename = file_path)
     except OSError as err:
         Trace.error(f"{comment} - importExcel '{err}'")
         return (None, 0)
 
     try:
-        sheet = workbook[sheet_name]
+        sheet: Worksheet | ReadOnlyWorksheet | Chartsheet = workbook[sheet_name]
     except KeyError as err:
         Trace.error(f"{comment} - importExcel '{filename}' {err}")
         return (None, 0)
 
-    check_hidden(sheet, "get_excel_sheet")
-
-    return (
-        sheet,
-        max(last_timestamp, get_modification_timestamp(file_path))
-    )
+    if isinstance(sheet, Worksheet):
+        check_hidden(sheet, "get_excel_sheet")
+        return ( sheet, max(last_timestamp, get_modification_timestamp(file_path)))
+    else:
+        Trace.error(f"{comment} - sheet '{sheet_name}' is not a Worksheet")
+        return (None, 0)
 
 def get_excel_sheet_special(workbook: Workbook, sheet_name: str, comment: str) -> None | Worksheet:
     try:
-        sheet = workbook[sheet_name]
+        sheet: Worksheet | ReadOnlyWorksheet | Chartsheet = workbook[sheet_name]
     except KeyError as err:
         Trace.error(f"{comment} - importExcel {err}")
         return None
 
-    check_hidden(sheet, "get_excel_sheet_special")
-    return sheet
+    if isinstance(sheet, Worksheet):
+        check_hidden(sheet, "get_excel_sheet_special")
+        return sheet
+    else:
+        Trace.error(f"{comment} - sheet '{sheet_name}' is not a Worksheet")
+        return None
 
 ######################################################################################
 # get_cell_value with converting
