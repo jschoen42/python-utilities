@@ -82,8 +82,11 @@ def run_mypy() -> None:
 
     result = subprocess.run(["mypy"] + (settings + sys.argv[1:]), capture_output=True, text=True)
 
+    summary = ""
     current_file = None
     for line in result.stdout.splitlines():
+        if line.startswith("Found") or line.startswith("Success"):
+            summary = line.strip()
         if line and not line.startswith(" "):
             file_path = line.split(":")[0]
             if file_path != current_file:
@@ -96,6 +99,7 @@ def run_mypy() -> None:
     with open(f"__mypy-{filepath}.txt", "w") as file:
         file.write(text)
 
+    print(f"{sys.argv[1:][0]}: {summary}")
     sys.exit(result.returncode)
 
 if __name__ == "__main__":
