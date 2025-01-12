@@ -17,7 +17,7 @@
 | result.py    | 10.01.2025  | rustedpy   |
 | prefs.py     | 10.01.2025  | |
 | text.py      | 20.12.2024  | |
-| trace.py     | 10.01.2025  | |
+| trace.py     | 11.01.2025  | |
 | util.py      | 10.01.2025  | |
 | utilities.py | 10.01.2025  | |
 | utils.py     | 20.12.2024  | |

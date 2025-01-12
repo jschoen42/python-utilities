@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 12.01.2025
 
     error channel -> rustedpy/result
 
@@ -46,7 +46,7 @@ except ModuleNotFoundError:
     pass
 
 try:
-    import dicttoxml # type: ignore # -> mypy
+    from dicttoxml import dicttoxml # type: ignore # -> mypy
 except ModuleNotFoundError:
     pass
 
@@ -328,7 +328,8 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
         # json -> xml
 
         elif isinstance(data, Dict):
-            text = minidom.parseString(dicttoxml(data)).toprettyxml(indent="  ")
+            xml = dicttoxml(data)
+            text = minidom.parseString(xml).toprettyxml(indent="  ")
             text = text.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
 
         else:

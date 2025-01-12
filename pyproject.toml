@@ -42,3 +42,31 @@ python_version = "3.13"
 mypy_path = "src"
 explicit_package_bases = true
 namespace_packages = true
+
+[tool.pyright]
+include = ["src"]
+exclude = ["**/node_modules",
+    "**/__pycache__",
+]
+pythonVersion = "3.13"
+reportPossiblyUnboundVariable = "none"
+
+reportMissingTypeStubs = true
+reportOptionalSubscript = true
+reportOptionalMemberAccess = true
+reportOptionalCall = true
+reportOptionalIterable = true
+reportOptionalContextManager = true
+reportOptionalOperand = true
+reportUntypedFunctionDecorator = true
+reportUntypedClassDecorator = true
+reportUntypedBaseClass = true
+reportUntypedNamedTuple = true
+reportFunctionMemberAccess = true
+reportPrivateUsage = true
+reportUnusedImport = true
+reportUnusedClass = true
+reportUnusedFunction = true
+reportUnusedVariable = true
+reportDuplicateImport = true
+reportUnnecessaryTypeIgnoreComment = true

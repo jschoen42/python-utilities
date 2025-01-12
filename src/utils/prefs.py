@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 09.01.2025
+    © Jürgen Schoenemeyer, 12.01.2025
 
     PUBLIC:
     class Prefs:
@@ -54,11 +54,9 @@ class Prefs:
             cls.data = dict(merge_dicts(cls.data, data))
             # cls.data = merge(dict(cls.data), data) # -> Exception: Conflict at trainingCompany
 
-        except yaml.parser.ParserError as err:
-            Trace.fatal(f"ParserError '{pref_name}':\n{err}")
-
-        except yaml.scanner.ScannerError as err:
-            Trace.fatal(f"ScannerError '{pref_name}':\n{err}")
+        except yaml.YAMLError as err:
+            Trace.fatal(f"YAMLError '{pref_name}':\n{err}")
+            return False
 
         except OSError as err:
             Trace.error(f"{pref_name}: {err}")
@@ -122,6 +120,11 @@ def get_pref_special(pref_path: Path, pref_prexix: str, pref_name: str, key: str
     try:
         with open(Path(pref_path, pref_prexix + pref_name + ".yaml"), "r", encoding="utf-8") as file:
             pref = yaml.safe_load(file)
+
+    except yaml.YAMLError as err:
+        Trace.fatal(f"YAMLError '{pref_name}':\n{err}")
+        return ""
+
     except OSError as err:
         Trace.error(f"{beautify_path(str(err))}")
         return ""
@@ -139,6 +142,10 @@ def read_pref( pref_path: Path, pref_name: str ) -> Tuple[bool, Dict[Any, Any]]:
 
         # Trace.wait( f"{pref_name}: {json.dumps(data, sort_keys=True, indent=2)}" )
         return False, data
+
+    except yaml.YAMLError as err:
+        Trace.fatal(f"YAMLError '{pref_name}':\n{err}")
+        return True, {}
 
     except OSError as err:
         Trace.error( f"{beautify_path(str(err))}" )

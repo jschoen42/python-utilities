@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 12.01.2025
 
     PUBLIC:
      - get_modification_timestamp(filename: Path | str) -> float
@@ -51,7 +51,7 @@ from os.path import isfile, isdir, join
 from pathlib import Path
 
 try:
-    from dateutil.parser import parse
+    from dateutil import parser
 except ImportError:
     pass
 
@@ -479,7 +479,7 @@ def copy_my_file(source: str, dest: str, _show_updated: bool) -> bool:
     return True
 
 def convert_datetime(time_string: str) -> int:
-    my_time_string = parse(time_string.replace("UTC", ""))
+    my_time_string = parser.parse(time_string.replace("UTC", ""))
 
     my_timestamp = int(datetime.datetime.timestamp(my_time_string))
 

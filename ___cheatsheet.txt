@@ -257,3 +257,4 @@ python __mypy.py src/main.py
 uv run __mypy.py src/main.py
 
 # type: ignore # mypy
+# xtype: ignore

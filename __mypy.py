@@ -14,6 +14,7 @@ BASE_PATH = Path(sys.argv[0]).parent.parent.resolve()
 def run_mypy() -> None:
 
     # https://mypy.readthedocs.io/en/stable/command_line.html
+    # https://gist.github.com/Michael0x2a/36c5948a7ea571b722686226639b0859
 
     settings: List[str] = [
         # Incremental mode
@@ -30,20 +31,39 @@ def run_mypy() -> None:
         "--warn-unused-ignores",
         "--warn-unreachable",
 
-        # Miscellaneous strictness flags
-        "--strict-equality",
-
         # Configuring error messages
         # "--show-error-context"
-        "--show-column-numbers",
-        # "--show-error-end",
+        # "--show-column-numbers",
         # "--show-error-code-links".
+        # "--show-error-end",
         # "--pretty",
-        # "--force-uppercase-builtins",
+        "--force-uppercase-builtins",
+
+        # Miscellaneous strictness flags
+        "--strict-equality",
+        # "--allow-untyped-globals",
+        "--allow-redefinition",
+        # "--local-partial-types",
+        # "--strict",
+
+        # strict mode enables the following flags:
+        #     --warn-unused-configs
+        #     --disallow-untyped-calls
+        #     --disallow-untyped-defs
+        #     --disallow-incomplete-defs
+        #     --check-untyped-defs
+        #     --no-implicit-optional
+        #     --warn-redundant-casts
+        #     --warn-return-any
+        #     --warn-unused-ignores
+        #     --disallow-subclassing-any
+        #     --disallow-untyped-decorators
 
         # Advanced options
-        # "--show-traceback",
-        # "--strict",
+        # "--show-traceback", # -> fatal error
+
+        # Enabling incomplete/experimental features
+        # "--enable-incomplete-feature", # Tuple[int, ...]
     ]
 
     filepath = Path(sys.argv[1]).stem
