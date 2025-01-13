@@ -1,24 +1,26 @@
 """
-    © Jürgen Schoenemeyer, 12.01.2025
+    © Jürgen Schoenemeyer, 13.01.2025
 
     PUBLIC:
-    get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0) -> Tuple[Workbook, int]
+    get_excel_file(source_path: str, filename: str, comment: str, last_timestamp: float = 0.0) -> Tuple[None | Workbook, float]
 
-    get_excel_sheet(source_path: str, filename: str, sheet: str, comment: str, last_timestamp: float = 0.0) -> Tuple[None | Worksheet, float]
-    get_excel_sheet_special(workbook: Workbook, sheet: str, comment: str) -> None | Worksheet
+    get_excel_sheet(source_path: str, filename: str, sheet_name: str, comment: str, last_timestamp: float = 0.0) -> Tuple[None | Worksheet, float]
+    get_excel_sheet_special(workbook: Workbook, sheet_name: str, comment: str) -> None | Worksheet
 
-    get_cell_text(in_cell: Cell | MergedCell) -> str:
     get_cell_value(in_cell: Cell | MergedCell) -> bool | str
+    get_cell_text(in_cell: Cell | MergedCell) -> str
 
     check_quotes( wb_name: str, word: str, line_number: int, function_name: str ) -> str
-    check_quotes_error(wb_name: str, word: str, line_number: int, function_name: str) -> Tuple[dict | bool, str]
-    check_hidden(sheet, comment: str) -> None
-    excel_date(date, time_zone) -> float
+    check_quotes_error(wb_name: str, word: str, line_number: int, function_name: str) -> Tuple[Dict[str, Any] | bool, str]
+    check_hidden(sheet: Worksheet, comment: str) -> None
+
+    excel_date(date: datetime, time_zone_offset: tzoffset) -> float
 """
 
 import re
 import unicodedata
-import datetime
+from datetime import datetime
+from dateutil.tz import tzoffset
 
 import warnings
 
@@ -190,12 +192,11 @@ def check_hidden(sheet: Worksheet, comment: str) -> None:
         if row_dimension.hidden is True:
             Trace.warning( f"{comment}:  hidden row: {row_num}")
 
-def excel_date(date: Any, time_zone: str) -> float:
+def excel_date(date: datetime, time_zone_offset: tzoffset) -> float:
     day_in_seconds = 86400
 
     # 30.12.1899 (+ 1 day)
     # https://forum.openoffice.org/en/forum/viewtopic.php?t=108820#post_content529967
 
-    tz = datetime.timezone.utc if time_zone == "UTC" else None
-    delta = date - datetime.datetime(1899, 12, 30, 0, 0, 0, 0, tzinfo=tz)
-    return float(delta.days) + (float(delta.seconds) / day_in_seconds)
+    delta = date - datetime(1899, 12, 30, tzinfo=time_zone_offset)
+    return delta.days + delta.seconds / day_in_seconds

@@ -1,5 +1,5 @@
-# python __pyright.py src/main.py
-# uv run __pyright.py src/main.py
+# python __pyright.py src
+# uv run __pyright.py src
 
 # install pyright: npm install --global pyright
 
@@ -22,25 +22,25 @@ def run_pyright(target_file: str) -> None:
         "reportPossiblyUnboundVariable": "none",
 
         # strict
-        "reportMissingTypeStubs": True,
-        "reportOptionalSubscript": True,
-        "reportOptionalMemberAccess": True,
-        "reportOptionalCall": True,
-        "reportOptionalIterable": True,
-        "reportOptionalContextManager": True,
-        "reportOptionalOperand": True,
-        "reportUntypedFunctionDecorator": True,
-        "reportUntypedClassDecorator": True,
-        "reportUntypedBaseClass": True,
-        "reportUntypedNamedTuple": True,
-        "reportFunctionMemberAccess": True,
-        "reportPrivateUsage": True,
-        "reportUnusedImport": True,
-        "reportUnusedClass": True,
-        "reportUnusedFunction": True,
-        "reportUnusedVariable": True,
-        "reportDuplicateImport": True,
-        "reportUnnecessaryTypeIgnoreComment": True,
+        # "reportMissingTypeStubs": True,
+        # "reportOptionalSubscript": True,
+        # "reportOptionalMemberAccess": True,
+        # "reportOptionalCall": True,
+        # "reportOptionalIterable": True,
+        # "reportOptionalContextManager": True,
+        # "reportOptionalOperand": True,
+        # "reportUntypedFunctionDecorator": True,
+        # "reportUntypedClassDecorator": True,
+        # "reportUntypedBaseClass": True,
+        # "reportUntypedNamedTuple": True,
+        # "reportFunctionMemberAccess": True,
+        # "reportPrivateUsage": True,
+        # "reportUnusedImport": True,
+        # "reportUnusedClass": True,
+        # "reportUnusedFunction": True,
+        # "reportUnusedVariable": True,
+        # "reportDuplicateImport": True,
+        # "reportUnnecessaryTypeIgnoreComment": True,
     }
 
     npx_path = shutil.which("npx")

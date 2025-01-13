@@ -414,18 +414,18 @@ def find_matching_file(path_name: str) -> bool | str:
 
     return s[0].replace("\\", "/")
 
-def find_matching_file_path(dirpath: Path, filename: str) -> Path | bool:
+def find_matching_file_path(dirpath: Path, filename: str) -> None | Path:
     filepath = str(dirpath / filename)
 
     s = glob.glob( filepath )
 
     if len(s) == 0:
         Trace.error(f"file not found: {filepath}")
-        return False
+        return None
 
     if len(s) > 1:
         Trace.error(f"file not unique: {filepath} - {s}")
-        return False
+        return None
 
     return Path(s[0].replace("\\", "/"))
 
