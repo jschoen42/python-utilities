@@ -35,6 +35,9 @@ projects:
   - name: docker-with-parameter
     path: /Python/Docker
 
+  - name: excel-playground
+    path: /Python/Excel
+
   - name: fastapi-tests
     path: /Python/FastAPI
 

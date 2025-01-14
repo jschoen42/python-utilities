@@ -27,7 +27,6 @@ zz-utils v0.1.0
 ├── result v0.17.0
 ├── tzdata v2024.2
 ├── xmltodict v0.14.2
-│
 ├── lxml-stubs v0.5.1 (group: dev)
 ├── mypy v1.14.1 (group: dev)
 │   ├── mypy-extensions v1.0.0
@@ -42,5 +41,4 @@ zz-utils v0.1.0
 ├── types-openpyxl v3.1.5.20241225 (group: dev)
 ├── types-pyyaml v6.0.12.20241230 (group: dev)
 └── types-xmltodict v0.14.0.20241009 (group: dev)
-
 (*) Package tree already displayed

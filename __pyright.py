@@ -43,12 +43,17 @@ def run_pyright(target_file: str) -> None:
         # "reportUnnecessaryTypeIgnoreComment": True,
     }
 
+    filepath = Path(sys.argv[1])
+    if not filepath.exists():
+        print(f"Error: '{filepath}' not found ")
+        return
+
+    name = filepath.stem
+
     npx_path = shutil.which("npx")
     if not npx_path:
         print("Error: 'npx' not found")
         return
-
-    filepath = Path(sys.argv[1]).stem
 
     text =  f"Python:   {sys.version}\n"
     text += f"Platform: {platform.platform()}\n"
@@ -72,6 +77,7 @@ def run_pyright(target_file: str) -> None:
     path = str(BASE_PATH)[0].lower() + str(BASE_PATH)[1:]
 
     stdout = result.stdout.encode("cp1252").decode("utf-8")
+    summary = "no summary"
     for line in stdout.splitlines():
         if line.startswith("  "):
             if path in line:
@@ -84,12 +90,11 @@ def run_pyright(target_file: str) -> None:
                 text += f"\n{summary}\n"
             else:
                 text += "\n"
-            #     text += line + "\n"
 
-    with open(f"__pyright-{filepath}.txt", "w") as file:
+    with open(f"__pyright-{name}.txt", "w") as file:
         file.write(text)
 
-    print(f"[PyRight] {target_file}: {summary} -> __pyright-{filepath}.txt")
+    print(f"[PyRight] {target_file}: {summary} -> __pyright-{name}.txt")
 
     sys.exit(result.returncode)
 

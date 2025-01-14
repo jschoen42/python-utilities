@@ -5,10 +5,10 @@
 | audio.py     | 06.01.2025  | |
 | beautify.py  | 10.01.2025  | |
 | decorator.py | 10.01.2025  | |
-| excel.py     | 12.01.2025  | |
-| file.py      | 12.01.2025  | |
+| excel.py     | 13.01.2025  | |
+| file.py      | 13.01.2025  | |
 | files.py     | 12.01.2025  | rustedpy  |
-| format.py    | 10.01.2025  | |
+| format.py    | 13.01.2025  | |
 | globals.py   | 10.01.2025  | |
 | log.py       | 10.01.2025  | |
 | metadata.py  | 12.01.2025  | |
