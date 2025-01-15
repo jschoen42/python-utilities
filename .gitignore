@@ -6,8 +6,8 @@ data/*
 
 *.7z
 __history.txt
-__mypy*.txt
-__pyright*.txt
+mypy-results/*
+pyright-results/*
 
 ### Python
 

@@ -73,6 +73,10 @@ def run_mypy() -> None:
 
     name = filepath.stem
 
+    folder_path = BASE_PATH / "mypy-results"
+    if not folder_path.exists():
+        folder_path.mkdir(parents=True, exist_ok=True)
+
     text =  f"Python:   {sys.version}\n"
     text += f"Platform: {platform.platform()}\n"
     text += f"Date:     {datetime.now().strftime("%d.%m.%Y %H:%M:%S")}\n"
@@ -101,10 +105,10 @@ def run_mypy() -> None:
 
         text += f"{line}\n"
 
-    with open(f"__mypy-{name}.txt", "w") as file:
+    with open(folder_path / f"mypy-{name}.txt", "w") as file:
         file.write(text)
 
-    print(f"[MyPy] {sys.argv[1:][0]}: {summary} -> __mypy-{name}.txt")
+    print(f"[MyPy] {sys.argv[1:][0]}: {summary} -> mypy-results/mypy-{name}.txt")
     sys.exit(result.returncode)
 
 if __name__ == "__main__":

@@ -11,27 +11,6 @@ import hashlib
 import shutil
 from pathlib import Path
 
-import utils.audio      # type: ignore
-import utils.beautify
-import utils.decorator
-import utils.excel
-import utils.file
-import utils.files
-import utils.format
-import utils.globals
-import utils.log
-import utils.metadata
-import utils.metadata_mutagen
-import utils.pandas
-import utils.prefs
-import utils.text
-import utils.trace
-import utils.util
-import utils.utilities
-import utils.utils
-import utils.xml
-import utils.zip  # noqa: F401
-
 from utils.globals   import DRIVE, BASE_PATH
 from utils.trace     import Trace
 from utils.prefs     import Prefs

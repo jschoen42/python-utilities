@@ -22,31 +22,35 @@ def run_pyright(target_file: str) -> None:
         "reportPossiblyUnboundVariable": "none",
 
         # strict
-        # "reportMissingTypeStubs": True,
-        # "reportOptionalSubscript": True,
-        # "reportOptionalMemberAccess": True,
-        # "reportOptionalCall": True,
-        # "reportOptionalIterable": True,
-        # "reportOptionalContextManager": True,
-        # "reportOptionalOperand": True,
-        # "reportUntypedFunctionDecorator": True,
-        # "reportUntypedClassDecorator": True,
-        # "reportUntypedBaseClass": True,
-        # "reportUntypedNamedTuple": True,
-        # "reportFunctionMemberAccess": True,
-        # "reportPrivateUsage": True,
-        # "reportUnusedImport": True,
-        # "reportUnusedClass": True,
-        # "reportUnusedFunction": True,
-        # "reportUnusedVariable": True,
-        # "reportDuplicateImport": True,
-        # "reportUnnecessaryTypeIgnoreComment": True,
+        "reportMissingTypeStubs": True,
+        "reportOptionalSubscript": True,
+        "reportOptionalMemberAccess": True,
+        "reportOptionalCall": True,
+        "reportOptionalIterable": True,
+        "reportOptionalContextManager": True,
+        "reportOptionalOperand": True,
+        "reportUntypedFunctionDecorator": True,
+        "reportUntypedClassDecorator": True,
+        "reportUntypedBaseClass": True,
+        "reportUntypedNamedTuple": True,
+        "reportFunctionMemberAccess": True,
+        "reportPrivateUsage": True,
+        "reportUnusedImport": True,
+        "reportUnusedClass": True,
+        "reportUnusedFunction": True,
+        "reportUnusedVariable": True,
+        "reportDuplicateImport": True,
+        "reportUnnecessaryTypeIgnoreComment": True,
     }
 
     filepath = Path(sys.argv[1])
     if not filepath.exists():
         print(f"Error: '{filepath}' not found ")
         return
+
+    folder_path = BASE_PATH / "pyright-results"
+    if not folder_path.exists():
+        folder_path.mkdir(parents=True, exist_ok=True)
 
     name = filepath.stem
 
@@ -91,10 +95,10 @@ def run_pyright(target_file: str) -> None:
             else:
                 text += "\n"
 
-    with open(f"__pyright-{name}.txt", "w") as file:
+    with open(folder_path / f"pyright-{name}.txt", "w") as file:
         file.write(text)
 
-    print(f"[PyRight] {target_file}: {summary} -> __pyright-{name}.txt")
+    print(f"[PyRight] {target_file}: {summary} -> pyright-results/pyright-{name}.txt")
 
     sys.exit(result.returncode)
 
