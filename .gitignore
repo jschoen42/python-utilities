@@ -6,8 +6,7 @@ data/*
 
 *.7z
 __history.txt
-mypy-results/*
-pyright-results/*
+.type-check-result/*
 
 ### Python
 

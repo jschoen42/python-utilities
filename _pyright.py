@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import datetime
 
 BASE_PATH = Path(sys.argv[0]).parent.parent.resolve()
+RESULT_FOLDER = ".type-check-result"
 
 def run_pyright(target_file: str) -> None:
 
@@ -48,7 +49,7 @@ def run_pyright(target_file: str) -> None:
         print(f"Error: '{filepath}' not found ")
         return
 
-    folder_path = BASE_PATH / "pyright-results"
+    folder_path = BASE_PATH / RESULT_FOLDER
     if not folder_path.exists():
         folder_path.mkdir(parents=True, exist_ok=True)
 
@@ -98,7 +99,7 @@ def run_pyright(target_file: str) -> None:
     with open(folder_path / f"pyright-{name}.txt", "w") as file:
         file.write(text)
 
-    print(f"[PyRight] {target_file}: {summary} -> pyright-results/pyright-{name}.txt")
+    print(f"[PyRight] {target_file}: {summary} -> {RESULT_FOLDER}/pyright-{name}.txt")
 
     sys.exit(result.returncode)
 

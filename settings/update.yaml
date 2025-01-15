@@ -4,7 +4,7 @@
 files:
   mandatory:
     - ___cheatsheet.txt
-     - .vscode/launch.json
+    - .vscode/launch.json
     - .vscode/settings.json
     - _mypy.py
     - _pyright.py

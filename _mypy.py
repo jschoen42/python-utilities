@@ -10,6 +10,7 @@ from pathlib import Path
 from datetime import datetime
 
 BASE_PATH = Path(sys.argv[0]).parent.parent.resolve()
+RESULT_FOLDER = ".type-check-result"
 
 def run_mypy() -> None:
 
@@ -73,7 +74,7 @@ def run_mypy() -> None:
 
     name = filepath.stem
 
-    folder_path = BASE_PATH / "mypy-results"
+    folder_path = BASE_PATH / RESULT_FOLDER
     if not folder_path.exists():
         folder_path.mkdir(parents=True, exist_ok=True)
 
@@ -108,7 +109,7 @@ def run_mypy() -> None:
     with open(folder_path / f"mypy-{name}.txt", "w") as file:
         file.write(text)
 
-    print(f"[MyPy] {sys.argv[1:][0]}: {summary} -> mypy-results/mypy-{name}.txt")
+    print(f"[MyPy] {sys.argv[1:][0]}: {summary} -> {RESULT_FOLDER}/mypy-{name}.txt")
     sys.exit(result.returncode)
 
 if __name__ == "__main__":
