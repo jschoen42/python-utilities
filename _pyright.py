@@ -1,5 +1,5 @@
-# python __pyright.py src
-# uv run __pyright.py src
+# python _pyright.py src
+# uv run _pyright.py src
 
 # install pyright: npm install --global pyright
 

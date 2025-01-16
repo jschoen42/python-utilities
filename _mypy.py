@@ -1,5 +1,5 @@
-# python __mypy.py src/main.py
-# uv run __mypy.py src/main.py
+# python _mypy.py src/main.py
+# uv run _mypy.py src/main.py
 
 import sys
 import subprocess
