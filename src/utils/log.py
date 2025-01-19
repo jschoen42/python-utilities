@@ -134,6 +134,7 @@ class DictionaryEntry(TypedDict):
 
 class DictionaryLog:
     def __init__(self, data: List[str]) -> None:
+        super().__init__()
         self.excel_used: Dict[str, Dict[int, int]] = {} # { "allgemein": {126: 2, 400: 1, 1165: 3, ... }
         self.word_replaced: Dict[str, int] = {}         # { "[abc] -> [aBc]": 2, "[def] -> [deF]" 1, ... }
         self.spelling: Dict[str, int]      = {}         # { "HV": 1, "K6": 4, ... }

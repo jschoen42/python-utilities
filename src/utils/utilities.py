@@ -85,14 +85,23 @@ def exception(function: Callable[[Any], Any]) -> Callable[[Any], Any]:
 # https://github.com/django/django/blob/stable/1.3.x/django/core/validators.py#L45
 
 def check_url(url: str) -> bool:
-    regex = re.compile(
-            r"^(?:http|ftp)s?://" # http:// or https://
-            r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|" #domain...
-            r"localhost|" #localhost...
-            r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})" # ...or ip
-            r"(?::\d+)?" # optional port
-            r"(?:/?|[/?]\S+)$", re.IGNORECASE)
+    # regex = re.compile(
+    #     r"^(?:http|ftp)s?://"                  # http:// or https://
+    #     r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|" #domain...
+    #     r"localhost|" #localhost...
+    #     r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})" # ...or ip
+    #     r"(?::\d+)?"                           # optional port
+    #     r"(?:/?|[/?]\S+)$", re.IGNORECASE
+    # )
 
+    regex = re.compile(
+        r"^(?:http|ftp)s?://" +
+        r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|" +
+        r"localhost|" +
+        r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})" +
+        r"(?::\d+)?" +
+        r"(?:/?|[/?]\S+)$", re.IGNORECASE
+    )
     ret = re.match(regex, url) is not None
     return ret
 
@@ -141,7 +150,7 @@ def prepare_smart_sort(text:str, count:int = 6) -> str:
 
     # slider3testaouaou4
 
-    split = []
+    split: List[str] = []
     tmp = ""
     num = None
     for char in text:

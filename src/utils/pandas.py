@@ -2,11 +2,12 @@
     © Jürgen Schoenemeyer, 07.01.2025
 
     PUBLIC:
-      - load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = "") -> DataFrame:
-      - save_data(filepath:str, filename:str, data:DataFrame, sheet_name:str = "Sheet1", key:str = "") -> None:
+      - load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = "") -> Any:
+      - save_data(filepath:str, filename:str, data:Any, sheet_name:str = "Sheet1", key:str = "") -> None:
 """
 
 import time
+from typing import Any
 from pathlib import Path
 
 import pandas as pd
@@ -38,6 +39,8 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
 
     # text
 
+    data_frame = pd.DataFrame()
+
     if import_type == "csv":
         data_frame = pd.read_csv(data_path)
 
@@ -62,7 +65,7 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
         data_frame = pd.read_pickle(data_path)
 
     elif import_type == "hdf":
-        result = pd.read_hdf(data_path, key=key)
+        result = pd.read_hdf(data_path, key=key) # type: ignore [reportUnknownVariableType]
         if isinstance(result, pd.Series):
             data_frame = result.to_frame()
         else:
@@ -93,7 +96,7 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
 #
 ####################################################
 
-def save_data(filepath:str, filename:str, data:DataFrame, sheet_name:str = "Sheet1", key:str = "") -> None:
+def save_data(filepath:str, filename:str, data:Any, sheet_name:str = "Sheet1", key:str = "") -> None:
 
     start_timer = time.time()
 

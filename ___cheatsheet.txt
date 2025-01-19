@@ -58,6 +58,7 @@ uv add torch<2.5
 -------------- upgrade packages ---------------
 
 uv lock --upgrade
+uv lock --upgrade-package <package>
 uv sync
 
 ------------------ licenses  -------------------
@@ -168,9 +169,12 @@ git log --name-status --pretty=format:"%h [%ai] %D >> '%s'" > __history.txt
 
 git fetch origin
 git log origin/main
-git diff --name-only origin/main
+
+git diff --name-only HEAD        # changed files since last commit
+git diff --name-only origin/main # changed files since last fetch
 git diff origin/main -- _prefs/base.yaml
 git diff origin/main
+
 
 git rebase -i HEAD~3
 git rebase -i --root

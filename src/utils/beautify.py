@@ -17,13 +17,15 @@ import json
 from typing import Dict
 from pathlib import Path
 
-import jsbeautifier     # type: ignore # mypy
-import cssbeautifier    # type: ignore # mypy
+import jsbeautifier        # type: ignore[import-untyped] # mypy + pyright
+import cssbeautifier       # type: ignore[import-untyped] # mypy + pyright
 from lxml import etree
 
 from utils.trace     import Trace
 from utils.decorator import duration
 from utils.util      import import_text, export_text
+
+# print(etree)
 
 expand_data_js: Dict[str, str] = {
     "!0":  "true",

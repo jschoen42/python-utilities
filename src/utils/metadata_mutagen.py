@@ -43,7 +43,7 @@ class MP4Info(Protocol): # -> mypi
 @deprecated("licence does not fit")
 def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
     try:
-        metadata = MP3.Open(filepath) # type: ignore
+        metadata = MP3.Open(filepath) # type: ignore [attr-defined] # mypy + pyright
     except MutagenError as err:
         Trace.error(f"MutagenError: {err}")
         return None
@@ -74,7 +74,7 @@ def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
 @deprecated("licence does not fit")
 def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
     try:
-        metadata = MP3.Open(filepath)  # type: ignore
+        metadata = MP3.Open(filepath) # type: ignore [attr-defined] # mypy + pyright
     except MutagenError as err:
         Trace.error(f"MutagenError: {err}")
         return None
@@ -83,7 +83,7 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
 
     duration     = mp3_info.info.length
     channels     = mp3_info.info.channels
-    mode         = ["STEREO", "JOINTSTEREO", "DUALCHANNEL", "MONO"][mp3_info.info.mode]
+    mode: str    = ["STEREO", "JOINTSTEREO", "DUALCHANNEL", "MONO"][int(mp3_info.info.mode)]
     bitrate_mode = mp3_info.info.bitrate_mode.split(".")[1]
     bitrate      = mp3_info.info.bitrate
     sample_rate  = mp3_info.info.sample_rate
@@ -100,7 +100,7 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
 @deprecated("licence does not fit")
 def get_video_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
     try:
-        metadata = MP4.Open(filepath)  # type: ignore
+        metadata = MP4.Open(filepath) # type: ignore [attr-defined] # mypy + pyright
     except MutagenError as err:
         Trace.error(f"MutagenError: {err}")
         return None

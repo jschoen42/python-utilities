@@ -20,7 +20,7 @@ from utils.file  import get_trace_path
 def check_zip(myzip: ZipFile, path: Path | str, files: List[str]) -> Dict[str, Any]:
     path = Path(path)
 
-    errors = {}
+    errors: Dict[str, Any] = {}
     for file in files:
         try:
             myzip.extract(file, path)

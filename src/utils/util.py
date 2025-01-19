@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 15.01.2025
+    © Jürgen Schoenemeyer, 18.01.2025
 
     src/utils/util.py
 
@@ -167,6 +167,8 @@ class CacheJSON:
     name: str = ""
 
     def __init__(self, path: Path | str, name: str, model: str, reset: bool):
+        super().__init__()
+
         self.cache = {}
         self.path = Path(path)
         self.name = name + "-" + model + ".json"
@@ -195,6 +197,7 @@ class CacheJSON:
 
 class ProcessLog:
     def __init__(self) -> None:
+        super().__init__()
         self.log: List[str] = []
 
     def add(self, info: str) -> None:
