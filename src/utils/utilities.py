@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
 
     PUBLIC:
      - clean_import_json(text: str) -> str | bool

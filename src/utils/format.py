@@ -1,5 +1,7 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
+
+    src/utils/format.py
 
     PUBLIC:
      - floor(number: float, decimals: int=2) -> int

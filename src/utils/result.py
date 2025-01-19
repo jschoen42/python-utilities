@@ -1,3 +1,12 @@
+"""
+    © Jürgen Schoenemeyer, 19.01.2025
+
+    src/utils/result.py
+
+    PUBLIC:
+
+"""
+
 # from result import Result, Ok, Err
 # from typing import TypeVar
 

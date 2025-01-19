@@ -1,5 +1,7 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
+
+    src/utils/log.py
 
     PUBLIC:
      - log_clear()
@@ -9,7 +11,6 @@
     class DictionaryLog:
      - add(self, data: Dict, data_spelling: Dict) -> None
      - get(self) -> Tuple[Dict, Dict, Dict]
-
 """
 
 from typing import Any, Dict, TypedDict, List, Tuple

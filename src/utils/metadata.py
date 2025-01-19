@@ -1,5 +1,7 @@
 """
-    © Jürgen Schoenemeyer, 12.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
+
+    src/utils/metadata.py
 
     PUBLIC:
      - get_media_info(filepath: str | BytesIO) -> None | Dict

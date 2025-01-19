@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 15.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
 
     src/utils/excel.py
 

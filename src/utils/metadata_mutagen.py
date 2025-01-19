@@ -1,5 +1,7 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
+
+    src/utils/metadata_mutagen.py
 
     PUBLIC:
      - get_audioinfo_mutagen(filepath: str) -> None | Dict

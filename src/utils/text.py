@@ -1,9 +1,12 @@
 """
-    © Jürgen Schoenemeyer, 20.12.2024
+    © Jürgen Schoenemeyer, 19.01.2025
+
+    src/utils/text.py
 
     PUBLIC:
      - check_quote(test_id: str, text: None | str, language: str) -> str
 """
+
 from utils.trace import Trace
 
 quote_info = {

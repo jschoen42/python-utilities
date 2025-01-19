@@ -1,5 +1,7 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
+
+    src/utils/zip.py
 
     PUBLIC:
      - check_zip(in_zip, path: str, files: List) -> Dict[str]

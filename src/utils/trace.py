@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 15.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
 
     src/utils/trace.py
 
@@ -32,7 +32,6 @@
     class Color:
       - Color.<color_name>
       - Color.clear(text: str) -> str:
-
 """
 
 import platform

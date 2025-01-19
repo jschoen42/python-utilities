@@ -1,5 +1,7 @@
 """
-    © Jürgen Schoenemeyer, 07.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
+
+    src/utils/pandas.py
 
     PUBLIC:
       - load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = "") -> Any:

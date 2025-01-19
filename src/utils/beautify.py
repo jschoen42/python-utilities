@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 19.01.2025
 
     PUBLIC:
      - beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool:
@@ -8,7 +8,6 @@
     PRIVAT:
      - expand_js(text: str) -> str:
      - expand_css(text: str) -> str:
-
 """
 
 import os
