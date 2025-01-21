@@ -19,6 +19,7 @@
 
      - excel_date(date: datetime, time_zone_offset: tzoffset) -> float
      - convert_datetime( time_string: str ) -> int
+     - seconds_to_timecode_excel(x: float) -> str
 """
 
 import re
@@ -46,6 +47,7 @@ from openpyxl.cell.cell import Cell, MergedCell
 
 from utils.trace import Trace
 from utils.file  import get_modification_timestamp, check_file_exists
+from utils.util  import format_timestamp
 
 # UserWarning: Data Validation extension is not supported and will be removed
 warnings.simplefilter("ignore")
@@ -213,3 +215,6 @@ def convert_datetime(time_string: str) -> int:
 
     # Trace.debug( f"{time_string} -> {my_time_string} => epoch: {my_timestamp}" )
     return my_timestamp
+
+def seconds_to_timecode_excel(x: float) -> str:
+    return format_timestamp(x, always_include_hours=False, decimal_marker=".")

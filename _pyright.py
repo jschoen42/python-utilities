@@ -3,11 +3,11 @@
 # install: npm install --global pyright
 # update: npm update --global pyright
 
+import os
 import sys
 import subprocess
 import platform
 import json
-import os
 import shutil
 import time
 
@@ -16,6 +16,12 @@ from datetime import datetime
 
 BASE_PATH = Path(sys.argv[0]).parent.parent.resolve()
 RESULT_FOLDER = ".type-check-result"
+
+# {
+#     "exclude": [
+#         "path/to/exclude"
+#     ]
+# }
 
 def run_pyright(target_file: str) -> None:
 
@@ -30,6 +36,7 @@ def run_pyright(target_file: str) -> None:
         # deactivate some Strict rules
         "reportUnknownArgumentType":  False,
         "reportUnknownMemberType":    False,
+        "reportUnknownVariableType":  False,
 
         # extra rules
         "enableExperimentalFeatures":          True,
@@ -46,6 +53,11 @@ def run_pyright(target_file: str) -> None:
 
         "deprecateTypingAliases": False,       # always False -> typing: List, Dict, ...
         "reportUnusedCallResult": False,       # always False -> _vars
+
+        "exclude": [
+            "src/faster_whisper/*",
+            "src/extras/*",
+        ]
     }
 
     filepath = Path(sys.argv[1])
@@ -76,7 +88,7 @@ def run_pyright(target_file: str) -> None:
 
     config = "tmp.json"
     with open(config, "w") as config_file:
-        json.dump(settings, config_file)
+        json.dump(settings, config_file, indent=2)
 
     start = time.time()
     try:
@@ -89,7 +101,7 @@ def run_pyright(target_file: str) -> None:
         print(result.stderr)
         sys.exit(result.returncode)
 
-    stdout = result.stdout.encode("cp1252").decode("utf-8")
+    stdout = result.stdout.encode("cp1252").decode("utf-8").replace("\xa0", " ")
 
     path = str(BASE_PATH)[0].lower() + str(BASE_PATH)[1:]
     version = ""

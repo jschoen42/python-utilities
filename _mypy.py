@@ -93,13 +93,14 @@ def run_mypy(target_file: str) -> None:
     text += "\n"
 
     result = subprocess.run(["mypy", target_file, "--verbose"] + settings, capture_output=True, text=True)
-    if result.returncode == 2:
-        print("error: ", result.stderr)
-        sys.exit(2)
+    # if result.returncode == 2:
+    #     print("error: ", result.stderr)
+    #     sys.exit(2)
 
     # "--verbose" -> stderr
 
     sources = []
+    version = ""
     for line in result.stderr.splitlines():
         if "Mypy Version:" in line:
             version = line.split("Mypy Version:")[-1].strip()

@@ -2,7 +2,6 @@
     © Jürgen Schoenemeyer, 19.01.2025
 
     src/utils/metadata.py
-
     PUBLIC:
      - get_media_info(filepath: str | BytesIO) -> None | Dict
      - get_audio_duration(filepath: str) -> float
@@ -15,6 +14,7 @@ from typing import Any, Dict, Protocol, cast
 from io import BytesIO
 
 from pymediainfo import MediaInfo          # type: ignore [import-untyped] # mypy + pyright
+
 from utils.trace import Trace
 
 class AudioTrack(Protocol):
@@ -115,10 +115,10 @@ def get_media_info(filepath: str | BytesIO) -> None | Dict[str, int | float]:
 
 
 def get_media_trackinfo(filepath: str | BytesIO) -> None | Dict[str, Any]:
+    ret = None
+
     try:
         media_info = MediaInfo.parse(filepath)
-        if media_info is None:
-            return None
 
     except FileNotFoundError as error:
         Trace.error(f"FileNotFoundError '{error}'")
@@ -131,12 +131,14 @@ def get_media_trackinfo(filepath: str | BytesIO) -> None | Dict[str, Any]:
     if isinstance(media_info, MediaInfo):
         for track in media_info.tracks: # type: ignore [reportUnknownVariableType]
             if track.track_type == "Audio":
-                return dict(track)
+                ret = track             # type: ignore [reportUnknownVariableType]
+                break
 
-    return None
-
+    return ret                          # type: ignore [reportUnknownVariableType]
 
 def get_audio_duration(filepath: str | BytesIO) -> float:
+    duration: float = -1
+
     try:
         media_info = MediaInfo.parse(filepath)
         if media_info is None:
@@ -153,9 +155,10 @@ def get_audio_duration(filepath: str | BytesIO) -> float:
     if isinstance(media_info, MediaInfo):
         for track in media_info.tracks: # type: ignore [reportUnknownVariableType]
             if track.track_type == "Audio":
-                return round(track.duration / 1000, 3)
+                duration = round(int(track.duration) / 1000, 3)
+                break
 
-    return -1
+    return duration
 
 def get_video_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]:
 
@@ -187,8 +190,6 @@ def get_video_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]:
 
     try:
         media_info = MediaInfo.parse(filepath)
-        if media_info is None:
-            return None
 
     except FileNotFoundError as error:
         Trace.error(f"FileNotFoundError '{error}'")
@@ -210,7 +211,7 @@ def get_video_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]:
                     info["duration"] = round(track.duration / 1000, 3)
 
                 info["video"]["track"] = track.track_id
-                if int(track.bit_rate):
+                if track.bit_rate:
                     bitrate =  int(track.bit_rate) / 1000
                     info["video"]["bitrate"]  = bitrate
 
@@ -258,8 +259,6 @@ def get_audio_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]:
 
     try:
         media_info = MediaInfo.parse(filepath)
-        if media_info is None:
-            return None
 
     except FileNotFoundError as error:
         Trace.error(f"FileNotFoundError '{error}'")
@@ -283,6 +282,6 @@ def get_audio_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]:
                 info["channels"]     = int(track.channel_s)
                 info["samplingRate"] = track.sampling_rate
                 info["format"]       = track.format  + " " + track.format_additionalfeatures + " (" + channels + ")"
-                return info
+                break
 
-    return None
+    return info
