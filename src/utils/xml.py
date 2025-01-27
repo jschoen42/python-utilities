@@ -1,10 +1,10 @@
 """
-    © Jürgen Schoenemeyer, 10.01.2025
+    © Jürgen Schoenemeyer, 27.01.2025
 
-    src/utils/xmk.py
+    src/utils/xml.py
 
     PUBLIC:
-     - open_xml_as_dict(myzip: ZipFile, path: str) -> Dict | None
+     - open_xml_as_dict(myzip: ZipFile, path: str) -> Dict[str, Any] | None
 """
 
 from typing import Any, Dict

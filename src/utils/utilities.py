@@ -1,14 +1,16 @@
 """
-    © Jürgen Schoenemeyer, 19.01.2025
+    © Jürgen Schoenemeyer, 27.01.2025
+
+    src/utils/utilities.py
 
     PUBLIC:
      - clean_import_json(text: str) -> str | bool
      - check_html(text_id: str, text: str) -> None
-     - exception(function)
+     - exception(function: Callable[[Any], Any]) -> Callable[[Any], Any]
      - check_url(url: str) -> bool
-     - insert_meta_node(data: Dict, in_type: str, language: str = None) -> None
-     - insert_data_node(data: Dict, paths: List, key: str, value: Any) -> None
-     - prepare_smart_sort(text:str, count:int = 6) -> str:
+     - insert_meta_node(data: Dict[Any, Any], in_type: str, language: str | None = None) -> None
+     - insert_data_node(data: Dict[Any, Any], paths: List[str], key: str, value: Any) -> None
+     - prepare_smart_sort(text:str, count:int = 6) -> str
 """
 
 import sys

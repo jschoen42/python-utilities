@@ -1,5 +1,7 @@
 """
-    © Jürgen Schoenemeyer, 19.01.2025
+    © Jürgen Schoenemeyer, 27.01.2025
+
+    src/utils/beautify.py
 
     PUBLIC:
      - beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool:
