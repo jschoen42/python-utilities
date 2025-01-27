@@ -15,17 +15,17 @@ zz-utils v0.1.0
 ├── mutagen v1.47.0
 ├── openpyxl v3.1.5
 │   └── et-xmlfile v2.0.0
-├── orjson v3.10.14
+├── orjson v3.10.15
 ├── pandas v2.2.3
-│   ├── numpy v2.2.1
+│   ├── numpy v2.2.2
 │   ├── python-dateutil v2.9.0.post0 (*)
 │   ├── pytz v2024.2
-│   └── tzdata v2024.2
+│   └── tzdata v2025.1
 ├── pymediainfo v6.1.0
 ├── python-dateutil v2.9.0.post0 (*)
 ├── pyyaml v6.0.2
 ├── result v0.17.0
-├── tzdata v2024.2
+├── tzdata v2025.1
 ├── xmltodict v0.14.2
 ├── lxml-stubs v0.5.1 (group: dev)
 ├── mypy v1.14.1 (group: dev)
@@ -36,7 +36,7 @@ zz-utils v0.1.0
 │   ├── openpyxl v3.1.5 (*)
 │   └── typing-extensions v4.12.2
 ├── pandas-stubs v2.2.3.241126 (group: dev)
-│   ├── numpy v2.2.1
+│   ├── numpy v2.2.2
 │   └── types-pytz v2024.2.0.20241221
 ├── types-openpyxl v3.1.5.20241225 (group: dev)
 ├── types-pyyaml v6.0.12.20241230 (group: dev)
