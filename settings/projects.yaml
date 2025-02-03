@@ -50,6 +50,9 @@ projects:
   - name: game-of-live
     path: /Python/Cython
 
+  - name: git-timestamp
+    path: /Python/Git
+
   - name: github-codespace-test
     path: /Python
 
@@ -73,6 +76,9 @@ projects:
 
   - name: port-scanner
     path: /Python
+
+  - name: pyright-tests
+    path: /Python/Pyright
 
   - name: PyQT6-stopwatch
     path: /Python/QT

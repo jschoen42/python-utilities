@@ -5,7 +5,6 @@
 # python src/main.py
 # uv run src/main.py
 
-import os
 import sys
 import hashlib
 import shutil
@@ -28,7 +27,7 @@ def main() -> None:
     for project in projects:
         dest = DRIVE / project["path"] / project["name"]
 
-        if not os.path.exists(dest):
+        if not dest.exists():
             Trace.error(f"Project '{dest}' not found")
             continue
 

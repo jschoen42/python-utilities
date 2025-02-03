@@ -15,10 +15,10 @@
 | metadata_mutagen.py | 27.01.2025 | |
 | pandas.py    | 19.01.2025  | |
 | result.py    | 19.01.2025  | rustedpy   |
-| prefs.py     | 19.01.2025  | |
+| prefs.py     | 03.02.2025  | |
 | text.py      | 19.01.2025  | |
-| trace.py     | 19.01.2025  | |
-| util.py      | 19.01.2025  | |
+| trace.py     | 02.02.2025  | |
+| util.py      | 02.02.2025  | |
 | utilities.py | 27.01.2025  | |
 | utils.py     | 19.01.2025  | |
 | xml.py       | 27.01.2025  | |
@@ -223,7 +223,7 @@ class Color:
  - import_json(folderpath: Path | str, filename: str, show_error: bool=True) -> Dict | None
 
  - export_text(folderpath: Path | str, filename: str, text: str, encoding: str = "utf-8", timestamp: float=0, ret_lf: bool=False, create_new_folder: bool=True, show_message: bool=True) -> str | None
- - export_json(folderpath: Path | str, filename: str, data: Dict | List, timestamp = None) -> str | None
+ - export_json(folderpath: Path | str, filename: str, data: Dict | List, timestamp = None, show_message: bool=True) -> str | None
 
 class CacheJSON:
   - def __init__(self, path: Path | str, name: str, model: str, reset: bool)

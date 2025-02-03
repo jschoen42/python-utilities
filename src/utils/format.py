@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 19.01.2025
+    © Jürgen Schoenemeyer, 29.01.2025
 
     src/utils/format.py
 
@@ -22,6 +22,10 @@
 
 import math
 import datetime
+
+from typing import Any
+
+# from re import A
 
 from dateutil.parser import parse
 # from utils.trace import Trace
@@ -96,18 +100,16 @@ def bin_nibble(val: int) -> str:
     b = bin(val)[2:]
     return  ".".join([b[::-1][i:i+4][::-1] for i in range(0, len(b), 4)][::-1])
 
-def to_bool(value: None | str) -> None | bool:
-    if not value:
-        return None
+FALSE_STRINGS = ("0", "F", "FALSE", "N", "NO")
 
-    if value.lower() == "true":
-        return True
-    elif value.lower() == "false":
+def to_bool(value: Any) -> bool | None:
+    if value is None or value == "":
+        return None
+    if isinstance(value, str) and value.upper() in FALSE_STRINGS:
         return False
-    else:
-        return None
+    return bool(value)
 
-def str_to_bool(value: None | str) -> None | bool:
+def str_to_bool(value: Any) -> bool | None:
     if not value:
         return None
 
