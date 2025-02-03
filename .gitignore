@@ -6,7 +6,7 @@ data/*
 
 *.7z
 __history.txt
-.type-check-result/*
+# .type-check-result/*
 
 ### Python
 
