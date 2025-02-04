@@ -36,6 +36,3 @@ dev = [
     "types-pyyaml>=6.0.12.20241230",
     "types-xmltodict>=0.14.0.20241009",
 ]
-
-[tool.mypy]
-python_version = "3.13"

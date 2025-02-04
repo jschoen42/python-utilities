@@ -19,26 +19,12 @@ zz-utils v0.1.0
 ├── pandas v2.2.3
 │   ├── numpy v2.2.2
 │   ├── python-dateutil v2.9.0.post0 (*)
-│   ├── pytz v2024.2
+│   ├── pytz v2025.1
 │   └── tzdata v2025.1
 ├── pymediainfo v6.1.0
 ├── python-dateutil v2.9.0.post0 (*)
 ├── pyyaml v6.0.2
 ├── result v0.17.0
 ├── tzdata v2025.1
-├── xmltodict v0.14.2
-├── lxml-stubs v0.5.1 (group: dev)
-├── mypy v1.14.1 (group: dev)
-│   ├── mypy-extensions v1.0.0
-│   └── typing-extensions v4.12.2
-├── openpyxl-stubs v0.1.25 (group: dev)
-│   ├── mypy v1.14.1 (*)
-│   ├── openpyxl v3.1.5 (*)
-│   └── typing-extensions v4.12.2
-├── pandas-stubs v2.2.3.241126 (group: dev)
-│   ├── numpy v2.2.2
-│   └── types-pytz v2024.2.0.20241221
-├── types-openpyxl v3.1.5.20241225 (group: dev)
-├── types-pyyaml v6.0.12.20241230 (group: dev)
-└── types-xmltodict v0.14.0.20241009 (group: dev)
+└── xmltodict v0.14.2
 (*) Package tree already displayed
