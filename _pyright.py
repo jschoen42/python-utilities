@@ -17,12 +17,6 @@ from datetime import datetime
 BASE_PATH = Path(sys.argv[0]).parent.parent.resolve()
 RESULT_FOLDER = ".type-check-result"
 
-# {
-#     "exclude": [
-#         "path/to/exclude"
-#     ]
-# }
-
 def run_pyright(target_file: str) -> None:
 
     try:

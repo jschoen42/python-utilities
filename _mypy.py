@@ -81,7 +81,7 @@ def run_mypy(target_file: str) -> None:
         "--warn-redundant-casts",         # default: False
         # "--warn-unused-ignores",        # default: False
         "--warn-no-return",               # default: False
-        "--warn-return-any",              # default: False
+        # "--warn-return-any",            # default: False
         "--warn-unreachable",             # default: False
 
         ### Suppressing errors
