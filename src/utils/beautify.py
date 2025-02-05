@@ -24,7 +24,7 @@ from lxml import etree
 
 from utils.trace     import Trace
 from utils.decorator import duration
-from utils.util      import import_text, export_text
+from utils.file      import import_text, export_text
 
 # print(etree)
 

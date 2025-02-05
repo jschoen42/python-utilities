@@ -84,6 +84,12 @@
 - get_folders_in_folder( path: Path ) -> List[str]
 - get_save_filename( path: Path, stem: str, suffix: str ) -> str
 
+- import_text( folderpath: Path | str, filename: Path | str, encoding: str="utf-8", show_error: bool=True ) -> str | None
+- import_json( folderpath: Path | str, filename: str, show_error: bool=True ) -> Any
+- import_json_timestamp( folderpath: Path | str, filename: str, show_error: bool=True ) -> Tuple[Any, float | None]
+
+- export_text( folderpath: Path | str, filename: str, text: str, encoding: str="utf-8", timestamp: None | float=0, ret_lf: bool=False, create_new_folder: bool=True, show_message: bool=True ) -> str | None
+- export_json( folderpath: Path | str, filename: str, data: Dict[str, Any] | List[Any], timestamp: float | None = None, show_message: bool=True ) -> str | None
 - export_binary_file(filepath: Path | str, filename: str, data: bytes, _timestamp: float=0, create_new_folder: bool=False) -> None
 - export_file(filepath: Path|str, filename: str, text: str, in_type: str | None = None, timestamp: float=0, create_new_folder: bool=True, encoding: str ="utf-8", overwrite: bool=True) -> None | str
 
@@ -202,17 +208,10 @@ class Color:
 - Color.<color_name>
 - Color.clear(text: str) -> str:
 
-### src/utils/util.py (toDo: merge with file.py ...)
+### src/utils/util.py
 ``` python
 - format_subtitle( start_time: float, end_time: float, text: str, color=True ) -> str
 - format_timestamp(seconds: float, always_include_hours: bool=False, decimal_marker: str=".", fps: float = 30) -> str
-
-- import_text(folderpath: Path | str, filename: Path|str, encoding: str="utf-8", show_error: bool=True) -> str | None:
-- import_json_timestamp(folderpath: Path | str, filename: str, show_error: bool=True) -> Tuple[Dict | None, float | None]
-- import_json(folderpath: Path | str, filename: str, show_error: bool=True) -> Dict | None
-
-- export_text(folderpath: Path | str, filename: str, text: str, encoding: str = "utf-8", timestamp: float=0, ret_lf: bool=False, create_new_folder: bool=True, show_message: bool=True) -> str | None
-- export_json(folderpath: Path | str, filename: str, data: Dict | List, timestamp = None, show_message: bool=True) -> str | None
 
 class CacheJSON:
 - def __init__(self, path: Path | str, name: str, model: str, reset: bool)
