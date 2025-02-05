@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 04.02.2025
+    © Jürgen Schoenemeyer, 05.02.2025
 
     src/utils/files.py
 
@@ -35,7 +35,7 @@
 import os
 import sys
 
-from typing import Any, Dict, List, Tuple
+from typing import Any, List, Tuple
 from datetime import datetime
 from pathlib import Path
 

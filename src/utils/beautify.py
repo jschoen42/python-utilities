@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 27.01.2025
+    © Jürgen Schoenemeyer, 05.02.2025
 
     src/utils/beautify.py
 
@@ -18,8 +18,8 @@ import json
 from typing import Dict
 from pathlib import Path
 
-import jsbeautifier        # type: ignore[import-untyped] # mypy + pyright
-import cssbeautifier       # type: ignore[import-untyped] # mypy + pyright
+import jsbeautifier        # type: ignore[import-untyped]
+import cssbeautifier       # type: ignore[import-untyped]
 from lxml import etree
 
 from utils.trace     import Trace

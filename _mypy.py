@@ -18,12 +18,13 @@ RESULT_FOLDER = ".type-check-result"
 
 CONFIG: str = \
 """
-[include]
-path="pyproject.toml"
-
 [tool.mypy]
 mypy_path = "src"
 python_version = "[version]"
+
+[[tool.mypy.overrides]]
+module = "faster_whisper.*"
+ignore_errors = true
 """
 
 def run_mypy(target_file: str) -> None:

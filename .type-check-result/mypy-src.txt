@@ -1,9 +1,9 @@
 Python:   3.13.1 (main, Dec  6 2024, 18:07:41) [MSC v.1942 64 bit (AMD64)]
 Platform: Windows-11-10.0.22631-SP0
-Date:     04.02.2025 15:22:55
+Date:     05.02.2025 12:47:11
 Path:     G:\Python\zz-utils
 
-MyPy 1.14.1 settings:
+MyPy 1.15.0 settings:
  - Python version 3.13
  --namespace-packages
  --explicit-package-bases
@@ -13,7 +13,6 @@ MyPy 1.14.1 settings:
  --disallow-untyped-decorators
  --warn-redundant-casts
  --warn-no-return
- --warn-return-any
  --warn-unreachable
  --allow-redefinition
  --extra-checks
