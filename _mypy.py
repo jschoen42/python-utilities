@@ -21,6 +21,9 @@ CONFIG: str = \
 [tool.mypy]
 mypy_path = "src"
 python_version = "[version]"
+exclude = [
+    "/extras/*"
+]
 
 [[tool.mypy.overrides]]
 module = "faster_whisper.*"
