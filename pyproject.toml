@@ -1,7 +1,7 @@
 [project]
 name = "zz-utils"
 version = "0.1.0"
-description = "Add your description here"
+description = "..."
 authors = [
   { name="Jürgen Schoenemeyer", email="js007@web.de" },
 ]
@@ -25,10 +25,9 @@ dependencies = [
     "tzdata>=2024.2",
     "xmltodict>=0.14.2",
 ]
-
 [dependency-groups]
 dev = [
-    "mypy>=1.14.1",
+    "mypy>=1.15.0",
     "lxml-stubs>=0.5.1",
     "openpyxl-stubs>=0.1.25",
     "pandas-stubs>=2.2.3.241126",

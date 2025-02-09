@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 05.02.2025
+    © Jürgen Schoenemeyer, 07.02.2025
 
     src/utils/files.py
 
@@ -48,7 +48,7 @@ except ModuleNotFoundError:
     pass
 
 try:
-    from dicttoxml import dicttoxml # type: ignore[import-untyped] # mypy + pyright
+    from dicttoxml import dicttoxml # type: ignore[import-untyped]
 except ModuleNotFoundError:
     pass
 

@@ -158,6 +158,14 @@ py -3.13
 
 %APPDATA%\Code\User\settings.json
 
+#################### packages #####################
+
+python setup.py sdist
+python setup.py bdist_wheel
+python setup.py bdist_wheel sdist
+
+pip install .
+
 ###################### git ########################
 
 git init
@@ -165,6 +173,11 @@ git remote add origin https://github.com/ ...
 
 git add .
 git commit -m "..."
+git commit --amend
+git commit --am -m "..."  # n x = ONE commit
+git rebase -i HEAD~1      # modify/combine message
+
+git commit --amend --no-edit
 git push -u origin main
 
 unstage files:

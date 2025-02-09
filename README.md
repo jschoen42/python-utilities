@@ -6,19 +6,19 @@
 | beautify.py  | 27.01.2025  | |
 | decorator.py | 27.01.2025  | |
 | excel.py     | 19.01.2025  | |
-| file.py      | 19.01.2025  | |
-| files.py     | 19.01.2025  | rustedpy  |
+| file.py      | 05.02.2025  | |
+| files.py     | 07.02.2025  | rustedpy  |
 | format.py    | 19.01.2025  | |
 | globals.py   | 27.01.2025  | |
 | log.py       | 19.01.2025  | |
-| metadata.py  | 27.01.2025  | |
+| metadata.py  | 07.02.2025  | |
 | metadata_mutagen.py | 27.01.2025 | |
 | pandas.py    | 19.01.2025  | |
 | result.py    | 19.01.2025  | rustedpy   |
 | prefs.py     | 03.02.2025  | |
 | text.py      | 19.01.2025  | |
 | trace.py     | 02.02.2025  | |
-| util.py      | 02.02.2025  | |
+| util.py      | 05.02.2025  | |
 | utilities.py | 27.01.2025  | |
 | utils.py     | 19.01.2025  | |
 | xml.py       | 27.01.2025  | |
