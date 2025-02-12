@@ -172,6 +172,8 @@ git init
 git remote add origin https://github.com/ ...
 
 git add .
+git add --all
+
 git commit -m "..."
 git commit --amend
 git commit --am -m "..."  # n x = ONE commit

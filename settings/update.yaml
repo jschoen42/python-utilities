@@ -6,6 +6,7 @@ files:
     - ___cheatsheet.txt
     - .vscode/launch.json
     - .vscode/settings.json
+    - .gitignore
     - _mypy.py
     - _pyright.py
     - ruff.toml
@@ -38,7 +39,6 @@ files:
 
   new:
     - ___start.txt
-    - .gitignore
 
   delete:
     - ___install.txt

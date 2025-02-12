@@ -11,7 +11,7 @@
 | format.py    | 19.01.2025  | |
 | globals.py   | 27.01.2025  | |
 | log.py       | 19.01.2025  | |
-| metadata.py  | 07.02.2025  | |
+| metadata.py  | 12.02.2025  | |
 | metadata_mutagen.py | 27.01.2025 | |
 | pandas.py    | 19.01.2025  | |
 | result.py    | 19.01.2025  | rustedpy   |
@@ -25,6 +25,7 @@
 | zip.py       | 19.01.2025  | |
 
 ### src/utils/audio.py
+
 ``` python
 - split_audio(source_path: Path | str, dest_path: Path | str, filename: str, ffmpeg: str) -> None
 - convert_to_mp3(source_path: Path | str, dest_path: Path | str, filename: str, sampling: int, channels: int, ffmpeg: str) -> None
@@ -32,16 +33,22 @@
 - convert_to_flac(source_path: Path | str, dest_path: Path | str, filename: str, sampling: int, channels: int, ffmpeg: str) -> None
 - filter_to_wav(source_path: Path | str, dest_path: Path | str, filename: str, sampling: int, channels: int, ffmpeg: str, filter_path: str, filter_name: str) -> None
 ```
+
 ### src/utils/beautify.py ("JS" | "CSS" | "JSON" | "XML")
+
 ``` python
 - beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool
 ```
+
 ### src/utils/decorator.py
+
 ``` python
 - @duration(text: str=None, rounds: int=1)
 - @deprecated(message: str="")
 ```
+
 ### src/utils/excel.py
+
 ``` python
 - check_excel_file_exists(filepath: Path | str) -> bool
 
@@ -60,7 +67,9 @@
 - convert_datetime( time_string: str ) -> int
 - seconds_to_timecode_excel(x: float) -> str
 ```
+
 ### src/utils/file.py
+
 ``` python
 - get_modification_timestamp(filename: Path | str) -> float
 - set_modification_timestamp(filename: Path | str, timestamp: float) -> None
@@ -101,7 +110,9 @@
 
 - copy_my_file(source: str, dest: str, _show_updated: bool) -> bool
 ```
+
 ### src/utils/files.py
+
 ``` python
 - result = get_timestamp(filepath: Path | str) -> Result[float, str]
 - result = set_timestamp(filepath: Path | str, timestamp: float) -> Result[(), str]
@@ -111,7 +122,9 @@
 - result = read_file(filepath: Path | str, encoding: str="utf-8" ) -> Result[Any, str]
 - result = write_file(filepath: Path | str, data: Any, encoding: str="utf-8", create_dir: bool = True, show_message: bool=True) -> Result[str, str]
 ```
+
 ### src/utils/format.py
+
 ``` python
 - floor(number: float, decimals: int=2) -> int
 
@@ -128,13 +141,17 @@
 - to_bool(in_text: str) -> bool
 - str_to_bool(value: str) -> bool
 ```
+
 ### src/utils/globals.py
+
 ``` python
 - DRIVE: Path
 - BASE_PATH: Path
 - SYSTEM_ENV_PATHS: List[str]
 ```
+
 ### src/utils/log.py
+
 ``` python
 - log_clear()
 - log_add(mediafile: str, text: str, corrected_details: List[Dict], last_segment_text: str, repetition_error: List[Dict], pause_error: List[Dict], spelling_failed: List[Dict] ) -> None:
@@ -142,6 +159,7 @@
 ```
 
 ### src/utils/metadata
+
 ``` python
 - get_media_info(filepath: str | BytesIO) -> None | Dict[str, int | float]
 - get_audio_duration(filepath: str | BytesIO) -> float:
@@ -151,6 +169,7 @@
 ```
 
 ### src/utils/metadata_mutagen.py
+
 ``` python
 - def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]
 - get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]
@@ -158,11 +177,14 @@
 ```
 
 ### src/utils/pandas.py
+
 ``` python
 - load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = "") -> Any:
 - save_data(filepath:str, filename:str, data:Any, sheet_name:str = "Sheet1", key:str = "") -> None:
 ```
+
 ### src/utils/prefs.py
+
 ``` python
 class Prefs:
 - init(cls, pref_path = None, pref_prefix = None ) -> None
@@ -172,11 +194,15 @@ class Prefs:
 - merge_dicts(a: Dict, b: Dict) -> Dict
 - build_tree(tree: List, in_key: str, value: str) -> Dict
 ```
+
 ### src/utils/text.py
+
 ``` python
 - check_quote(test_id: str, text: None | str, language: str) -> str
 ```
+
 ### src/utils/trace.py
+
 ``` python
 class Trace:
 - Trace.set(debug_mode=True)
@@ -223,14 +249,18 @@ class ProcessLog (array cache)
 - add
 - get
 ```
+
 ### src/utils/utils.py
+
 ``` python
 - camel_to_snake(name: str) -> str
 - snake_to_camel(name: str) -> str
 - pascal_to_snake(name: str) -> str
 - snake_to_pascal(name: str) -> str
 ```
+
 ### src/utils/utilities.py
+
 ``` python
 - clean_import_json(text: str) -> str | bool
 - check_html(text_id: str, text: str) -> None
@@ -240,11 +270,15 @@ class ProcessLog (array cache)
 - insert_data_node(data: Dict[Any, Any], paths: List[str], key: str, value: Any) -> None
 - prepare_smart_sort(text:str, count:int = 6) -> str
 ```
+
 ### src/utils/xml.py
+
 ``` python
 - open_xml_as_dict(myzip: ZipFile, path: str) -> Dict[str, Any] | None
 ```
+
 ### src/utils/zip.py
+
 ``` python
 - check_zip(in_zip, path: str, files: List) -> Dict[str]
 - expand_zip(source_path: str, dest_path: str) -> bool
