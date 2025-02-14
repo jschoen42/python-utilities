@@ -3,21 +3,24 @@
 
 files:
   mandatory:
-    - ___cheatsheet.txt
-    - .vscode/launch.json
-    - .vscode/settings.json
-    - .gitignore
-    - _mypy.py
-    - _pyright.py
-    - ruff.toml
-    - LICENSE
-    - src/__init__.py
-    - src/utils/__init__.py
-    - src/utils/decorator.py
-    - src/utils/trace.py
-    - src/utils/globals.py
+    common:
+      - ___cheatsheet.txt
+      - .vscode/settings.json
+      - .gitignore
+      - _mypy.py
+      - _pyright.py
+      - ruff.toml
+      - LICENSE
+    lib:
+      - src/__init__.py
+      - src/utils/__init__.py
+      - src/utils/decorator.py
+      - src/utils/trace.py
+      - src/utils/globals.py
 
   optional:
+    common:
+    lib:
     - src/utils/audio.py
     - src/utils/beautify.py
     - src/utils/excel.py
@@ -38,9 +41,9 @@ files:
     - src/utils/zip.py
 
   new:
-    - ___start.txt
+    common:
+      - ___start.txt
+    lib:
 
   delete:
-    - ___install.txt
-    - __mypy.py
-    - __pyright.py
+      - .vscode/launch.json

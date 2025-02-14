@@ -5,6 +5,10 @@
 # python src/main.py
 # uv run src/main.py
 
+"""
+distribute files to all local repos
+"""
+
 import sys
 import hashlib
 import shutil
@@ -18,11 +22,7 @@ from utils.file      import get_modification_timestamp, set_modification_timesta
 SOURCE_PATH = BASE_PATH
 
 def main() -> None:
-    projects  = Prefs.get("projects")
-    mandatory = Prefs.get("files.mandatory")
-    optional  = Prefs.get("files.optional")
-    new       = Prefs.get("files.new")
-    delete    = Prefs.get("files.delete")
+    projects = Prefs.get("projects")
 
     for project in projects:
         dest = DRIVE / project["path"] / project["name"]
@@ -31,18 +31,28 @@ def main() -> None:
             Trace.error(f"Project '{dest}' not found")
             continue
 
-        Trace.action( f"Project '{project['name']}'" )
-        for file in mandatory:
-            copy_file_special( SOURCE_PATH, dest, project["name"], file, "mandatory" )
+        # copy
 
-        for file in optional:
-            copy_file_special( SOURCE_PATH, dest, project["name"], file, "optional" )
+        for type in ["mandatory", "optional", "new"]:
 
-        for file in new:
-            copy_file_special( SOURCE_PATH, dest, project["name"], file, "new" )
+            for file in Prefs.get(f"files.{type}.common") or []:
+                copy_file_special( SOURCE_PATH, dest, project["name"], file, type )
 
-        for file in delete:
+            if project["lib"]:
+                for file in Prefs.get(f"files.{type}.lib") or []:
+                    copy_file_special( SOURCE_PATH, dest, project["name"], file, type )
+
+        # delete
+
+        for file in Prefs.get("files.delete"):
             delete_file( dest, file )
+
+
+
+# copy file:
+#  - mandatory -> copy/overwite files
+#  - optional  -> copy/overwrite files, if there is a destination file
+#  - new       -> copy file, if there is NO destination file
 
 def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, type: str ) -> None:
     src = source / filepath
