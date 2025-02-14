@@ -6,7 +6,7 @@
 | beautify.py  | 27.01.2025  | |
 | decorator.py | 27.01.2025  | |
 | excel.py     | 19.01.2025  | |
-| file.py      | 05.02.2025  | |
+| file.py      | 14.02.2025  | |
 | files.py     | 07.02.2025  | rustedpy  |
 | format.py    | 19.01.2025  | |
 | globals.py   | 27.01.2025  | |
@@ -85,7 +85,7 @@
 - delete_folder_tree(dest_path: Path | str, relax: bool = False) -> bool:
 - create_folder( folderpath: Path | str ) -> bool:
 - make_dir(path: Path | str) -> None:
-- delete_file(path: Path | str, filename: str) -> None:
+- delete_file(path: Path | str, filename: str) -> bool:
 - beautify_path( path: Path | str ) -> str:
 
 - get_trace_path(filepath: Path | str) -> str:

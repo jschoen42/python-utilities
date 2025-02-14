@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 05.02.2025
+    © Jürgen Schoenemeyer, 14.02.2025
 
     src/utils/file.py
 
@@ -22,7 +22,7 @@
      - delete_folder_tree(dest_path: Path | str, relax: bool = False) -> bool:
      - create_folder( folderpath: Path | str ) -> bool:
      - make_dir(path: Path | str) -> None:
-     - delete_file(path: Path | str, filename: str) -> None:
+     - delete_file(path: Path | str, filename: str) -> bool:
      - beautify_path( path: Path | str ) -> str:
 
      #
@@ -223,15 +223,19 @@ def make_dir(path: Path | str) -> None:
 
     path.mkdir(parents=True, exist_ok=True)
 
-def delete_file(path: Path | str, filename: str) -> None:
+def delete_file(path: Path | str, filename: str) -> bool:
     filepath = Path(path) / filename
 
     if filepath.is_file():
         try:
             filepath.unlink()
             Trace.update(f"file '{filepath}' deleted")
+            return True
+
         except OSError as err:
             Trace.error(f"{err}")
+
+    return False
 
 def beautify_path( path: Path | str ) -> str:
     return str( path ).replace("\\\\", "/")

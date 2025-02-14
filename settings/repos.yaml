@@ -1,7 +1,7 @@
 %YAML 1.1
 ---
 
-projects:
+repos:
   - name: _empty
     path: /Python
     lib:  true
