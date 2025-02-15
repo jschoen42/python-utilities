@@ -244,6 +244,7 @@ class Color:
 - Color.clear(text: str) -> str:
 
 ### src/utils/util.py
+
 ``` python
 - format_subtitle( start_time: float, end_time: float, text: str, color=True ) -> str
 - format_timestamp(seconds: float, always_include_hours: bool=False, decimal_marker: str=".", fps: float = 30) -> str

@@ -1,0 +1,17 @@
+# unix line endings
+* text=auto eol=lf
+
+*.jpg binary
+*.png binary
+
+# duff
+*.ps1 diff=powershell
+
+# merge
+*.json merge=union
+*.lock merge=ours
+
+# filter Git LFS
+*.jpg filter=lfs
+*.png filter=lfs
+*.mp4 filter=lfs

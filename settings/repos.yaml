@@ -46,6 +46,10 @@ repos:
     path: /Python/Django
     lib:  false
 
+  - name: Django-HTMX-Finance-App
+    path: /Python/Django
+    lib:  false
+
   - name: docker-create-files
     path: /Python/Docker
     lib:  true

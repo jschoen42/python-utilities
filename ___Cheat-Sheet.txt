@@ -6,7 +6,7 @@ uv init -p 3.13
 
 ├── .python-version
 ├── README.md
-├── hello.py
+├── main.py
 └── pyproject.toml
 
 ------------------ pyproject.toml -----------------

@@ -8,6 +8,7 @@ actions:
         - ___Cheat-Sheet.txt
         - .vscode/settings.json
         - .gitignore
+        - .gitattributes
         - _mypy.py
         - _pyright.py
         - ruff.toml
