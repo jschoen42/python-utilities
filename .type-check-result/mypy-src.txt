@@ -1,6 +1,6 @@
 Python:   3.13.2 (main, Feb  5 2025, 19:16:35) [MSC v.1942 64 bit (AMD64)]
 Platform: Windows-11-10.0.22631-SP0
-Date:     12.02.2025 22:41:01
+Date:     15.02.2025 19:19:29
 Path:     G:\Python\zz-utils
 
 MyPy 1.15.0 settings:

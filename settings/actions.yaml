@@ -5,7 +5,7 @@ actions:
   copy:
     mandatory:
       common:
-        - ___cheatsheet.txt
+        - ___Cheat-Sheet.txt
         - .vscode/settings.json
         - .gitignore
         - _mypy.py
@@ -48,3 +48,4 @@ actions:
 
   delete:
       - .vscode/launch.json
+      - ___cheatsheet.txt

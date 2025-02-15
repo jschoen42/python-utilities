@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 07.02.2025
+    © Jürgen Schoenemeyer, 15.02.2025
 
     src/utils/files.py
 
@@ -47,10 +47,10 @@ try:
 except ModuleNotFoundError:
     pass
 
-try:
-    from dicttoxml import dicttoxml # type: ignore[import-untyped]
-except ModuleNotFoundError:
-    pass
+# try:
+#     from dicttoxml import dicttoxml # type: ignore[import-untyped] # GNU License
+# except ModuleNotFoundError:
+#     pass
 
 try:
     import orjson
@@ -334,15 +334,37 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
         # json -> xml
 
-        elif isinstance(data, dict):
-            if "dicttoxml" in sys.modules:
-                xml = dicttoxml(data) # type: ignore[reportPossiblyUnboundVariable]
-                text = minidom.parseString(xml).toprettyxml(indent="  ")
-                text = text.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
+        elif isinstance(data, dict) or isinstance(data, list):
+            if "xmltodict" in sys.modules:
+                if len(data)>0:
+                    data = {
+                        "root": data
+                    }
+                try:
+                    text = xmltodict.unparse(data, pretty=True, indent="  " ) # type: ignore[reportPossiblyUnboundVariable]
+                    text = text.replace('<?xml version="1.0" encoding="utf-8"?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
+                except ValueError as error:
+                    err = f"ValueError: {error}"
+                    return Err(err)
             else:
-                err = "module 'dicttoxml' not installed"
+                err = "module 'xmltodict' not installed"
                 Trace.debug(err)
                 return Err(err)
+
+            # if "dicttoxml" in sys.modules: # GNU License !
+            #     try:
+            #         xml = dicttoxml(data) # type: ignore[reportPossiblyUnboundVariable]
+            #     except ValueError as error:
+            #         err = f"ValueError: {error}"
+            #         return Err(err)
+
+            #     text = minidom.parseString(xml).toprettyxml(indent="  ")
+            #     text = text.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
+            # else:
+            #     err = "module 'dicttoxml' not installed"
+            #     Trace.debug(err)
+            #     return Err(err)
+
         else:
             err = f"Type '{type(data)}' is not supported for '{suffix}'"
             Trace.debug(f"{err}")

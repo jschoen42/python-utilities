@@ -17,7 +17,7 @@ zz-utils v0.1.0
 │   └── et-xmlfile v2.0.0
 ├── orjson v3.10.15
 ├── pandas v2.2.3
-│   ├── numpy v2.2.2
+│   ├── numpy v2.2.3
 │   ├── python-dateutil v2.9.0.post0 (*)
 │   ├── pytz v2025.1
 │   └── tzdata v2025.1

@@ -4,5 +4,5 @@ deactivate
 
 python src/main.py
 
-python _pyright.py src/utils
-python _mypy.py src/utils
+python _pyright.py src
+python _mypy.py src

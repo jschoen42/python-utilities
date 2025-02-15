@@ -7,14 +7,14 @@
 | decorator.py | 27.01.2025  | |
 | excel.py     | 19.01.2025  | |
 | file.py      | 14.02.2025  | |
-| files.py     | 07.02.2025  | rustedpy  |
+| files.py     | 15.02.2025  | rustedpy  |
 | format.py    | 19.01.2025  | |
 | globals.py   | 27.01.2025  | |
 | log.py       | 19.01.2025  | |
 | metadata.py  | 12.02.2025  | |
 | metadata_mutagen.py | 27.01.2025 | |
 | pandas.py    | 19.01.2025  | |
-| result.py    | 19.01.2025  | rustedpy   |
+| result.py    | 15.02.2025  | rustedpy   |
 | prefs.py     | 03.02.2025  | |
 | text.py      | 19.01.2025  | |
 | trace.py     | 02.02.2025  | |
@@ -158,7 +158,7 @@
 - log_get_data() -> Tuple[str, str]
 ```
 
-### src/utils/metadata
+### src/utils/metadata (MediaInfo)
 
 ``` python
 - get_media_info(filepath: str | BytesIO) -> None | Dict[str, int | float]
@@ -181,6 +181,15 @@
 ``` python
 - load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = "") -> Any:
 - save_data(filepath:str, filename:str, data:Any, sheet_name:str = "Sheet1", key:str = "") -> None:
+```
+
+### src/utils/result.py
+
+``` python
+- is_ok(result: Result[T, E]) -> bool:
+- is_err(result: Result[T, E]) -> bool:
+- unwrap_ok(result: Result[T, E]) -> T:
+- unwrap_err(result: Result[T, E]) -> E:
 ```
 
 ### src/utils/prefs.py
