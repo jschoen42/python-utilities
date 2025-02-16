@@ -5,9 +5,9 @@
 | audio.py     | 19.01.2025  | |
 | beautify.py  | 27.01.2025  | |
 | decorator.py | 27.01.2025  | |
-| excel.py     | 19.01.2025  | |
-| file.py      | 14.02.2025  | |
-| files.py     | 15.02.2025  | rustedpy  |
+| excel.py     | 18.02.2025  | |
+| file.py      | 16.02.2025  | |
+| files.py     | 16.02.2025  | rustedpy  |
 | format.py    | 19.01.2025  | |
 | globals.py   | 27.01.2025  | |
 | log.py       | 19.01.2025  | |
@@ -17,7 +17,7 @@
 | result.py    | 15.02.2025  | rustedpy   |
 | prefs.py     | 03.02.2025  | |
 | text.py      | 19.01.2025  | |
-| trace.py     | 02.02.2025  | |
+| trace.py     | 18.02.2025  | |
 | util.py      | 05.02.2025  | |
 | utilities.py | 27.01.2025  | |
 | utils.py     | 19.01.2025  | |
@@ -37,7 +37,7 @@
 ### src/utils/beautify.py ("JS" | "CSS" | "JSON" | "XML")
 
 ``` python
-- beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool
+- beautify_file(file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str) -> bool
 ```
 
 ### src/utils/decorator.py
@@ -64,7 +64,7 @@
 - check_double_quotes(wb_name: str, cell_text: str, line_number: int, function_name: str) -> Tuple[bool, str]
 
 - excel_date(date: datetime, time_zone_offset: tzoffset) -> float
-- convert_datetime( time_string: str ) -> int
+- convert_datetime(time_string: str) -> int
 - seconds_to_timecode_excel(x: float) -> str
 ```
 
@@ -77,30 +77,31 @@
 - check_path_exists(path: str) -> bool
 - check_file_exists(filepath: Path | str, filename: str) -> bool
 
-- listdir(path: Path | str ) -> Tuple[List[str], List[str]]
+- listdir(path: Path | str) -> Tuple[List[str], List[str]]
 - listdir_match_extention(path: Path | str, extensions: List[str] | None = None) -> Tuple[List[str], List[str]]
 
 - list_folders(path: Path | str) -> List[str]:
 - clear_folder(path: Path | str) -> None:
 - delete_folder_tree(dest_path: Path | str, relax: bool = False) -> bool:
-- create_folder( folderpath: Path | str ) -> bool:
+- create_folder(folderpath: Path | str) -> bool:
 - make_dir(path: Path | str) -> None:
 - delete_file(path: Path | str, filename: str) -> bool:
-- beautify_path( path: Path | str ) -> str:
+- beautify_path(path: Path | str) -> str:
 
 - get_trace_path(filepath: Path | str) -> str:
-- get_files_in_folder( path: Path ) -> List[str]
-- get_folders_in_folder( path: Path ) -> List[str]
-- get_save_filename( path: Path, stem: str, suffix: str ) -> str
+- get_files_in_folder(path: Path) -> List[str]
+- get_folders_in_folder(path: Path) -> List[str]
+- get_save_filename(path: Path, stem: str, suffix: str) -> str
 
-- import_text( folderpath: Path | str, filename: Path | str, encoding: str="utf-8", show_error: bool=True ) -> str | None
-- import_json( folderpath: Path | str, filename: str, show_error: bool=True ) -> Any
-- import_json_timestamp( folderpath: Path | str, filename: str, show_error: bool=True ) -> Tuple[Any, float | None]
+- import_text(folderpath: Path | str, filename: Path | str, encoding: str="utf-8", show_error: bool=True) -> str | None
+- import_json(folderpath: Path | str, filename: str, show_error: bool=True) -> Any
+- import_json_timestamp(folderpath: Path | str, filename: str, show_error: bool=True) -> Tuple[Any, float | None]
 
-- export_text( folderpath: Path | str, filename: str, text: str, encoding: str="utf-8", timestamp: None | float=0, ret_lf: bool=False, create_new_folder: bool=True, show_message: bool=True ) -> str | None
-- export_json( folderpath: Path | str, filename: str, data: Dict[str, Any] | List[Any], timestamp: float | None = None, show_message: bool=True ) -> str | None
+- export_text(folderpath: Path | str, filename: str, text: str, encoding: str="utf-8", newline: str="\n", timestamp: float=0.0, create_new_folder: bool=True, show_message: bool=True) -> str | None:
+- export_json(folderpath: Path | str, filename: str, data: Dict[str, Any] | List[Any], newline: str="\n", timestamp: float=0.0, show_message: bool=True) -> str | None:
 - export_binary_file(filepath: Path | str, filename: str, data: bytes, _timestamp: float=0, create_new_folder: bool=False) -> None
-- export_file(filepath: Path|str, filename: str, text: str, in_type: str | None = None, timestamp: float=0, create_new_folder: bool=True, encoding: str ="utf-8", overwrite: bool=True) -> None | str
+
+- export_file(filepath: Path | str, filename: str, text: str, in_type: str | None = None, encoding: str ="utf-8", newline: str="\n", timestamp: float=0.0, create_new_folder: bool=True, overwrite: bool=True) -> None | str
 
 - get_filename_unique(dirpath: Path, filename: str) -> str
 - find_matching_file(path_name: str) -> bool | str
@@ -119,7 +120,7 @@
 
 - result = get_files_dirs(path: str, extensions: List) -> Result[Tuple[List, List], str]
 
-- result = read_file(filepath: Path | str, encoding: str="utf-8" ) -> Result[Any, str]
+- result = read_file(filepath: Path | str, encoding: str="utf-8") -> Result[Any, str]
 - result = write_file(filepath: Path | str, data: Any, encoding: str="utf-8", create_dir: bool = True, show_message: bool=True) -> Result[str, str]
 ```
 
@@ -130,7 +131,7 @@
 
 - convert_date_time(time_string: str) -> int
 
-- format_bytes( size: int, unit: str ) -> str
+- format_bytes(size: int, unit: str) -> str
 - format_bytes_v2(size: int) -> str
 
 - convert_duration(duration: int) -> str
@@ -154,7 +155,7 @@
 
 ``` python
 - log_clear()
-- log_add(mediafile: str, text: str, corrected_details: List[Dict], last_segment_text: str, repetition_error: List[Dict], pause_error: List[Dict], spelling_failed: List[Dict] ) -> None:
+- log_add(mediafile: str, text: str, corrected_details: List[Dict], last_segment_text: str, repetition_error: List[Dict], pause_error: List[Dict], spelling_failed: List[Dict]) -> None:
 - log_get_data() -> Tuple[str, str]
 ```
 
@@ -196,7 +197,7 @@
 
 ``` python
 class Prefs:
-- init(cls, pref_path = None, pref_prefix = None ) -> None
+- init(cls, pref_path = None, pref_prefix = None) -> None
 - load(cls, pref_name: str) -> bool
 - get(cls, key_path: str) -> Any
 
@@ -246,18 +247,19 @@ class Color:
 ### src/utils/util.py
 
 ``` python
-- format_subtitle( start_time: float, end_time: float, text: str, color=True ) -> str
+- format_subtitle(start_time: float, end_time: float, text: str, color=True) -> str
 - format_timestamp(seconds: float, always_include_hours: bool=False, decimal_marker: str=".", fps: float = 30) -> str
 
 class CacheJSON:
-- def __init__(self, path: Path | str, name: str, model: str, reset: bool)
-- def get(self, value_hash: str) -> Dict | None
-- def add(self, value_hash: str, value: Dict) -> None
-- def flush(self) -> None:
+- CacheJSON.init(path: Path | str, name: str, model: str, reset: bool)
+- CacheJSON.get(self, value_hash: str) -> Dict | None
+- CacheJSON.add(self, value_hash: str, value: Dict) -> None
+- CacheJSON.flush(self) -> None:
 
 class ProcessLog (array cache)
-- add
-- get
+- ProcessLog.init()
+- ProcessLog.add(info: str)
+- ProcessLog.get() -> List[str]
 ```
 
 ### src/utils/utils.py

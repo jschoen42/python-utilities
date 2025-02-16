@@ -44,15 +44,20 @@ deactivate
 │   └── pyvenv.cfg
 ├── .python-version
 ├── README.md
-├── hello.py
+├── main.py
 ├── pyproject.toml
 └── uv.lock
 
 .venv/pyenv.cfg -> 'prompt = xyz' -> terminal -> (xyz)
 
+PyPy:
+uv venv .venv -p pypy-3.11.11-windows-x86_64-none --prompt .venv
+
 ----------- uv dependencies -> uv pip  ------------
 
 uv pip install -r requirements.txt
+
+uv pip compile pyproject.toml -o requirements.toml.txt
 
 ------ uv dependencies -> uv add, uv remove  ------
 
@@ -93,8 +98,8 @@ uv lock
 uv pip list
 uv pip list --outdated > __outdated.txt
 
-uv tree > __tree.txt
-uv tree --no-dev > __tree.txt
+uv tree > __package_tree.txt
+uv tree --no-dev > __package_tree.txt
 
 ----------------- upgrade Python ------------------
 

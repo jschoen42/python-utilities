@@ -9,7 +9,7 @@ zz-utils v0.1.0
 │   │   ├── editorconfig v0.17.0
 │   │   └── six v1.17.0
 │   └── six v1.17.0
-├── dicttoxml v1.7.16
+├── dict2xml v1.7.6
 ├── jsbeautifier v1.15.3 (*)
 ├── lxml v5.3.1
 ├── mutagen v1.47.0

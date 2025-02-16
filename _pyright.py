@@ -10,6 +10,7 @@ import platform
 import json
 import shutil
 import time
+import argparse
 
 from pathlib import Path
 from datetime import datetime
@@ -17,18 +18,21 @@ from datetime import datetime
 BASE_PATH = Path(sys.argv[0]).parent.parent.resolve()
 RESULT_FOLDER = ".type-check-result"
 
-def run_pyright(target_file: str) -> None:
+LINEFEET = "\n"
 
-    try:
-        with open(".python-version", "r") as f:
-            version = f.read().strip()
-    except OSError:
-        version = f"{sys.version_info.major}.{sys.version_info.minor}"
+def run_pyright(target_file: str, python_version: str) -> None:
+
+    if python_version == "":
+        try:
+            with open(".python-version", "r") as f:
+                python_version = f.read().strip()
+        except OSError:
+            python_version = f"{sys.version_info.major}.{sys.version_info.minor}"
 
     # https://microsoft.github.io/pyright/#/configuration?id=diagnostic-settings-defaults
 
     settings = {
-        "pythonVersion": version,
+        "pythonVersion": python_version,
 
         # "typeCheckingMode": "off",
         # "typeCheckingMode": "basic",
@@ -78,9 +82,9 @@ def run_pyright(target_file: str) -> None:
         print("Error: 'npx' not found")
         return
 
-    text =  f"Python:   {sys.version}\n"
+    text =  f"Python:   {sys.version.replace(LINEFEET, ' ')}\n"
     text += f"Platform: {platform.platform()}\n"
-    text += f"Date:     {datetime.now().strftime("%d.%m.%Y %H:%M:%S")}\n"
+    text += f"Date:     {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}\n"
     text += f"Path:     {BASE_PATH}\n"
     text += "\n"
 
@@ -141,7 +145,7 @@ def run_pyright(target_file: str) -> None:
 
             text += "\n"
 
-    with open(folder_path / f"pyright-{name}.txt", "w") as file:
+    with open(folder_path / f"pyright-{python_version}-{name}.txt", "w", newline="\n") as file:
         file.write(text)
 
     duration = time.time() - start
@@ -150,12 +154,14 @@ def run_pyright(target_file: str) -> None:
     sys.exit(result.returncode)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: _pyright.py <dir_or_file>")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="check with pyright")
+    parser.add_argument("-v", "--version", type=str, default="", help="Python version 3.10/3.11/...")
+    parser.add_argument("file", type=str, help="folder or path")
+
+    args = parser.parse_args()
 
     try:
-        run_pyright(sys.argv[1])
+        run_pyright(args.file, args.version)
     except KeyboardInterrupt:
         print(" --> KeyboardInterrupt")
         sys.exit(1)

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 15.02.2025
+    © Jürgen Schoenemeyer, 16.02.2025
 
     src/utils/files.py
 
@@ -42,22 +42,22 @@ from pathlib import Path
 from xml.dom import minidom
 import xml.etree.ElementTree as ET
 
-try:
-    import xmltodict
-except ModuleNotFoundError:
-    pass
-
-# try:
-#     from dicttoxml import dicttoxml # type: ignore[import-untyped] # GNU License
-# except ModuleNotFoundError:
-#     pass
+from result import Result, Ok, Err
 
 try:
     import orjson
 except ModuleNotFoundError:
     import json
 
-from result import Result, Ok, Err
+try:
+    import xmltodict
+except ModuleNotFoundError:
+    pass
+
+try:
+    from dict2xml import dict2xml # type: ignore[import-untyped]
+except ModuleNotFoundError:
+    pass
 
 from utils.trace import Trace, Color
 
@@ -282,7 +282,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
 
     elif suffix == ".json":
 
-        # xxl -> json
+        # xml -> json
 
         if "xmltodict" in sys.modules:
             if isinstance(data, minidom.Document):
@@ -335,19 +335,15 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
         # json -> xml
 
         elif isinstance(data, dict) or isinstance(data, list):
-            if "xmltodict" in sys.modules:
-                if len(data)>0:
-                    data = {
-                        "root": data
-                    }
+            if "dict2xml" in sys.modules:
                 try:
-                    text = xmltodict.unparse(data, pretty=True, indent="  " ) # type: ignore[reportPossiblyUnboundVariable]
-                    text = text.replace('<?xml version="1.0" encoding="utf-8"?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
-                except ValueError as error:
+                    text  = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>\n'
+                    text += dict2xml(data, wrap="root", indent="  ") # type: ignore[reportPossiblyUnboundVariable]
+                except Exception as error:
                     err = f"ValueError: {error}"
                     return Err(err)
             else:
-                err = "module 'xmltodict' not installed"
+                err = "module 'dict2xml' not installed"
                 Trace.debug(err)
                 return Err(err)
 
@@ -357,7 +353,6 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
             #     except ValueError as error:
             #         err = f"ValueError: {error}"
             #         return Err(err)
-
             #     text = minidom.parseString(xml).toprettyxml(indent="  ")
             #     text = text.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
             # else:
@@ -403,7 +398,7 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
             return Ok("")
 
         try:
-            with open(filepath, "w", encoding=encoding) as f:
+            with open(filepath, "w", encoding=encoding, newline=newline) as f:
                 f.write(text)
         except OSError as err:
             return Err(f"{err}")

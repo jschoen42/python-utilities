@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 12.02.2025
+    © Jürgen Schoenemeyer, 18.02.2025
 
     src/utils/excel.py
 
@@ -7,8 +7,8 @@
      - check_excel_file_exists(filepath: Path | str) -> bool
 
      - read_excel_file(folderpath: Path | str, filename: str) -> None | Tuple[Workbook, float]
-     - read_excel_worksheet(folderpath: str, filename: str, sheet_name: str) -> Tuple[Worksheet | ReadOnlyWorksheet | Chartsheet | None, float]
-     - get_excel_worksheet(workbook: Workbook, sheet_name: str) -> None | Worksheet | ReadOnlyWorksheet | Chartsheet
+     - read_excel_worksheet(folderpath: str, filename: str, sheet_name: str) -> Tuple[Worksheet | None, float]
+     - get_excel_worksheet(workbook: Workbook, sheet_name: str) -> Worksheet | None
 
      - get_cell_text(in_cell: Cell | MergedCell) -> str:
      - get_cell_value(in_cell: Cell | MergedCell, check_boolean: bool = True) -> bool | str
@@ -36,8 +36,6 @@ from dateutil.tz import tzoffset
 from openpyxl import load_workbook
 from openpyxl.workbook.workbook import Workbook
 from openpyxl.worksheet.worksheet import Worksheet
-from openpyxl.worksheet._read_only import ReadOnlyWorksheet
-from openpyxl.chartsheet.chartsheet import Chartsheet
 from openpyxl.cell.cell import Cell, MergedCell
 
 # from openpyxl.workbook.defined_name import DefinedName, DefinedNameList
@@ -79,7 +77,7 @@ def read_excel_file(folderpath: Path | str, filename: str) -> Tuple[Workbook | N
 
     return workbook, get_modification_timestamp(filepath)
 
-def read_excel_worksheet(folderpath: str, filename: str, sheet_name: str) -> Tuple[Worksheet | ReadOnlyWorksheet | Chartsheet | None, float]:
+def read_excel_worksheet(folderpath: str, filename: str, sheet_name: str) -> Tuple[Worksheet | None, float]:
     filepath = Path(folderpath) / filename
 
     if check_excel_file_exists(filepath) is False:
@@ -92,7 +90,7 @@ def read_excel_worksheet(folderpath: str, filename: str, sheet_name: str) -> Tup
         return None, 0
 
     try:
-        sheet: Worksheet | ReadOnlyWorksheet | Chartsheet = workbook[sheet_name]
+        sheet: Worksheet = workbook[sheet_name]
     except KeyError as err:
         Trace.error(f"KeyError: {err}")
         return None, 0
@@ -100,9 +98,9 @@ def read_excel_worksheet(folderpath: str, filename: str, sheet_name: str) -> Tup
     check_hidden_rows_columns(sheet)
     return sheet, get_modification_timestamp(filepath)
 
-def get_excel_worksheet(workbook: Workbook, sheet_name: str) -> None | Worksheet | ReadOnlyWorksheet | Chartsheet:
+def get_excel_worksheet(workbook: Workbook, sheet_name: str) -> Worksheet | None:
     try:
-        sheet: Worksheet | ReadOnlyWorksheet | Chartsheet = workbook[sheet_name]
+        sheet: Worksheet = workbook[sheet_name]
     except KeyError as err:
         Trace.error(f"{err}")
         return None

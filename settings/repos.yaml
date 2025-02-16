@@ -130,6 +130,10 @@ repos:
     path: /Python/QT
     lib:  true
 
+  - name: pypy-try
+    path: /Python/PyPy
+    lib:  true
+
   - name: python-analyse
     path: /Python
     lib:  true
@@ -255,5 +259,9 @@ repos:
     lib:  true
 
   - name: Youtube-download-helper
+    path: /Python
+    lib:  true
+
+  - name: zz-utils
     path: /Python
     lib:  true

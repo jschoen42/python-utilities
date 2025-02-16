@@ -48,5 +48,6 @@ actions:
       lib:
 
   delete:
-      - .vscode/launch.json
-      - ___cheatsheet.txt
+    - .vscode/launch.json
+    - ___cheatsheet.txt
+    - __tree.txt
