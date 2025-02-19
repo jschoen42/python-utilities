@@ -20,7 +20,7 @@ RESULT_FOLDER = ".type-check-result"
 
 LINEFEET = "\n"
 
-def run_pyright(target_file: str, python_version: str) -> None:
+def run_pyright(src_path: Path, python_version: str) -> None:
 
     if python_version == "":
         try:
@@ -33,6 +33,10 @@ def run_pyright(target_file: str, python_version: str) -> None:
 
     settings = {
         "pythonVersion": python_version,
+        # "pythonPlatform": "Linux", # "Windows", "Darwin"
+
+        "venvPath": ".",
+        "venv": ".venv",
 
         # "typeCheckingMode": "off",
         # "typeCheckingMode": "basic",
@@ -61,21 +65,23 @@ def run_pyright(target_file: str, python_version: str) -> None:
         "reportUnusedCallResult": False,       # always False -> _vars
 
         "exclude": [
+            ".venv/*",
             "src/faster_whisper/*",
             "src/extras/*",
         ]
     }
 
-    filepath = Path(sys.argv[1])
-    if not filepath.exists():
-        print(f"Error: '{filepath}' not found")
+    if not src_path.exists():
+        print(f"Error: path '{src_path}' not found")
         return
 
     folder_path = BASE_PATH / RESULT_FOLDER
     if not folder_path.exists():
         folder_path.mkdir(parents=True, exist_ok=True)
 
-    name = filepath.stem
+    name = src_path.stem
+    if name == "":
+        name = "."
 
     npx_path = shutil.which("npx")
     if not npx_path:
@@ -98,7 +104,7 @@ def run_pyright(target_file: str, python_version: str) -> None:
 
     start = time.time()
     try:
-        result = subprocess.run([npx_path, "pyright", target_file, "--verbose", "--project", config], capture_output=True, text=True, shell=True)
+        result = subprocess.run([npx_path, "pyright", src_path, "--verbose", "--project", config], capture_output=True, text=True, shell=True)
     finally:
         os.remove(config)
 
@@ -141,27 +147,28 @@ def run_pyright(target_file: str, python_version: str) -> None:
         else:
             if "informations" in line:
                 summary = line.strip()
-                text += f"\n'{target_file}' {num_files} source file(s): {summary}"
+                text += f"\n'{src_path}' {num_files} source file(s): {summary}"
 
             text += "\n"
 
-    with open(folder_path / f"pyright-{python_version}-{name}.txt", "w", newline="\n") as file:
+    result_filename = f"pyright-{python_version}-'{name}'.txt"
+    with open(folder_path / result_filename, "w", newline="\n") as file:
         file.write(text)
 
     duration = time.time() - start
-    print(f"[PyRight {version} ({duration:.2f} sec)] '{target_file}' - {num_files} source file(s): {summary} -> {RESULT_FOLDER}/pyright-{name}.txt")
+    print(f"[PyRight {version} ({duration:.2f} sec)] '{name}' - {num_files} source file(s): {summary} -> {RESULT_FOLDER}/{result_filename}")
 
     sys.exit(result.returncode)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="check with pyright")
+    parser = argparse.ArgumentParser(description="static type check with Pyright")
+    parser.add_argument("path", nargs="?", type=str, default=".", help="relative path to a file or folder")
     parser.add_argument("-v", "--version", type=str, default="", help="Python version 3.10/3.11/...")
-    parser.add_argument("file", type=str, help="folder or path")
 
     args = parser.parse_args()
 
     try:
-        run_pyright(args.file, args.version)
+        run_pyright(Path(args.path), args.version)
     except KeyboardInterrupt:
         print(" --> KeyboardInterrupt")
         sys.exit(1)

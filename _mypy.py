@@ -37,7 +37,7 @@ module = "faster_whisper.*"
 ignore_errors = true
 """
 
-def run_mypy(target_file: str, python_version: str) -> None:
+def run_mypy(src_path: Path, python_version: str) -> None:
 
     if python_version == "":
         try:
@@ -178,12 +178,13 @@ def run_mypy(target_file: str, python_version: str) -> None:
 
     start = time.time()
 
-    filepath = Path(sys.argv[1])
-    if not filepath.exists():
-        print(f"Error: '{filepath}' not found ")
+    if not src_path.exists():
+        print(f"Error: path '{src_path}' not found ")
         return
 
-    name = filepath.stem
+    name = src_path.stem
+    if name == "":
+        name = "."
 
     folder_path = BASE_PATH / RESULT_FOLDER
     if not folder_path.exists():
@@ -205,7 +206,7 @@ def run_mypy(target_file: str, python_version: str) -> None:
     with open(config, "w") as config_file:
         config_file.write(configuration)
 
-    result = subprocess.run(["mypy", target_file, "--config-file", "tmp.toml", "--verbose"] + settings, capture_output=True, text=True)
+    result = subprocess.run(["mypy", str(src_path), "--config-file", "tmp.toml", "--verbose"] + settings, capture_output=True, text=True)
 
     os.remove(config)
 
@@ -245,22 +246,23 @@ def run_mypy(target_file: str, python_version: str) -> None:
 
         text += f"{line}\n"
 
-    with open(folder_path / f"mypy-{python_version}-{name}.txt", "w", newline="\n") as file:
+    result_filename = f"mypy-{python_version}-'{name}'.txt"
+    with open(folder_path / result_filename, "w", newline="\n") as file:
         file.write(text)
 
     duration = time.time() - start
-    print(f"[MyPy {version} ({duration:.2f} sec)] {sys.argv[1:][0]}: {summary} -> {RESULT_FOLDER}/mypy-{name}.txt")
+    print(f"[MyPy {version} ({duration:.2f} sec)] '{name}': {summary} -> {RESULT_FOLDER}/{result_filename}")
     sys.exit(result.returncode)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="check with mypy")
+    parser = argparse.ArgumentParser(description="static type check with mypy")
+    parser.add_argument("path", nargs="?", type=str, default=".", help="relative path to a file or folder")
     parser.add_argument("-v", "--version", type=str, default="", help="Python version 3.10/3.11/...")
-    parser.add_argument("file", type=str, help="folder or path")
 
     args = parser.parse_args()
 
     try:
-        run_mypy(args.file, args.version)
+        run_mypy(Path(args.path), args.version)
     except KeyboardInterrupt:
         print(" --> KeyboardInterrupt")
         sys.exit(1)

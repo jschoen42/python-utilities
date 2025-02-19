@@ -304,7 +304,7 @@ class Trace:
                 if platform.system() == "Windows":
                     import msvcrt
 
-                    key = msvcrt.getch()
+                    key = msvcrt.getch()                      # type: ignore[attr-defined] # -> Linux
                     print()
 
                 else: # unix terminal
@@ -313,14 +313,14 @@ class Trace:
                     import termios
 
                     fd: int = sys.stdin.fileno()
-                    old_settings: Any = termios.tcgetattr(fd)  # type: ignore[attr-defined]
+                    old_settings: Any = termios.tcgetattr(fd)  # type: ignore[attr-defined] # -> Windows
                     try:
-                        tty.setraw(sys.stdin.fileno())         # type: ignore[attr-defined]
+                        tty.setraw(sys.stdin.fileno())         # type: ignore[attr-defined] # -> Windows
                         key = sys.stdin.buffer.read(1)
                     finally:
-                        termios.tcsetattr(                     # type: ignore[attr-defined]
+                        termios.tcsetattr(                     # type: ignore[attr-defined] # -> Windows
                             fd,
-                            termios.TCSADRAIN,                 # type: ignore[attr-defined]
+                            termios.TCSADRAIN,                 # type: ignore[attr-defined] # -> Windows
                             old_settings
                         )
                         print()

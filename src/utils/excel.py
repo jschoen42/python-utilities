@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 18.02.2025
+    © Jürgen Schoenemeyer, 19.02.2025
 
     src/utils/excel.py
 
@@ -77,30 +77,38 @@ def read_excel_file(folderpath: Path | str, filename: str) -> Tuple[Workbook | N
 
     return workbook, get_modification_timestamp(filepath)
 
-def read_excel_worksheet(folderpath: str, filename: str, sheet_name: str) -> Tuple[Worksheet | None, float]:
+def read_excel_worksheet(folderpath: Path | str, filename: str, sheet_name: str) -> Tuple[Worksheet | None, float]:
     filepath = Path(folderpath) / filename
 
     if check_excel_file_exists(filepath) is False:
-        return None, 0
+        return None, 0.0
 
     try:
         workbook: Workbook = load_workbook(filename = filepath)
     except OSError as err:
         Trace.error(f"{err}")
-        return None, 0
+        return None, 0.0
 
     try:
-        sheet: Worksheet = workbook[sheet_name]
+        sheet = workbook[sheet_name]
+        assert isinstance(sheet, Worksheet)
+    except AssertionError:
+        Trace.error(f"'{sheet_name}' is not a Worksheet")
+        return None, 0.0
     except KeyError as err:
         Trace.error(f"KeyError: {err}")
-        return None, 0
+        return None, 0.0
 
     check_hidden_rows_columns(sheet)
     return sheet, get_modification_timestamp(filepath)
 
 def get_excel_worksheet(workbook: Workbook, sheet_name: str) -> Worksheet | None:
     try:
-        sheet: Worksheet = workbook[sheet_name]
+        sheet = workbook[sheet_name]
+        assert isinstance(sheet, Worksheet)
+    except AssertionError:
+        Trace.error(f"'{sheet_name}' is not a Worksheet")
+        return None
     except KeyError as err:
         Trace.error(f"{err}")
         return None
