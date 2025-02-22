@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 27.01.2025
+    © Jürgen Schoenemeyer, 20.02.2025
 
     src/utils/utilities.py
 
@@ -13,15 +13,17 @@
      - prepare_smart_sort(text:str, count:int = 6) -> str
 """
 
-import sys
-import functools
-import traceback
-import re
+from __future__ import annotations
 
+import functools
+import re
+import sys
+import traceback
 from typing import Any, Callable, Dict, List
 
 from utils.prefs import Prefs
 from utils.trace import Trace
+
 
 def clean_import_json(text: str) -> str | bool:
     # mutiple space -> single space
@@ -96,14 +98,16 @@ def check_url(url: str) -> bool:
     #     r"(?:/?|[/?]\S+)$", re.IGNORECASE
     # )
 
-    regex = re.compile(
-        r"^(?:http|ftp)s?://" +
-        r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|" +
-        r"localhost|" +
-        r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})" +
-        r"(?::\d+)?" +
-        r"(?:/?|[/?]\S+)$", re.IGNORECASE
-    )
+    regex = re.compile(r"""
+        ^(?:http|ftp)s?://
+        (?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|
+        localhost|
+        \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})
+        (?::\d+)?
+        (?:/?|[/?]\S+)$
+    """, re.IGNORECASE | re.VERBOSE)
+
+
     ret = re.match(regex, url) is not None
     return ret
 
@@ -122,7 +126,7 @@ def insert_meta_node(data: Dict[Any, Any], in_type: str, language: str | None = 
     data[".meta"]["font"]      = Prefs.get("eventFont")
 
 def insert_data_node(data: Dict[Any, Any], paths: List[str], key: str, value: Any) -> None:
-    curr_node = data
+    curr_node: Dict[Any, Any] = data
 
     for node in paths:
         if node not in curr_node:
@@ -174,7 +178,7 @@ def prepare_smart_sort(text:str, count:int = 6) -> str:
 
     # ["slider",  "3", "testaouaou",  "4"]
 
-    split_smart = []
+    split_smart: List[Any] = []
     for entry in split:
         if entry[0].isdigit():
             split_smart.append(entry.zfill(count))

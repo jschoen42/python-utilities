@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 19.01.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/pandas.py
 
@@ -8,15 +8,17 @@
       - save_data(filepath:str, filename:str, data:Any, sheet_name:str = "Sheet1", key:str = "") -> None:
 """
 
+from __future__ import annotations
+
 import time
-from typing import Any
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 from pandas import DataFrame
 
+from utils.file import check_file_exists
 from utils.trace import Trace
-from utils.file  import check_file_exists
 
 # https://pandas.pydata.org/docs/user_guide/io.html
 
@@ -64,7 +66,7 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
         data_frame = pd.read_orc(data_path)
 
     elif import_type == "pkl":
-        data_frame = pd.read_pickle(data_path)
+        data_frame = pd.read_pickle(data_path)  # noqa: S301
 
     elif import_type == "hdf":
         result = pd.read_hdf(data_path, key=key) # type: ignore [reportUnknownVariableType]

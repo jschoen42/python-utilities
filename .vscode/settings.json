@@ -6,20 +6,20 @@
   "editor.fontWeight": 400,
   "editor.lineHeight": 1.4,
   "editor.fontLigatures": true,
-
   "editor.insertSpaces": true,
-  "files.trimTrailingWhitespace": true,
   "editor.formatOnSave": false,
   "editor.autoClosingQuotes": "never",
   "editor.autoSurround": "never",
+  "editor.inlineSuggest.enabled": true,
+
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.autoGuessEncoding": false,
+  "files.defaultEncoding": "utf8",
 
   "terminal.integrated.minimumContrastRatio": 7,
   "terminal.integrated.fontWeight": "normal",
   "terminal.integrated.fontFamily": "Consolas Nerd Font",
-
-  "files.eol": "\n",
-  "files.autoGuessEncoding": false,
-  "files.defaultEncoding": "utf8",
 
   "[html]": {
     "editor.formatOnSave": true,
@@ -41,7 +41,6 @@
     "editor.fontLigatures": false
   },
   "[yaml]": {
-    "files.eol": "\n",
     "editor.tabSize": 2,
     "editor.indentSize": 2,
     "editor.fontLigatures": false
@@ -73,7 +72,7 @@
   "python.analysis.diagnosticSeverityOverrides": {
     "reportUnnecessaryTypeIgnoreComment": "none"
   },
-  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.typeCheckingMode": "basic",
   "_errorLens.codeLensEnabled": true,
   "errorLens.delay": 2000,
   "errorLens.followCursor": "activeLine",

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 18.02.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/format.py
 
@@ -20,19 +20,20 @@
      - str_to_bool(value: str) -> bool
 """
 
-import math
+from __future__ import annotations
+
 import datetime
-
-from typing import Any
-
-# from re import A
+import math
+from typing import Any, Dict
 
 from dateutil.parser import parse
+
 # from utils.trace import Trace
 
 def floor(number: float, decimals: int=2) -> int:
     if decimals < 0:
-        raise ValueError("decimal places has to be 0 or more")
+        err = "decimal places has to be 0 or more"
+        raise ValueError(err)
 
     if decimals == 0:
         return math.floor(number)
@@ -60,9 +61,9 @@ def format_bytes( size: int, reference: str ) -> str:
 """
 
 def format_bytes( size: int, unit: str ) -> str:
-    next_unit = {
+    next_unit: Dict[str, str] = {
         "B":"KB", "KB":"MB", "MB":"GB", "GB":"TB", "TB":"PB",
-        "b":"Kb", "Kb":"Mb", "Mb":"Gb", "Gb":"Tb", "Tb":"Pb"
+        "b":"Kb", "Kb":"Mb", "Mb":"Gb", "Gb":"Tb", "Tb":"Pb",
     }
 
     if unit not in next_unit:

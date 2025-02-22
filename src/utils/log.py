@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 19.01.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/log.py
 
@@ -13,7 +13,9 @@
      - get(self) -> Tuple[Dict, Dict, Dict]
 """
 
-from typing import Any, Dict, TypedDict, List, Tuple
+from __future__ import annotations
+
+from typing import Any, Dict, List, Tuple, TypedDict
 
 global_complete_text: str = ""
 global_complete_text_corr: str = ""
@@ -31,7 +33,7 @@ def log_add(
     last_segment_text: str,
     repetition_error:  Dict[Any, Any],
     pause_error:       Dict[Any, Any],
-    spelling_failed:   Dict[Any, Any]
+    spelling_failed:   Dict[Any, Any],
 ) -> None:
 
     global global_complete_text, global_complete_text_corr
@@ -75,8 +77,6 @@ def log_add(
             global_complete_text_corr += f">> possible repetition {entry['type']} ({entry['segment']}): {entry['text']}\n"
 
     # 4. last segment hallucination removed
-
-    # toDo: vorletztes Segment
 
     # OSR_2311_LuG_LODAS
     # OSR_2311_Lohn_Kap_02_00:     *** suspicious text *** segment 9/10  - last: False, no_speech_prob: 0.981, duration: 0.56, compressionRatio: 0.87 ' Vielen Dank.'

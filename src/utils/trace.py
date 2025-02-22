@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 18.02.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/trace.py
 
@@ -34,19 +34,23 @@
       - Color.clear(text: str) -> str:
 """
 
-import platform
-import sys
-import os
-import re
-import inspect
-import importlib.util
+from __future__ import annotations
 
-from typing import Any, Callable, Dict, List
+import importlib.util
+import inspect
+import platform
+import re
+import sys
+from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from datetime import datetime
-from zoneinfo import ZoneInfo
-from zoneinfo import ZoneInfoNotFoundError
+from typing import TYPE_CHECKING, Any, Callable, ClassVar, Dict, List
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+
+from typing_extensions import override
+
+if TYPE_CHECKING:
+    from types import FrameType
 
 # https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 
@@ -54,6 +58,7 @@ def ansi_code(code: int) -> str:
     return f"\033[{code}m"
 
 class StrEnum(Enum):
+    @override
     def __str__(self) -> str: # type: ignore[reportImplicitOverride]
         return self.value
 
@@ -109,7 +114,7 @@ class Color(StrEnum):
     def clear(text: str) -> str:
         return re.sub(r"\033\[[0-9;]*m", "", text)
 
-pattern = {
+pattern: Dict[str, str] = {
     "time":      " --> ",
     "action":    " >>> ",
     "result":    " ==> ",
@@ -131,12 +136,12 @@ pattern = {
 }
 
 class Trace:
-    BASE_PATH = Path(sys.argv[0]).parent
+    BASE_PATH: Path = Path(sys.argv[0]).parent
 
-    default_base = BASE_PATH.resolve()
-    default_base_folder = str(default_base).replace("\\", "/")
+    default_base: Path = BASE_PATH.resolve()
+    default_base_folder: str = str(default_base).replace("\\", "/")
 
-    settings: Dict[str, Any] = {
+    settings: ClassVar[Dict[str, Any]] = {
         "appl_folder":    default_base_folder + "/",
 
         "color":          True,
@@ -149,9 +154,9 @@ class Trace:
         "show_caller":    True,
     }
 
-    pattern: List[str] = []
-    messages: List[str] = []
-    csv: bool     = False
+    pattern:  ClassVar[List[str]] = []
+    messages: ClassVar[List[str]] = []
+    csv: bool = False
     output: Callable[..., None] | None = None
 
     @classmethod
@@ -165,7 +170,7 @@ class Trace:
                     # tzdata installed ?
 
                     if importlib.util.find_spec("tzdata") is None:
-                        print( f"{pattern['warning']} install 'tzdata' for named timezones")
+                        print( f"{pattern['warning']} install 'tzdata' for named timezones")  # noqa: T201
                         cls.settings[key] = True
                     else:
 
@@ -174,7 +179,7 @@ class Trace:
                         try:
                             _ = ZoneInfo(value)
                         except ZoneInfoNotFoundError:
-                            print( f"{pattern['error']} tzdata '{value}' unknown timezone")
+                            print( f"{pattern['error']} tzdata '{value}' unknown timezone")  # noqa: T201
                             cls.settings[key] = True
 
             else:
@@ -205,9 +210,9 @@ class Trace:
 
         try:
             if not trace_path.is_dir():
-                os.makedirs(path)
+                Path(path).mkdir(parents=True)
 
-            with open(Path(trace_path, f"{filename} • {curr_time}.txt"), "w", encoding="utf-8") as file:
+            with Path.open(Path(trace_path, f"{filename} • {curr_time}.txt"), mode="w", encoding="utf-8", newline="\n") as file:
                 file.write(text)
 
         except OSError as err:
@@ -299,18 +304,18 @@ class Trace:
             pre = f"{cls.__get_time()}{cls.__get_pattern()}{cls.__get_caller()}"
             cls.__show_message(cls.__check_file_output(), pre, message, *optional)
             try:
-                print(f"{Color.RED}{Color.BOLD} >>> Press Any key to continue or ESC to exit <<< {Color.RESET}", end="", flush=True)
+                print(f"{Color.RED}{Color.BOLD} >>> Press Any key to continue or ESC to exit <<< {Color.RESET}", end="", flush=True)  # noqa: T201
 
                 if platform.system() == "Windows":
                     import msvcrt
 
                     key = msvcrt.getch()                      # type: ignore[attr-defined] # -> Linux
-                    print()
+                    print()  # noqa: T201
 
                 else: # unix terminal
 
-                    import tty
                     import termios
+                    import tty
 
                     fd: int = sys.stdin.fileno()
                     old_settings: Any = termios.tcgetattr(fd)  # type: ignore[attr-defined] # -> Windows
@@ -321,7 +326,7 @@ class Trace:
                         termios.tcsetattr(                     # type: ignore[attr-defined] # -> Windows
                             fd,
                             termios.TCSADRAIN,                 # type: ignore[attr-defined] # -> Windows
-                            old_settings
+                            old_settings,
                         )
                         print()
 
@@ -334,11 +339,11 @@ class Trace:
 
     @classmethod
     def __check_file_output(cls) -> bool:
-        current_frame = inspect.currentframe()
+        current_frame: FrameType | None = inspect.currentframe()
         if current_frame is None:
             return False
 
-        caller_frame = current_frame.f_back
+        caller_frame: FrameType | None = current_frame.f_back
         if caller_frame is None:
             return False
 
@@ -348,7 +353,7 @@ class Trace:
     @classmethod
     def __get_time_timezone(cls, tz: bool | str) -> str:
         if tz is False:
-            return datetime.now().strftime("%H:%M:%S.%f")[:-3]
+            return datetime.now().astimezone().strftime("%H:%M:%S.%f")[:-3]
 
         elif tz is True:
             d = datetime.now().astimezone()
@@ -376,11 +381,11 @@ class Trace:
 
     @staticmethod
     def __get_pattern() -> str:
-        current_frame = inspect.currentframe()
+        current_frame: FrameType | None = inspect.currentframe()
         if current_frame is None:
             return pattern["clear"]
 
-        caller_frame = current_frame.f_back
+        caller_frame: FrameType | None = current_frame.f_back
         if caller_frame is None:
             return pattern["clear"]
 
@@ -398,15 +403,15 @@ class Trace:
         path = inspect.stack()[2][1].replace("\\", "/")
         path = path.split(cls.settings["appl_folder"])[-1]
 
-        current_frame = inspect.currentframe()
+        current_frame: FrameType | None = inspect.currentframe()
         if current_frame is None:
             return ""
 
-        caller_frame = current_frame.f_back
+        caller_frame: FrameType | None = current_frame.f_back
         if caller_frame is None:
             return ""
 
-        trace_frame = caller_frame.f_back
+        trace_frame: FrameType | None = caller_frame.f_back
         if trace_frame is None:
             return ""
 
@@ -451,15 +456,15 @@ class Trace:
         def is_redirected(stream: Any) -> bool:
             return not hasattr(stream, "isatty") or not stream.isatty()
 
-        if not cls.settings["color"] or is_redirected(sys.stdout):
+        if not cls.settings["color"] or is_redirected(stream=sys.stdout):
             text_no_tabs = Color.clear(text_no_tabs)
 
         # https://docs.python.org/3/library/sys.html#sys.displayhook
 
-        bytes = (text_no_tabs + "\n").encode("utf-8", "backslashreplace")
+        data = (text_no_tabs + "\n").encode("utf-8", "backslashreplace")
         if hasattr(sys.stdout, "buffer"):
-            sys.stdout.buffer.write(bytes)
+            sys.stdout.buffer.write(data)
             sys.stdout.flush()
         else:
-            text = bytes.decode("utf-8", "strict")
+            text = data.decode("utf-8", "strict")
             sys.stdout.write(text)

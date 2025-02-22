@@ -11,6 +11,7 @@ actions:
         - .gitattributes
         - _mypy.py
         - _pyright.py
+        - _basedpyright.py
         - ruff.toml
         - LICENSE
       lib:

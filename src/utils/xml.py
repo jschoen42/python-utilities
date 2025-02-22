@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 27.01.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/xml.py
 
@@ -7,13 +7,18 @@
      - open_xml_as_dict(myzip: ZipFile, path: str) -> Dict[str, Any] | None
 """
 
-from typing import Any, Dict
-from zipfile import ZipFile
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any, Dict
 
 import xmltodict
 from xmltodict import ParsingInterrupted
 
 from utils.trace import Trace
+
+if TYPE_CHECKING:
+    from zipfile import ZipFile
+
 
 def open_xml_as_dict(myzip: ZipFile, path: str) -> Dict[str, Any] | None:
     try:

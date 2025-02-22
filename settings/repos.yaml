@@ -122,6 +122,10 @@ repos:
     path: /Python/Pyright
     lib:  true
 
+  - name: basedpyright-tests
+    path: /Python/Pyright
+    lib:  true
+
   - name: PyQT6-stopwatch
     path: /Python/QT
     lib:  true

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 16.02.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/util.py
 
@@ -19,11 +19,14 @@
      - ProcessLog.get() -> List[str]
 """
 
-from typing import Any, Dict, List
-from pathlib import Path
+from __future__ import annotations
 
-from utils.trace import Trace, Color
-from utils.file  import create_folder, import_json, export_json
+from pathlib import Path
+from typing import Any, Dict, List
+
+from utils.file import create_folder, export_json, import_json
+from utils.trace import Color, Trace
+
 
 # PUBLIC
 def format_subtitle( start_time: float, end_time: float, text: str, color: bool=True ) -> str:
@@ -71,11 +74,11 @@ def format_timestamp(seconds: float, always_include_hours: bool=False, decimal_m
         f"{hours_marker}{minutes:02d}:{seconds:02d}{decimal_marker}{milliseconds:03d}"
 )
 class CacheJSON:
-    cache: Dict[str, Any] = {}
+    cache: Dict[str, Any] = {}  # noqa: RUF012
     path: Path = Path()
     name: str = ""
 
-    def __init__(self, path: Path | str, name: str, model: str, reset: bool):
+    def __init__(self, path: Path | str, name: str, model: str, reset: bool) -> None:
         super().__init__()
 
         self.cache = {}

@@ -2,27 +2,27 @@
 
 | File         | Last update | Note      |
 | :----------- | :---------: | :-------: |
-| audio.py     | 19.01.2025  | |
-| beautify.py  | 27.01.2025  | |
-| decorator.py | 27.01.2025  | |
-| excel.py     | 18.02.2025  | |
-| file.py      | 16.02.2025  | |
-| files.py     | 16.02.2025  | rustedpy  |
-| format.py    | 19.01.2025  | |
-| globals.py   | 27.01.2025  | |
-| log.py       | 19.01.2025  | |
-| metadata.py  | 12.02.2025  | |
-| metadata_mutagen.py | 27.01.2025 | |
-| pandas.py    | 19.01.2025  | |
-| result.py    | 15.02.2025  | rustedpy   |
-| prefs.py     | 03.02.2025  | |
-| text.py      | 19.01.2025  | |
-| trace.py     | 18.02.2025  | |
-| util.py      | 05.02.2025  | |
-| utilities.py | 27.01.2025  | |
-| utils.py     | 19.01.2025  | |
-| xml.py       | 27.01.2025  | |
-| zip.py       | 19.01.2025  | |
+| audio.py     | 22.02.2025  | |
+| beautify.py  | 22.02.2025  | |
+| decorator.py | 22.02.2025  | |
+| excel.py     | 22.02.2025  | |
+| file.py      | 22.02.2025  | |
+| files.py     | 22.02.2025  | rustedpy  |
+| format.py    | 22.02.2025  | |
+| globals.py   | 22.02.2025  | |
+| log.py       | 22.02.2025  | |
+| metadata.py  | 22.02.2025  | |
+| metadata_mutagen.py | 22.02.2025 | |
+| pandas.py    | 22.02.2025  | |
+| result.py    | 22.02.2025  | rustedpy   |
+| prefs.py     | 22.02.2025  | |
+| text.py      | 22.02.2025  | |
+| trace.py     | 22.02.2025  | |
+| util.py      | 22.02.2025  | |
+| utilities.py | 22.02.2025  | |
+| utils.py     | 22.02.2025  | |
+| xml.py       | 22.02.2025  | |
+| zip.py       | 22.02.2025  | |
 
 ### src/utils/audio.py
 

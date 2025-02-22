@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 15.02.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/result.py
 
@@ -10,8 +10,11 @@
      - unwrap_err(result: Result[T, E]) -> E:
 """
 
-from result import Result, Ok, Err
-from typing import TypeVar, Generic
+from __future__ import annotations
+
+from typing import Generic, TypeVar
+
+from result import Err, Ok, Result
 
 T = TypeVar("T")
 E = TypeVar("E")
@@ -23,11 +26,11 @@ def is_err(result: Result[T, E]) -> bool:
     return isinstance(result, Err)
 
 def unwrap_ok(result: Result[T, E]) -> T:
-    assert isinstance(result, Ok)
+    assert isinstance(result, Ok)  # noqa: S101
     return result.ok()
 
 def unwrap_err(result: Result[T, E]) -> E:
-    assert isinstance(result, Err)
+    assert isinstance(result, Err)  # noqa: S101
     return result.err()
 
 class ResultUtils(Generic[T, E]):
@@ -41,10 +44,10 @@ class ResultUtils(Generic[T, E]):
 
     @staticmethod
     def unwrap_ok(result: Result[T, E]) -> T:
-        assert isinstance(result, Ok)
+        assert isinstance(result, Ok)  # noqa: S101
         return result.ok()
 
     @staticmethod
     def unwrap_err(result: Result[T, E]) -> E:
-        assert isinstance(result, Err)
+        assert isinstance(result, Err)  # noqa: S101
         return result.err()

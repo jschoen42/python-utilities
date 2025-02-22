@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 19.01.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/zip.py
 
@@ -9,15 +9,16 @@
      - create_zip(source_path: str, dest_path: str, filename: str, compression = 6) -> bool
 """
 
+from __future__ import annotations
+
 import shutil
-import os
-
-from typing import Any, Dict, List
 from pathlib import Path
-from zipfile import ZipFile, ZIP_DEFLATED
+from typing import Any, Dict, List
+from zipfile import ZIP_DEFLATED, ZipFile
 
+from utils.file import get_trace_path
 from utils.trace import Trace
-from utils.file  import get_trace_path
+
 
 def check_zip(myzip: ZipFile, path: Path | str, files: List[str]) -> Dict[str, Any]:
     path = Path(path)
@@ -36,7 +37,7 @@ def expand_zip(source_path: Path | str, dest_path: Path | str) -> bool:
     source_path = Path(source_path)
     dest_path = Path(dest_path)
 
-    if os.path.isfile(source_path):
+    if Path.is_file(source_path):
         try:
             shutil.unpack_archive(source_path, dest_path)
             return True
@@ -50,10 +51,10 @@ def expand_zip(source_path: Path | str, dest_path: Path | str) -> bool:
 
 def create_zip(source_path: Path | str, dest_path: Path | str, filename: str, compression: int = 6) -> bool:
     source_path = Path(source_path)
-    dest_path = Path(dest_path)
+    dest_path   = Path(dest_path)
 
-    if not os.path.isdir(dest_path):
-        os.makedirs(dest_path)
+    if not dest_path.is_dir():
+        dest_path.mkdir(parents=True)
         Trace.update( f"makedir + '{dest_path}'")
 
     Trace.info( f"'{get_trace_path(source_path)}/{filename}' > '{get_trace_path(dest_path)}/{filename}'")

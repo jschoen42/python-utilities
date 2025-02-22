@@ -11,15 +11,19 @@ distribute files to all local repos
  - actions -> settings/actions.yaml
 """
 
-import sys
 import hashlib
 import shutil
+import sys
 from pathlib import Path
 
-from utils.globals   import DRIVE, BASE_PATH
-from utils.trace     import Trace
-from utils.prefs     import Prefs
-from utils.file      import get_modification_timestamp, set_modification_timestamp, delete_file
+from utils.file import (
+    delete_file,
+    get_modification_timestamp,
+    set_modification_timestamp,
+)
+from utils.globals import BASE_PATH, DRIVE
+from utils.prefs import Prefs
+from utils.trace import Trace
 
 SOURCE_PATH = BASE_PATH
 
@@ -40,14 +44,14 @@ def main() -> None:
         # copy
 
         modified_files = 0
-        for type in ["mandatory", "optional", "new"]:
+        for action_type in ["mandatory", "optional", "new"]:
 
-            for file in Prefs.get(f"actions.copy.{type}.common") or []:
-                modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, type )
+            for file in Prefs.get(f"actions.copy.{action_type}.common") or []:
+                modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type )
 
             if repo["lib"]:
-                for file in Prefs.get(f"actions.copy.{type}.lib") or []:
-                    modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, type )
+                for file in Prefs.get(f"actions.copy.{action_type}.lib") or []:
+                    modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type )
 
         # delete
 
@@ -66,7 +70,7 @@ def main() -> None:
 #  - optional  -> copy/overwrite files, if there is a destination file
 #  - new       -> copy file, if there is NO destination file
 
-def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, type: str ) -> int:
+def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, action_type: str ) -> int:
     src = source / filepath
     dst = dest / filepath
 
@@ -74,18 +78,18 @@ def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, type
         dst.parent.mkdir()
 
     if Path(dst).is_file():
-        if type == "new":
+        if action_type == "new":
             return 0
 
         if not Path(src).is_file():
             Trace.fatal(f"source '{src}' file is missing")
             return 0
 
-        with open(src, "rb") as file:
+        with Path.open(src, "rb") as file:
             text = file.read()
         source_md5 = hashlib.md5(text).hexdigest()
 
-        with open(dst, "rb") as file:
+        with Path.open(dst, "rb") as file:
             text = file.read()
         dest_md5 = hashlib.md5(text).hexdigest()
 
@@ -95,16 +99,16 @@ def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, type
             Trace.result( f"copy '{filepath}' => {name}" )
             return 1
 
-    else:
-        if type == "mandatory" or type == "new":
-            if not Path(src).is_file():
-                Trace.fatal(f"source '{src}' file is missing")
-                return 0
 
-            shutil.copyfile(src, dst)
-            set_modification_timestamp( dst, get_modification_timestamp(src) )
-            Trace.result( f"copy '{filepath}' => {name}" )
-            return 1
+    elif action_type in ("mandatory", "new"):
+        if not Path(src).is_file():
+            Trace.fatal(f"source '{src}' file is missing")
+            return 0
+
+        shutil.copyfile(src, dst)
+        set_modification_timestamp( dst, get_modification_timestamp(src) )
+        Trace.result( f"copy '{filepath}' => {name}" )
+        return 1
 
     return 0
 

@@ -1,11 +1,13 @@
 """
-    © Jürgen Schoenemeyer, 19.01.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/text.py
 
     PUBLIC:
      - check_quote(test_id: str, text: None | str, language: str) -> str
 """
+
+from __future__ import annotations
 
 from utils.trace import Trace
 
@@ -56,11 +58,11 @@ quote_info = {
     "fr": [chr(171)+chr(160), chr(160)+chr(187)], # französisch
 
     # Ecke links oben, Ecke rechts unten
-    "ja": [chr(12300), chr(12301)] # japanisch
+    "ja": [chr(12300), chr(12301)], # japanisch
 
     # keine typographischen Anführungszeichen
     # "ms": [chr(34), chr(34)], # malayisch
-    # "vi": [chr(34), chr(34)]  # vietnamesisch
+    # "vi": [chr(34), chr(34)], # vietnamesisch
 }
 
 def check_quote(test_id: str, text: None | str, language: str) -> str:

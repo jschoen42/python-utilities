@@ -10,6 +10,8 @@
      - snake_to_pascal(name: str) -> str
 """
 
+from __future__ import annotations
+
 import re
 
 # https://stackoverflow.com/questions/17156078/converting-identifier-naming-between-camelcase-and-snakes-during-json-seria#answer-17156414

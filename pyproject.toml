@@ -35,4 +35,5 @@ dev = [
     "types-pyyaml>=6.0.12.20241230",
     "types-xmltodict>=0.14.0.20241009",
     "pip-licenses>=5.0.0",
+    "basedpyright>=1.27.1",
 ]

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 27.01.2025
+    © Jürgen Schoenemeyer, 22.02.2025
 
     src/utils/metadata_mutagen.py
 
@@ -9,17 +9,20 @@
      - get_video_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]
 """
 
-from typing import Any, Dict, Protocol, cast
-from pathlib import Path
+from __future__ import annotations
 
-import mutagen
+from typing import TYPE_CHECKING, Any, Dict, Protocol, cast
+
+from mutagen._util import MutagenError
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 
-from utils.trace import Trace
 from utils.decorator import deprecated
+from utils.trace import Trace
 
-MutagenError = getattr(mutagen, "MutagenError")
+if TYPE_CHECKING:
+    from pathlib import Path
+
 
 class MP3Info(Protocol): # -> mypi
     info:         Any
@@ -70,7 +73,7 @@ def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
         "samples":   samples,
         "bits":      bits,
         "sampleCnt": sample_count,
-        "startPt":   start_ptr
+        "startPt":   start_ptr,
     }
 
 @deprecated("licence does not fit")
@@ -119,5 +122,5 @@ def get_video_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
         "durationAudio":   round(duration, 2),
         "bitrateAudio":    int(bitrate / 1000),
         "modeAudio":       mode,
-        "sampleRateAudio": sample_rate
+        "sampleRateAudio": sample_rate,
     }
