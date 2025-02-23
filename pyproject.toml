@@ -37,3 +37,14 @@ dev = [
     "pip-licenses>=5.0.0",
     "basedpyright>=1.27.1",
 ]
+
+[tool.basedpyright]
+deprecateTypingAliases =  false
+reportAny = false
+reportExplicitAny = false
+reportImplicitRelativeImport = false
+reportMissingTypeStubs = false
+reportUnusedCallResult = false
+reportUnknownArgumentType = false
+reportUnknownVariableType = false
+reportUnknownMemberType = false

@@ -7,7 +7,6 @@
       - load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = "") -> Any:
       - save_data(filepath:str, filename:str, data:Any, sheet_name:str = "Sheet1", key:str = "") -> None:
 """
-
 from __future__ import annotations
 
 import time

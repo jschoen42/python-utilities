@@ -6,7 +6,6 @@
     PUBLIC:
      - check_quote(test_id: str, text: None | str, language: str) -> str
 """
-
 from __future__ import annotations
 
 from utils.trace import Trace

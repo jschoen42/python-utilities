@@ -31,7 +31,6 @@
      - result = listdir_ext(dirpath: Path | str, extensions: List | None = None) -> Result[List, str]
      - result = check_path_exist(path: Path | str, case_sensitive: bool=False, debug: bool=False) -> Result[str, str]
 """
-
 from __future__ import annotations
 
 import os

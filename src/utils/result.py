@@ -9,7 +9,6 @@
      - unwrap_ok(result: Result[T, E]) -> T:
      - unwrap_err(result: Result[T, E]) -> E:
 """
-
 from __future__ import annotations
 
 from typing import Generic, TypeVar

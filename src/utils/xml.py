@@ -6,7 +6,6 @@
     PUBLIC:
      - open_xml_as_dict(myzip: ZipFile, path: str) -> Dict[str, Any] | None
 """
-
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Dict

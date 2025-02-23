@@ -12,7 +12,6 @@
 
      - filter_to_wav(source_path: Path | str, dest_path: Path | str, filename: str, sampling: int, channels: int, ffmpeg: str, filter_path: str, filter_name: str) -> None
 """
-
 from __future__ import annotations
 
 import subprocess

@@ -33,7 +33,6 @@
       - Color.<color_name>
       - Color.clear(text: str) -> str:
 """
-
 from __future__ import annotations
 
 import importlib.util

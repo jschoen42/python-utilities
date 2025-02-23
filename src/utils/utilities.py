@@ -12,7 +12,6 @@
      - insert_data_node(data: Dict[Any, Any], paths: List[str], key: str, value: Any) -> None
      - prepare_smart_sort(text:str, count:int = 6) -> str
 """
-
 from __future__ import annotations
 
 import functools

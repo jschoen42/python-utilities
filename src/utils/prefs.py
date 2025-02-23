@@ -12,7 +12,6 @@
      - merge_dicts(a: Dict, b: Dict) -> Dict
      - build_tree(tree: List, in_key: str, value: str) -> Dict
 """
-
 from __future__ import annotations
 
 import json

@@ -12,7 +12,6 @@
      - add(self, data: Dict, data_spelling: Dict) -> None
      - get(self) -> Tuple[Dict, Dict, Dict]
 """
-
 from __future__ import annotations
 
 from typing import Any, Dict, List, Tuple, TypedDict

@@ -8,7 +8,6 @@
      - expand_zip(source_path: str, dest_path: str) -> bool
      - create_zip(source_path: str, dest_path: str, filename: str, compression = 6) -> bool
 """
-
 from __future__ import annotations
 
 import shutil

@@ -19,7 +19,6 @@
      - to_bool(in_text: str) -> bool
      - str_to_bool(value: str) -> bool
 """
-
 from __future__ import annotations
 
 import datetime

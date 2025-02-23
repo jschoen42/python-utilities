@@ -11,7 +11,6 @@
      - expand_js(text: str) -> str:
      - expand_css(text: str) -> str:
 """
-
 from __future__ import annotations
 
 import json

@@ -10,7 +10,6 @@
      - get_video_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]
      - get_audio_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]
 """
-
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Dict, Protocol, cast
