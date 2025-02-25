@@ -5,50 +5,54 @@ actions:
   copy:
     mandatory:
       common:
-        - ___Cheat-Sheet.txt
-        - .vscode/settings.json
-        - .gitignore
-        - .gitattributes
-        - _mypy.py
-        - _pyright.py
-        - _basedpyright.py
-        - ruff.toml
-        - LICENSE
+       - ___Cheat-Sheet.txt
+       - .vscode/settings.json
+       - .gitignore
+       - .gitattributes
+       - _mypy.py
+       - _pyright.py
+       - _basedpyright.py
+       - ruff.toml
+       - LICENSE
       lib:
-        - src/__init__.py
-        - src/utils/__init__.py
-        - src/utils/decorator.py
-        - src/utils/trace.py
-        - src/utils/globals.py
+       - src/__init__.py
+       - src/utils/__init__.py
+       - src/utils/decorator.py
+       - src/utils/trace.py
+       - src/utils/globals.py
+      git:
+       - .git/hooks/pre-commit
 
     optional:
       common:
       lib:
-      - src/utils/audio.py
-      - src/utils/beautify.py
-      - src/utils/excel.py
-      - src/utils/file.py
-      - src/utils/files.py
-      - src/utils/format.py
-      - src/utils/log.py
-      - src/utils/metadata.py
-      - src/utils/metadata_mutagen.py
-      - src/utils/pandas.py
-      - src/utils/prefs.py
-      - src/utils/result.py
-      - src/utils/text.py
-      - src/utils/util.py
-      - src/utils/utilities.py
-      - src/utils/utils.py
-      - src/utils/xml.py
-      - src/utils/zip.py
+       - src/utils/audio.py
+       - src/utils/beautify.py
+       - src/utils/excel.py
+       - src/utils/file.py
+       - src/utils/files.py
+       - src/utils/format.py
+       - src/utils/log.py
+       - src/utils/metadata.py
+       - src/utils/metadata_mutagen.py
+       - src/utils/pandas.py
+       - src/utils/prefs.py
+       - src/utils/result.py
+       - src/utils/text.py
+       - src/utils/util.py
+       - src/utils/utilities.py
+       - src/utils/utils.py
+       - src/utils/xml.py
+       - src/utils/zip.py
+      git:
 
     new:
       common:
-        - ___start.txt
+      - ___start.txt
       lib:
+      git:
+       - exclude-pre-commit.toml
 
   delete:
     - .vscode/launch.json
     - ___cheatsheet.txt
-    - __tree.txt

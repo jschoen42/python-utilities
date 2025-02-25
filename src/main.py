@@ -42,7 +42,6 @@ def main(force: bool = False) -> None:
 
     for repo in repos:
         dest = DRIVE / repo["path"] / repo["name"]
-
         if not dest.exists():
             Trace.error(f"Project '{dest}' not found")
             continue
@@ -57,6 +56,10 @@ def main(force: bool = False) -> None:
 
             if repo["lib"]:
                 for file in Prefs.get(f"actions.copy.{action_type}.lib") or []:
+                    modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
+
+            if repo["git"]:
+                for file in Prefs.get(f"actions.copy.{action_type}.git") or []:
                     modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
 
         # delete

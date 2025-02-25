@@ -68,7 +68,7 @@ ignore = [
     "A005",    # stdlib-module-shadowing (-> utils.trace)
     "ANN401",  # any-type
     "ARG001",  # unused-function-argument
-    #"E501",    # line too long
+    "E501",    # line too long
     "PERF203", # try-except-in-loop
     "PERF401", # manual-list-comprehension
     "PLR0911", # too-many-return-statements

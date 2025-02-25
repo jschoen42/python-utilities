@@ -1,0 +1,7 @@
+[precommit]
+exclude = [
+    "/utils/",
+    "_mypy.py",
+    "_pyright.py",
+    "_basedpyright.py",
+]
