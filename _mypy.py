@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 23.02.2025
+    © Jürgen Schoenemeyer, 25.02.2025 15:45
 
     _mypy.py
 
@@ -254,7 +254,6 @@ def run_mypy(src_path: Path, python_version: str) -> None:
             text=True,
             check=False,
         )
-        # result: CompletedProcess[str] = subprocess.run(["mypy", str(src_path), "--config-file", "tmp.toml", "--verbose", "--output=json"] + settings, capture_output=True, text=True, check=False)
     except Exception as err:
         print(f"error: {err} - mypy")
         sys.exit(1)
@@ -264,7 +263,8 @@ def run_mypy(src_path: Path, python_version: str) -> None:
     # analyse stderr ("--verbose")
 
     # LOG:  Mypy Version: 1.14.0
-    # LOG:  Found source: BuildSource(path='src\\__init__.py', module='__main__', has_text=False, base_dir='G:\\Python\\Whisper\\whisper-datev-gitlab\\src', followed=False)
+    # LOG:  Found source: BuildSource(path='src\\__init__.py', module='__main__', has_text=False,
+    #                     base_dir='G:\\Python\\Whisper\\whisper-datev-gitlab\\src', followed=False)
     # ...
     # LOG:  Metadata fresh for __main__: file src\__init__.py
 

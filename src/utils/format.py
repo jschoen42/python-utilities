@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 22.02.2025
+    © Jürgen Schoenemeyer, 25.02.2025 15:45
 
     src/utils/format.py
 
@@ -119,4 +119,3 @@ def str_to_bool(value: Any) -> bool | None:
         return False
     else:
         return None
-
