@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 22.02.2025
+    © Jürgen Schoenemeyer, 24.02.2025
 
     src/utils/trace.py
 
@@ -43,10 +43,8 @@ import sys
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Callable, ClassVar, Dict, List
+from typing import TYPE_CHECKING, Any, Callable, ClassVar, Dict, List, override
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
-
-from typing_extensions import override
 
 if TYPE_CHECKING:
     from types import FrameType
@@ -131,7 +129,9 @@ pattern: Dict[str, str] = {
     "debug":     "DEBUG", # only in debug mode
     "wait":      "WAIT ", # only in debug mode
 
-    "clear":     " $$$ ", # only internal (for decorator, ...) - •••
+    "clear":     " §§§ ", # only internal (for decorator, ...)
+    #"clear":    " 🕑  ",
+
 }
 
 class Trace:

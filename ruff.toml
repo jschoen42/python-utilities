@@ -12,13 +12,15 @@ exclude = [
     "site-packages",
 ]
 
+line-length = 150
+
 [lint]
 select = [
     "N",    # pep8-naming
     "W",    # pycodestyle Warning
     "E",    # pycodestyle Error
     "F",    # Pyflakes
-    "I",    # isort#
+    "I",    # isort
     "PERF", # Perflint
     "DOC",  # pydoclint
     "PLR",  # Refactor
@@ -66,7 +68,7 @@ ignore = [
     "A005",    # stdlib-module-shadowing (-> utils.trace)
     "ANN401",  # any-type
     "ARG001",  # unused-function-argument
-    "E501",    # line too long
+    #"E501",    # line too long
     "PERF203", # try-except-in-loop
     "PERF401", # manual-list-comprehension
     "PLR0911", # too-many-return-statements
@@ -83,7 +85,7 @@ ignore = [
     "SIM103",  # needless-bool
     "SIM105",  # suppressible-exception
     "SIM108",  # if-else-block-instead-of-if-exp
-
+    "SIM110",  # reimplemented-builtin
     "UP006",   # non-pep585-annotation
     "UP035",   # deprecated-import
     "RUF001",  # ambiguous-unicode-character-string

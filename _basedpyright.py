@@ -236,6 +236,8 @@ def run_basedpyright(src_path: Path, python_version: str) -> None:
             text += f"\n - {error_type[0]}: {error_type[1]}"
         text += "\n\n"
 
+    text += "\n"
+
     footer = "Found "
     footer += f"{format_singular_plural(summary['errorCount'],'error')}, "
     footer += f"{format_singular_plural(summary['warningCount'],'warning')}, "
