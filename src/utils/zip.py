@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 25.02.2025 15:45
+    © Jürgen Schoenemeyer, 01.03.2025 15:26
 
     src/utils/zip.py
 
@@ -11,13 +11,13 @@
 from __future__ import annotations
 
 import shutil
+
 from pathlib import Path
 from typing import Any, Dict, List
 from zipfile import ZIP_DEFLATED, ZipFile
 
 from utils.file import get_trace_path
 from utils.trace import Trace
-
 
 def check_zip(myzip: ZipFile, path: Path | str, files: List[str]) -> Dict[str, Any]:
     path = Path(path)
@@ -39,11 +39,11 @@ def expand_zip(source_path: Path | str, dest_path: Path | str) -> bool:
     if Path.is_file(source_path):
         try:
             shutil.unpack_archive(source_path, dest_path)
-            return True
-
         except OSError as err:
             Trace.error(f"{err}")
             return False
+
+        return True
     else:
         Trace.error(f"file not exist: '{get_trace_path(dest_path)}'")
         return False
@@ -63,8 +63,8 @@ def create_zip(source_path: Path | str, dest_path: Path | str, filename: str, co
         with ZipFile(dest_path / filename, "w", ZIP_DEFLATED, compresslevel=compression) as zf:
             for file in src_path.rglob("*"):
                 zf.write(file, file.relative_to(src_path))
-        return True
-
     except OSError as err:
         Trace.error(f"{err}")
         return False
+
+    return True

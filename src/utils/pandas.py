@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 25.02.2025 15:45
+    © Jürgen Schoenemeyer, 01.03.2025 15:26
 
     src/utils/pandas.py
 
@@ -10,10 +10,12 @@
 from __future__ import annotations
 
 import time
+
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
+
 from pandas import DataFrame
 
 from utils.file import check_file_exists

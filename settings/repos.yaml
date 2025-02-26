@@ -113,6 +113,11 @@ repos:
     lib:  true
     git:  true
 
+  - name: pre-commit-hook-try
+    path: /Python/Git
+    lib:  true
+    git:  true
+
   - name: github-codespace-test
     path: /Python
     lib:  true
@@ -215,6 +220,11 @@ repos:
 
   - name: normalize-wav
     path: /Python/SciPy
+    lib:  true
+    git:  true
+
+  - name: settings-toml
+    path: /Python/Settings
     lib:  true
     git:  true
 

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 25.02.2025 15:45
+    © Jürgen Schoenemeyer, 01.03.2025 15:26
 
     src/utils/xml.py
 
@@ -11,6 +11,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, Dict
 
 import xmltodict
+
 from xmltodict import ParsingInterrupted
 
 from utils.trace import Trace

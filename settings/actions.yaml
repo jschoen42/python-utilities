@@ -51,7 +51,7 @@ actions:
       - ___start.txt
       lib:
       git:
-       - exclude-pre-commit.toml
+       - pre-commit-exclude.toml
 
   delete:
     - .vscode/launch.json

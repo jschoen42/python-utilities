@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 25.02.2025 15:45
+    © Jürgen Schoenemeyer, 01.03.2025 15:26
 
     src/utils/beautify.py
 
@@ -14,11 +14,13 @@
 from __future__ import annotations
 
 import json
+
 from pathlib import Path
 from typing import Dict
 
 import cssbeautifier  # type: ignore[import-untyped]
 import jsbeautifier  # type: ignore[import-untyped]
+
 from lxml import etree
 
 from utils.decorator import duration

@@ -14,9 +14,10 @@ _old/*
 .mypy_cache/*
 .type-check-result/*
 
-exclude-pre-commit.toml
 .timestamps.json
 .Python31?-*
+
+pre-commit-exclude.toml
 
 ### General
 .env

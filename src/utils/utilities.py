@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 25.02.2025 15:45
+    © Jürgen Schoenemeyer, 01.03.2025 15:26
 
     src/utils/utilities.py
 
@@ -18,11 +18,11 @@ import functools
 import re
 import sys
 import traceback
+
 from typing import Any, Callable, Dict, List
 
 from utils.prefs import Prefs
 from utils.trace import Trace
-
 
 def clean_import_json(text: str) -> str | bool:
     # mutiple space -> single space
