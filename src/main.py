@@ -1,15 +1,21 @@
-# pwsh: .venv/Scripts/activate
-# bash: source .venv/Scripts/activate
-# deactivate
-
-# python src/main.py
-# uv run src/main.py
-
 """
-distribute files to all local repos
- - list of repos -> settings/repos.yaml
- - actions -> settings/actions.yaml
+    © Jürgen Schoenemeyer, 01.03.2025 19:50
+
+    src/main.py
+
+    .venv/Scripts/activate
+
+    python src/main.py
+    uv run src/main.py
+
+    distribute files to all local repos
+     - list of repos -> settings/repos.yaml
+     - actions -> settings/actions.yaml
+
+    parameter:
+     - overwrite newer files:  -f --force
 """
+from __future__ import annotations
 
 import hashlib
 import shutil
