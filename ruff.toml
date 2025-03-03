@@ -75,6 +75,7 @@ ignore = [
 
     # tryceratops
     "TRY002",  # raise-vanilla-class
+    "TRY300",  # try-consider-else
 
     # pyupgrade
     "UP006",   # non-pep585-annotation

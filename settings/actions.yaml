@@ -22,6 +22,7 @@ actions:
        - src/utils/globals.py
       git:
        - .git/hooks/pre-commit
+       - .git/hooks/pre-commit.py
 
     optional:
       common:
@@ -48,7 +49,7 @@ actions:
 
     new:
       common:
-      - ___start.txt
+       - ___start.txt
       lib:
       git:
        - pre-commit-exclude.toml

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.03.2025 15:26
+    © Jürgen Schoenemeyer, 03.03.2025 18:19
 
     src/utils/file.py
 
@@ -236,12 +236,12 @@ def delete_file(path: Path | str, filename: str) -> bool:
         try:
             filepath.unlink()
             Trace.update(f"file '{filepath}' deleted")
+            return True
 
         except OSError as err:
             Trace.error(f"{err}")
-            return False
 
-    return True
+    return False
 
 def beautify_path( path: Path | str ) -> str:
     return str( path ).replace("\\\\", "/")

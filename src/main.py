@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.03.2025 19:50
+    © Jürgen Schoenemeyer, 03.03.2025 18:40
 
     src/main.py
 
@@ -24,11 +24,7 @@ import sys
 from argparse import ArgumentParser
 from pathlib import Path
 
-from utils.file import (
-    delete_file,
-    get_modification_timestamp,
-    set_modification_timestamp,
-)
+from utils.file import delete_file, get_modification_timestamp, set_modification_timestamp
 from utils.globals import BASE_PATH, DRIVE
 from utils.prefs import Prefs
 from utils.trace import Trace
@@ -79,7 +75,7 @@ def main(force: bool = False) -> None:
             modified_files_all += modified_files
             modified_repos += 1
 
-    Trace.result( f"copy {format_singular_plural(modified_files_all, "file")} to {format_singular_plural(modified_repos, "repo")}")
+    Trace.result( f"modified {format_singular_plural(modified_files_all, "file")} to {format_singular_plural(modified_repos, "repo")}")
 
 # copy file:
 #  - mandatory -> copy/overwite files
@@ -125,7 +121,6 @@ def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, acti
                 set_modification_timestamp( dst, get_modification_timestamp(src) )
                 Trace.result( f"copy '{filepath}' => {name}" )
                 return 1
-
 
     elif action_type in ("mandatory", "new"):
         if not Path(src).is_file():
