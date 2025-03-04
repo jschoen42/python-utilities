@@ -83,6 +83,7 @@ uv remove pip-licenses
 ----------------- install Python ------------------
 
 uv python list
+uv python list --all-versions
 
 uv python install 3.11 3.12 3.13
 uv python install pypy-3.11.11
@@ -105,15 +106,19 @@ uv tree --no-dev > __package_tree.txt
 ----------------- upgrade Python ------------------
 
 uv python list --all-versions
-uv python install 3.13.1
+uv python install 3.13.2
+uv python install pypy-3.11
 
 uv python uninstall 3.13.0
  -> ruff extention fails !!!
 
 ---- for every env
 
-uv venv .venv -p 3.13.1
+uv venv .venv -p 3.13
 uv sync
+
+uv venv .venv -p pypy-3.11.11
+pypy --version
 
 ################### pip - venv ####################
 

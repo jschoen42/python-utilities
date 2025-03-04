@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 04.03.2025 14:30
+    © Jürgen Schoenemeyer, 04.03.2025 15:28
 
     src/utils/trace.py
 
@@ -406,7 +406,7 @@ class Trace:
 
         line_no = str(trace_frame.f_lineno).zfill(3)
 
-        caller = trace_frame.f_code.co_name # co_qualname - PyPy v7.3.19 (3.11) no support
+        caller = trace_frame.f_code.co_qualname
         caller = caller.replace(".<locals>.", " → ")
 
         if caller == "<module>":
