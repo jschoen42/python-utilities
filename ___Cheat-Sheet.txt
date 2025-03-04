@@ -85,6 +85,7 @@ uv remove pip-licenses
 uv python list
 
 uv python install 3.11 3.12 3.13
+uv python install pypy-3.11.11
 uv python uninstall 3.9
 
 ------------------- helper: uv --------------------
@@ -198,6 +199,10 @@ git log --name-status --pretty=format:"%h [%ai] %D >> '%s'" > __history.txt
 
 git fetch origin
 git log origin/main
+
+----- list of all changes of a file
+
+git log --follow -p src/utils/trace.py > trace.version.log
 
 git diff --name-only HEAD        # changed files since last commit
 git diff --name-only origin/main # changed files since last fetch
