@@ -103,6 +103,21 @@ repos:
     lib:  true
     git:  true
 
+  - name: htmx-quickstart
+    path: /Python/Flask
+    lib:  true
+    git:  true
+
+  - name: flask-introduction
+    path: /Python/Flask
+    lib:  false
+    git:  true
+
+  - name: flask-crud-application
+    path: /Python/Flask
+    lib:  false
+    git:  true
+
   - name: game-of-live
     path: /Python/Cython
     lib:  true
@@ -352,3 +367,6 @@ repos:
     path: /Python
     lib:  false
     git:  false
+
+    delete: false
+    copy:   false

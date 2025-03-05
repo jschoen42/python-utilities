@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.03.2025 15:26
+    © Jürgen Schoenemeyer, 06.03.2025 17:56
 
     src/utils/beautify.py
 
@@ -7,7 +7,7 @@
      - beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool:
         - file_type = "JS" | "CSS" | "JSON" | "XML"
 
-    PRIVAT:
+    PRIVATE:
      - expand_js(text: str) -> str:
      - expand_css(text: str) -> str:
 """

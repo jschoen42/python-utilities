@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.03.2025 16:36
+    © Jürgen Schoenemeyer, 10.03.2025 17:20
 
     _basedpyright.py
 
@@ -124,7 +124,7 @@ def run_basedpyright(src_path: Path, python_version: str) -> None:
 
     text  = f"Python:   {sys.version.replace(LINEFEET, ' ')}\n"
     text += f"Platform: {platform.platform()}\n"
-    text += f"Date:     {datetime.now().astimezone().strftime('%d.%m.%Y %H:%M:%S')}\n"
+    text += f"Date:     {datetime.now().astimezone():%d.%m.%Y %H:%M:%S}\n"
     text += f"Path:     {BASE_PATH}\n"
     text += "\n"
 
@@ -214,10 +214,14 @@ def run_basedpyright(src_path: Path, python_version: str) -> None:
             error_type = diagnostic["rule"]
             error_types[error_type] += 1
 
-        range_start = diagnostic["range"]["start"]
+        if "range" in diagnostic:
+            range_start = diagnostic["range"]["start"]
+            range_text = f"{range_start['line']+1}:{range_start['character']+1}"
+        else:
+            range_text = ""
 
         msg = file[n:]
-        msg += f":{range_start['line']+1}:{range_start['character']+1} - {severity}: " # 0-based
+        msg += f":{range_text} - {severity}: " # 0-based
         msg += diagnostic["message"]
         if error_type != "":
             msg += f" ({error_type})"

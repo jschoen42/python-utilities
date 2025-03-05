@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 04.03.2025 14:30
+    © Jürgen Schoenemeyer, 10.03.2025 17:20
 
     _mypy.py
 
@@ -230,7 +230,7 @@ def run_mypy(src_path: Path, python_version: str) -> None:
 
     text  = f"Python:   {sys.version.replace(LINEFEET, ' ')}\n"
     text += f"Platform: {platform.platform()}\n"
-    text += f"Date:     {datetime.now().astimezone().strftime('%d.%m.%Y %H:%M:%S')}\n"
+    text += f"Date:     {datetime.now().astimezone():%d.%m.%Y %H:%M:%S}\n"
     text += f"Path:     {BASE_PATH}\n"
     text += "\n"
 

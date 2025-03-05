@@ -3,21 +3,21 @@
 | File         | Last update | Note      |
 | :----------- | :---------: | :-------: |
 | audio.py     | 01.03.2025  | |
-| beautify.py  | 01.03.2025  | |
-| decorator.py | 01.03.2025  | |
+| beautify.py  | 06.03.2025  | |
+| decorator.py | 12.03.2025  | |
 | excel.py     | 01.03.2025  | |
-| file.py      | 01.03.2025  | |
+| file.py      | 06.03.2025  | |
 | files.py     | 01.03.2025  | rustedpy  |
 | format.py    | 01.03.2025  | |
 | globals.py   | 01.03.2025  | |
-| log.py       | 25.02.2025  | |
+| log.py       | 06.03.2025  | |
 | metadata.py  | 25.02.2025  | |
 | metadata_mutagen.py | 25.02.2025 | |
 | pandas.py    | 01.03.2025  | |
-| prefs.py     | 01.03.2025  | |
+| prefs.py     | 06.03.2025  | |
 | result.py    | 25.02.2025  | rustedpy   |
 | text.py      | 25.02.2025  | |
-| trace.py     | 04.03.2025  | |
+| trace.py     | 12.03.2025  | |
 | util.py      | 01.03.2025  | |
 | utilities.py | 01.03.2025  | |
 | utils.py     | 25.02.2025  | |

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 03.03.2025 18:40
+    © Jürgen Schoenemeyer, 07.03.2025 12:30
 
     src/main.py
 
@@ -49,27 +49,30 @@ def main(force: bool = False) -> None:
             Trace.error(f"Project '{dest}' not found")
             continue
 
-        # copy
-
         modified_files = 0
-        for action_type in ["mandatory", "optional", "new"]:
-
-            for file in Prefs.get(f"actions.copy.{action_type}.common") or []:
-                modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
-
-            if repo["lib"]:
-                for file in Prefs.get(f"actions.copy.{action_type}.lib") or []:
-                    modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
-
-            if repo["git"]:
-                for file in Prefs.get(f"actions.copy.{action_type}.git") or []:
-                    modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
 
         # delete
 
-        for file in Prefs.get("actions.delete") or []:
-            if delete_file( dest, file ):
-                modified_files += 1
+        if repo.get("delete", True):
+            for file in Prefs.get("actions.delete") or []:
+                if delete_file( dest, file ):
+                    modified_files += 1
+
+        # copy
+
+        if repo.get("copy", True):
+            for action_type in ["mandatory", "optional", "new"]:
+
+                for file in Prefs.get(f"actions.copy.{action_type}.common") or []:
+                    modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
+
+                if repo["lib"]:
+                    for file in Prefs.get(f"actions.copy.{action_type}.lib") or []:
+                        modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
+
+                if repo["git"]:
+                    for file in Prefs.get(f"actions.copy.{action_type}.git") or []:
+                        modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
 
         if modified_files>0:
             modified_files_all += modified_files

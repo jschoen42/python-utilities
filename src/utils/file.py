@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 03.03.2025 18:19
+    © Jürgen Schoenemeyer, 06.03.2025 17:56
 
     src/utils/file.py
 
@@ -25,7 +25,7 @@
      - delete_file(path: Path | str, filename: str) -> bool:
      - beautify_path( path: Path | str ) -> str:
 
-     #
+    #
      - get_trace_path(filepath: Path | str) -> str:
      - get_files_in_folder(path: Path) -> List[str]
      - get_folders_in_folder(path: Path) -> List[str]

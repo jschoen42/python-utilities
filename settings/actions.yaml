@@ -52,8 +52,7 @@ actions:
        - ___start.txt
       lib:
       git:
-       - pre-commit-exclude.toml
+       - .githooks.toml
 
   delete:
-    - .vscode/launch.json
-    - ___cheatsheet.txt
+    # - .githooks.toml
