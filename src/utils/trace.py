@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 12.03.2025 12:28
+    © Jürgen Schoenemeyer, 12.03.2025 16:31
 
     src/utils/trace.py
 
@@ -315,7 +315,8 @@ class Trace:
             if not trace_path.is_dir():
                 Path(path).mkdir(parents=True)
 
-            with Path.open(Path(trace_path, f"{filename} • {curr_time}.txt"), mode="w", encoding="utf-8", newline="\n") as file:
+            file_path = trace_path / f"{filename} • {curr_time}.txt"
+            with file_path.open(mode="w", encoding="utf-8", newline="\n") as file:
                 file.write(text)
 
         except OSError as err:

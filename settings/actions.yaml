@@ -5,10 +5,11 @@ actions:
   copy:
     mandatory:
       common:
-       - ___Cheat-Sheet.txt
+       - .cheat-sheet.txt
        - .vscode/settings.json
        - .gitignore
        - .gitattributes
+       - .windsurfrules
        - _mypy.py
        - _pyright.py
        - _basedpyright.py
@@ -18,11 +19,12 @@ actions:
        - src/__init__.py
        - src/utils/__init__.py
        - src/utils/decorator.py
-       - src/utils/trace.py
        - src/utils/globals.py
+       - src/utils/trace.py
       git:
        - .git/hooks/pre-commit
        - .git/hooks/pre-commit.py
+       - .git/info/exclude        # -> /.cheat-sheet.txt
 
     optional:
       common:
@@ -33,7 +35,6 @@ actions:
        - src/utils/file.py
        - src/utils/files.py
        - src/utils/format.py
-       - src/utils/log.py
        - src/utils/metadata.py
        - src/utils/metadata_mutagen.py
        - src/utils/pandas.py
@@ -55,4 +56,4 @@ actions:
        - .githooks.toml
 
   delete:
-    # - .githooks.toml
+     - ___Cheat-Sheet.txt

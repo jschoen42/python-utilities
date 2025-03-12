@@ -40,11 +40,13 @@ dev = [
 
 [tool.basedpyright]
 deprecateTypingAliases =  false
+enableTypeIgnoreComments = true
 reportAny = false
 reportExplicitAny = false
 reportImplicitRelativeImport = false
 reportMissingTypeStubs = false
-reportUnusedCallResult = false
 reportUnknownArgumentType = false
-reportUnknownVariableType = false
 reportUnknownMemberType = false
+reportUnknownVariableType = false
+reportUnnecessaryTypeIgnoreComment = false
+reportUnusedCallResult = false

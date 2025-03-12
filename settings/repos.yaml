@@ -3,368 +3,368 @@
 
 repos:
   - name: _empty
-    path: /Python
+    path: Python
     lib:  true
     git:  false
 
   - name: amazon-polly
-    path: /Python/Amazon-AWS
+    path: Python/Amazon-AWS
     lib:  true
     git:  true
 
   - name: args-kwargs
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: argpars-try
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: audible-create-cue
-    path: /Python
+    path: Python
     lib:  true
     git:  true
     git:  true
 
   - name: beautify-files
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: circular-buffer
-    path: /Python/PyTest
+    path: Python/PyTest
     lib:  true
     git:  true
 
   - name: convert-fonts
-    path: /Python/FontTools
+    path: Python/FontTools
     lib:  true
     git:  true
 
   - name: convert-images-web
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: datetime-arrow
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: django-course
-    path: /Python/Django
+    path: Python/Django
     lib:  false
     git:  true
 
   - name: django-new
-    path: /Python/Django
+    path: Python/Django
     lib:  false
     git:  true
 
   - name: Django-HTMX-Finance-App
-    path: /Python/Django
+    path: Python/Django
     lib:  false
     git:  true
 
   - name: docker-create-files
-    path: /Python/Docker
+    path: Python/Docker
     lib:  true
     git:  true
 
   - name: docker-with-parameter
-    path: /Python/Docker
+    path: Python/Docker
     lib:  true
     git:  true
 
   - name: excel-playground
-    path: /Python/Excel
+    path: Python/Excel
     lib:  true
     git:  true
 
   - name: fastapi-crud-application
-    path: /Python/FastAPI
+    path: Python/FastAPI
     lib:  false
     git:  false
 
   - name: fastapi-tests
-    path: /Python/FastAPI
+    path: Python/FastAPI
     lib:  true
     git:  true
 
   - name: elevenlabs-api
-    path: /Python/ElevenLabs
+    path: Python/ElevenLabs
     lib:  true
     git:  true
 
   - name: flask-api
-    path: /Python/Flask
+    path: Python/Flask
     lib:  true
     git:  true
 
   - name: htmx-quickstart
-    path: /Python/Flask
+    path: Python/Flask
     lib:  true
     git:  true
 
   - name: flask-introduction
-    path: /Python/Flask
+    path: Python/Flask
     lib:  false
     git:  true
 
   - name: flask-crud-application
-    path: /Python/Flask
+    path: Python/Flask
     lib:  false
     git:  true
 
   - name: game-of-live
-    path: /Python/Cython
+    path: Python/Cython
     lib:  true
     git:  false
 
   - name: git-timestamp
-    path: /Python/Git
+    path: Python/Git
     lib:  true
     git:  true
 
   - name: pre-commit-hook-try
-    path: /Python/Git
+    path: Python/Git
     lib:  true
     git:  true
 
   - name: github-codespace-test
-    path: /Python
+    path: Python
     lib:  true
     git:  false
 
   - name: hyphenation-test
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: lectora-datev
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: mathplotlib-examples
-    path: /Python/Mathplotlib
+    path: Python/Mathplotlib
     lib:  true
     git:  true
 
   - name: media-info-try
-    path: /Python/MediaInfo
+    path: Python/MediaInfo
     lib:  true
     git:  true
 
   - name: password-hash
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: pdf-merge
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: port-scanner
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: pyright-tests
-    path: /Python/Pyright
+    path: Python/Pyright
     lib:  true
     git:  true
 
   - name: basedpyright-tests
-    path: /Python/Pyright
+    path: Python/Pyright
     lib:  true
     git:  true
 
   - name: PyQT6-stopwatch
-    path: /Python/QT
+    path: Python/QT
     lib:  true
     git:  false
 
   - name: pyside6-tests
-    path: /Python/QT
+    path: Python/QT
     lib:  true
     git:  true
 
   - name: pypy-try
-    path: /Python/PyPy
+    path: Python/PyPy
     lib:  true
     git:  true
 
   - name: python-analyse
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: python-decorators
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: python-starter
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: qr-code
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: recursion-fibonacci
-    path: /Python/Rekursion
+    path: Python/Rekursion
     lib:  true
     git:  true
 
   - name: recursion-list_all_path
-    path: /Python/Rekursion
+    path: Python/Rekursion
     lib:  true
     git:  true
 
   - name: rustedpy
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: normalize-wav
-    path: /Python/SciPy
+    path: Python/SciPy
     lib:  true
     git:  true
 
   - name: settings-toml
-    path: /Python/Settings
+    path: Python/Settings
     lib:  true
     git:  true
 
   - name: sockets-client-server
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: storyline-analyse
-    path: /Python/Storyline
+    path: Python/Storyline
     lib:  true
     git:  true
 
   - name: storyline-unpack-js
-    path: /Python/Storyline
+    path: Python/Storyline
     lib:  true
     git:  true
 
   - name: storyline-webplayer
-    path: /Python/Storyline
+    path: Python/Storyline
     lib:  true
     git:  true
 
   - name: storyline-xml
-    path: /Python/Storyline
+    path: Python/Storyline
     lib:  true
     git:  true
 
   - name: storyline-zip-test
-    path: /Python/Storyline
+    path: Python/Storyline
     lib:  true
     git:  true
 
   - name: import-starter
-    path: /Python/Storyline/impl
+    path: Python/Storyline/impl
     lib:  true
     git:  true
 
   - name: streamlit-try
-    path: /Python/Streamlit
+    path: Python/Streamlit
     lib:  true
     git:  true
 
   - name: svg-wrapper
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: custom-tkinter-try
-    path: /Python/Tkinter
+    path: Python/Tkinter
     lib:  true
     git:  true
 
   - name: pygubu-try
-    path: /Python/Tkinter
+    path: Python/Tkinter
     lib:  true
     git:  false
 
   - name: try-pandas
-    path: /Python/Pandas
+    path: Python/Pandas
     lib:  true
     git:  false
 
   - name: txtai-try
-    path: /Python/txtai
+    path: Python/txtai
     lib:  true
     git:  false
 
   - name: unreal-memreport
-    path: /Python
+    path: Python
     lib:  true
     git:  false
 
   - name: virtual-lobby
-    path: /Python/VirtualLobby/impl/mgr
+    path: Python/VirtualLobby/impl/mgr
     lib:  true
     git:  true
 
   - name: try-hunspell
-    path: /Python/Whisper
+    path: Python/Whisper
     lib:  true
     git:  true
 
   - name: try-faster-whisper
-    path: /Python/Whisper
+    path: Python/Whisper
     lib:  true
     git:  true
 
   - name: patch-faster-whisper
-    path: /Python/Whisper
+    path: Python/Whisper
     lib:  true
     git:  true
 
   - name: try-spacy
-    path: /Python/Whisper
+    path: Python/Whisper
     lib:  true
     git:  true
 
   - name: try-stanza
-    path: /Python/Whisper
+    path: Python/Whisper
     lib:  true
     git:  true
 
   - name: try-whisper
-    path: /Python/Whisper
+    path: Python/Whisper
     lib:  true
     git:  true
 
   - name: whisper-datev-gitlab
-    path: /Python/Whisper
+    path: Python/Whisper
     lib:  true
     git:  true
 
   - name: whisper-subtitles-github
-    path: /Python/Whisper
+    path: Python/Whisper
     lib:  true
     git:  true
 
   - name: Youtube-download-helper
-    path: /Python
+    path: Python
     lib:  true
     git:  true
 
   - name: zz-utils
-    path: /Python
+    path: Python
     lib:  false
     git:  false
 

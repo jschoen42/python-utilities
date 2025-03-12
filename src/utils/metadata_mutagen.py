@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 25.02.2025 15:45
+    © Jürgen Schoenemeyer, 14.03.2025 09:22
 
     src/utils/metadata_mutagen.py
 
@@ -52,7 +52,7 @@ def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
         Trace.error(f"MutagenError: {err}")
         return None
 
-    mp3_info = cast(MP3Info, metadata)
+    mp3_info = cast("MP3Info", metadata)
 
     duration = mp3_info.info.length
     if mp3_info.info.mode == 3:
@@ -83,7 +83,7 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
         Trace.error(f"MutagenError: {err}")
         return None
 
-    mp3_info = cast(MP3Info, metadata)
+    mp3_info = cast("MP3Info", metadata)
 
     duration     = mp3_info.info.length
     channels     = mp3_info.info.channels
@@ -109,7 +109,7 @@ def get_video_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
         Trace.error(f"MutagenError: {err}")
         return None
 
-    mp4_info = cast(MP4Info, metadata)
+    mp4_info = cast("MP4Info", metadata)
 
     duration    = mp4_info.info.length
     mode        = ["STEREO", "JOINTSTEREO", "DUALCHANNEL", "MONO"][mp4_info.mode]

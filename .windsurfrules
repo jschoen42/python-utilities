@@ -1,0 +1,20 @@
+## Coding Standards for Python
+
+### General Principles
+ - Write concise, readable Python code.
+ - Use Python type hints in all functions and methods.
+ - Use for style hints
+    - union: "|",
+    - optional: "| None",
+    - list: "List",
+    - dict: "Dict",
+    - tuple "Tuple"
+ - Use pathlib for all file operation
+
+### Naming Conventions
+- **Variables and Functions**: snake_case
+- **Classes**: PascalCase
+- **Files**: snake_case
+
+### Error Handling
+- Always wrap activities with proper try-except blocks.

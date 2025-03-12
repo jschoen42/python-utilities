@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 07.03.2025 12:30
+    © Jürgen Schoenemeyer, 14.03.2025 17:59
 
     src/main.py
 
@@ -25,7 +25,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 from utils.file import delete_file, get_modification_timestamp, set_modification_timestamp
-from utils.globals import BASE_PATH, DRIVE
+from utils.globals import BASE_PATH, ROOT
 from utils.prefs import Prefs
 from utils.trace import Trace
 
@@ -44,7 +44,7 @@ def main(force: bool = False) -> None:
     modified_files_all = 0
 
     for repo in repos:
-        dest = DRIVE / repo["path"] / repo["name"]
+        dest = ROOT / repo["path"] / repo["name"]
         if not dest.exists():
             Trace.error(f"Project '{dest}' not found")
             continue

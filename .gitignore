@@ -14,10 +14,11 @@ _old/*
 .mypy_cache/*
 .type-check-result/*
 
-.timestamps.json
 .Python31?-*
 
 /.githooks.toml
+/.windsurfrules
+/.timestamps.json
 
 ### General
 .env

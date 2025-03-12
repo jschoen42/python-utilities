@@ -4,15 +4,14 @@
 | :----------- | :---------: | :-------: |
 | audio.py     | 01.03.2025  | |
 | beautify.py  | 06.03.2025  | |
-| decorator.py | 12.03.2025  | |
+| decorator.py | 15.03.2025  | |
 | excel.py     | 01.03.2025  | |
-| file.py      | 06.03.2025  | |
+| file.py      | 16.03.2025  | |
 | files.py     | 01.03.2025  | rustedpy  |
 | format.py    | 01.03.2025  | |
-| globals.py   | 01.03.2025  | |
-| log.py       | 06.03.2025  | |
+| globals.py   | 14.03.2025  | |
 | metadata.py  | 25.02.2025  | |
-| metadata_mutagen.py | 25.02.2025 | |
+| metadata_mutagen.py | 13.03.2025 | |
 | pandas.py    | 01.03.2025  | |
 | prefs.py     | 06.03.2025  | |
 | result.py    | 25.02.2025  | rustedpy   |
@@ -147,16 +146,9 @@
 
 ``` python
 - DRIVE: Path
+- ROOT: Path
 - BASE_PATH: Path
 - SYSTEM_ENV_PATHS: List[str]
-```
-
-### src/utils/log.py
-
-``` python
-- log_clear()
-- log_add(mediafile: str, text: str, corrected_details: List[Dict], last_segment_text: str, repetition_error: List[Dict], pause_error: List[Dict], spelling_failed: List[Dict]) -> None:
-- log_get_data() -> Tuple[str, str]
 ```
 
 ### src/utils/metadata (MediaInfo)
@@ -169,7 +161,7 @@
 - get_audio_metadata(filepath: str | BytesIO) -> None | Dict[str, Any]
 ```
 
-### src/utils/metadata_mutagen.py
+### src/utils/metadata_mutagen.py (Mutagen)
 
 ``` python
 - def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]
