@@ -24,7 +24,7 @@ actions:
       git:
        - .git/hooks/pre-commit
        - .git/hooks/pre-commit.py
-       - .git/info/exclude        # -> /.cheat-sheet.txt
+       - .git/hooks/pre-push  # -> /.cheat-sheet.txt
 
     optional:
       common:
