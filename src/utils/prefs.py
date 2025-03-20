@@ -1,13 +1,13 @@
 """
-    © Jürgen Schoenemeyer, 12.03.2025 16:31
+    © Jürgen Schoenemeyer, 20.03.2025 15:50
 
     src/utils/prefs.py
 
     PUBLIC:
-    class Prefs:
-      - init(cls, pref_path = None, pref_prefix = None ) -> None
-      - load(cls, pref_name: str) -> bool
-      - get(cls, key_path: str) -> Any
+    static class Prefs:
+      - Prefs.init(pref_path = None, pref_prefix = None ) -> None
+      - Prefs.load(pref_name: str) -> bool
+      - Prefs.get(key_path: str) -> Any
 
     PRIVATE:
      - merge_dicts(a: Dict, b: Dict) -> Dict

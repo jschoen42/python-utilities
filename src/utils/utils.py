@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 19.01.2025
+    © Jürgen Schoenemeyer, 22.03.2025 10:40
 
     src/utils/utils.py
 
@@ -8,6 +8,7 @@
      - snake_to_camel(name: str) -> str
      - pascal_to_snake(name: str) -> str
      - snake_to_pascal(name: str) -> str
+     - to_title(text: str) -> str
 """
 from __future__ import annotations
 

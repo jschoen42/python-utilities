@@ -11,6 +11,8 @@ _history/*
 _trace*/*
 _old/*
 
+/temp/*
+
 .mypy_cache/*
 .type-check-result/*
 

@@ -55,6 +55,9 @@ ignore = [
     # flake8-use-pathlib
     "PTH208",  # os-listdir
 
+    # flake8-quotes
+    # "Q000",    # bad-quotes-inline-string
+
     # flake8-return
     "RET504",  # unnecessary-assign
     "RET505",  # superfluous-else-return

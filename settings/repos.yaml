@@ -7,6 +7,16 @@ repos:
     lib:  true
     git:  false
 
+  - name: impl
+    path: Python/Articulate-Storyline/WebService1
+    lib:  false
+    git:  false
+
+  - name: impl_sl
+    path: Python/Articulate-Storyline/WebService1
+    lib:  false
+    git:  false
+
   - name: amazon-polly
     path: Python/Amazon-AWS
     lib:  true
@@ -42,6 +52,11 @@ repos:
     path: Python/FontTools
     lib:  true
     git:  true
+
+  - name: consolig
+    path: Python/FontTools
+    lib:  false
+    git:  false
 
   - name: convert-images-web
     path: Python

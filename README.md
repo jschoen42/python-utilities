@@ -6,20 +6,20 @@
 | beautify.py  | 06.03.2025  | |
 | decorator.py | 15.03.2025  | |
 | excel.py     | 01.03.2025  | |
-| file.py      | 16.03.2025  | |
+| file.py      | 20.03.2025  | |
 | files.py     | 01.03.2025  | rustedpy  |
 | format.py    | 01.03.2025  | |
-| globals.py   | 14.03.2025  | |
+| globals.py   | 20.03.2025  | |
 | metadata.py  | 25.02.2025  | |
 | metadata_mutagen.py | 13.03.2025 | |
 | pandas.py    | 01.03.2025  | |
-| prefs.py     | 06.03.2025  | |
+| prefs.py     | 20.03.2025  | |
 | result.py    | 25.02.2025  | rustedpy   |
 | text.py      | 25.02.2025  | |
-| trace.py     | 12.03.2025  | |
+| trace.py     | 22.03.2025  | |
 | util.py      | 01.03.2025  | |
 | utilities.py | 01.03.2025  | |
-| utils.py     | 25.02.2025  | |
+| utils.py     | 22.03.2025  | |
 | xml.py       | 01.03.2025  | |
 | zip.py       | 01.03.2025  | |
 
@@ -188,7 +188,7 @@
 ### src/utils/prefs.py
 
 ``` python
-class Prefs:
+static class Prefs:
 - init(cls, pref_path = None, pref_prefix = None) -> None
 - load(cls, pref_name: str) -> bool
 - get(cls, key_path: str) -> Any
@@ -206,7 +206,7 @@ class Prefs:
 ### src/utils/trace.py
 
 ``` python
-class Trace:
+static class Trace:
 - Trace.set(debug_mode=True)
 - Trace.set(reduced_mode=True)
 - Trace.set(color=False)
@@ -232,7 +232,7 @@ class Trace:
 - Trace.debug()    # only in debug mode
 - Trace.wait()     # only in debug mode
 
-class Color:
+static class Color:
 - Color.<color_name>
 - Color.clear(text: str) -> str:
 
@@ -261,6 +261,7 @@ class ProcessLog (array cache)
 - snake_to_camel(name: str) -> str
 - pascal_to_snake(name: str) -> str
 - snake_to_pascal(name: str) -> str
+- to_title(text: str) -> str
 ```
 
 ### src/utils/utilities.py

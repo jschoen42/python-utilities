@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 14.03.2025 17:59
+    © Jürgen Schoenemeyer, 22.03.2025 17:35
 
     src/main.py
 
@@ -28,8 +28,6 @@ from utils.file import delete_file, get_modification_timestamp, set_modification
 from utils.globals import BASE_PATH, ROOT
 from utils.prefs import Prefs
 from utils.trace import Trace
-
-SOURCE_PATH = BASE_PATH
 
 def format_singular_plural(value: int, text: str) -> str:
     if value == 1:
@@ -64,15 +62,15 @@ def main(force: bool = False) -> None:
             for action_type in ["mandatory", "optional", "new"]:
 
                 for file in Prefs.get(f"actions.copy.{action_type}.common") or []:
-                    modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
+                    modified_files += copy_file_special( BASE_PATH, dest, repo["name"], file, action_type, force=force)
 
                 if repo["lib"]:
                     for file in Prefs.get(f"actions.copy.{action_type}.lib") or []:
-                        modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
+                        modified_files += copy_file_special( BASE_PATH, dest, repo["name"], file, action_type, force=force)
 
                 if repo["git"]:
                     for file in Prefs.get(f"actions.copy.{action_type}.git") or []:
-                        modified_files += copy_file_special( SOURCE_PATH, dest, repo["name"], file, action_type, force=force)
+                        modified_files += copy_file_special( BASE_PATH, dest, repo["name"], file, action_type, force=force)
 
         if modified_files>0:
             modified_files_all += modified_files
@@ -138,7 +136,7 @@ def copy_file_special( source: Path, dest: Path, name: str, filepath: Path, acti
     return 0
 
 if __name__ == "__main__":
-    Trace.set( debug_mode=True, timezone=False )
+    Trace.set( timezone=False, show_caller=False )
     Trace.action(f"Python version {sys.version}")
 
     Prefs.init("settings", "")
