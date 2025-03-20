@@ -16,8 +16,7 @@ _old/*
 
 .Python31?-*
 
-!.cheat-sheet.txt
-
+/.cheat-sheet.txt
 /.githooks.toml
 /.windsurfrules
 /.timestamps.json
