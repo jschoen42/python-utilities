@@ -4,5 +4,6 @@ deactivate
 
 uv run src/main.py
 
-uv run _pyright.py src
 uv run _mypy.py src
+uv run _pyright.py src
+uv run _basedpyright.py src

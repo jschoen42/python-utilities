@@ -1,4 +1,10 @@
 {
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "pyproject.toml": "ruff.toml, requirements.txt, uv.lock, .git*, README.md, LICENSE, __licenses.txt, .python-version, __package_tree*, .Python31*, .windsurfrules, .timestamps.json"
+  },
+
   "terminal.integrated.fontFamily": "Consolas Nerd Font",
   "terminal.integrated.fontWeight": "normal",
   "terminal.integrated.minimumContrastRatio": 7,
@@ -37,12 +43,15 @@
     "editor.acceptSuggestionOnEnter": "on",
     "editor.suggest.insertMode": "insert",
     "editor.autoClosingBrackets": "never",
-    "editor.suggestOnTriggerCharacters": false,
+
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.suggest.showWords": false,
+    "editor.parameterHints.enabled": true,
     "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "on",
-      "other": "on",
-    }
+      "other": true,
+      "comments": false,
+      "strings": true,
+    },
   },
   "[yaml]": {
     "editor.fontLigatures": false,
@@ -127,6 +136,7 @@
       {
         "scope": [
          "entity.name.function.python",
+         "meta.attribute.python",
          "meta.function-call.generic.python",
          ],
         "settings": {

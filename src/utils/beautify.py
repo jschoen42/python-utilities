@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 06.03.2025 17:56
+    © Jürgen Schoenemeyer, 29.03.2025 18:30
 
     src/utils/beautify.py
 
@@ -26,8 +26,6 @@ from lxml import etree
 from utils.decorator import duration
 from utils.file import export_text, import_text
 from utils.trace import Trace
-
-# print(etree)
 
 expand_data_js: Dict[str, str] = {
     "!0":  "true",
@@ -163,8 +161,8 @@ def expand_css(text: str) -> str:
 
 @duration("beautify '{1}\\{2}'")
 def beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool:
-    source = Path(source_path, source_filename)
-    dest   = Path(dest_path, dest_filename)
+    source = Path(source_path) / source_filename
+    dest   = Path(dest_path) / dest_filename
 
     text = import_text(source.parent, source.name)
     if text is None:
@@ -172,28 +170,49 @@ def beautify_file( file_type: str, source_path: Path | str, source_filename: str
 
     mtime = source.stat().st_mtime
 
-    opts = jsbeautifier.default_options()
-    opts.indent_size = 2
-
     if file_type == "JS":
+        """
+            default_options.break_chained_methods = false
+            default_options.eol = '\n'
+            default_options.indent_char = ' '
+            default_options.indent_level = 0
+            default_options.indent_size = 4
+            default_options.jslint_happy = false
+            default_options.preserve_newlines = true
+        """
+        opts = jsbeautifier.default_options()
+        opts.indent_size = 2
         data = expand_js( jsbeautifier.beautify(text, opts) )
 
     elif file_type == "CSS":
+        """
+            default_options.brace_style = 'collapse'
+            default_options.end_with_newline = false
+            default_options.indent_char = ' '
+            default_options.indent_size = 4
+            default_options.newline_between_rules = false
+            default_options.preserve_newlines = false
+            default_options.selector_separator_newline = true
+            default_options.space_around_combinator = false
+            default_options.space_around_selector_separator = false
+        """
+        opts = cssbeautifier.default_options()
+        opts.indent_size = 2
         data = expand_css( cssbeautifier.beautify(text, opts) )
 
     elif file_type == "JSON":
         try:
-            data = json.dumps(json.loads(text), indent=2)
-        except ValueError as err:
-            Trace.error( f"JSON parse error: {err} - {source}" )
+            data = json.dumps(json.loads(text), indent=2, sort_keys=False)
+        except ValueError as e:
+            Trace.error( f"JSON parse error: {e} - {source}" )
             data = text
 
     elif file_type == "XML":
         try:
             x = etree.fromstring(text)  # noqa: S320
             data = etree.tostring(x, pretty_print=True, encoding=str)
-        except ValueError as err:
-            Trace.error( f"XML parse error: {err} - {source}" )
+        except ValueError as e:
+            Trace.error( f"XML parse error: {e} - {source}" )
             data = text
 
     else:

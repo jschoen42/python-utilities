@@ -188,6 +188,11 @@ repos:
     lib:  true
     git:  true
 
+  - name: try-pygame
+    path: Python/Pygame
+    lib:  true
+    git:  true
+
   - name: pyright-tests
     path: Python/Pyright
     lib:  true

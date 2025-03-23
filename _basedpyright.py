@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 23.03.2025 15:33
+    © Jürgen Schoenemeyer, 29.03.2025 18:30
 
     _basedpyright.py
 
@@ -144,6 +144,8 @@ def check_types(src_path: Path, python_version: str) -> None:
             print("Error: 'basedpyright' not installed -> uv add basedpyright --dev")
             sys.exit(1)
 
+        # https://github.com/DetachHead/basedpyright/blob/main/docs/configuration/command-line.md
+
         result: CompletedProcess[str] = subprocess.run(
             [basedpyright_path, src_path, "--project", config, "--outputjson"],
             capture_output=True,
@@ -152,18 +154,24 @@ def check_types(src_path: Path, python_version: str) -> None:
             encoding="utf-8",
             errors="replace",
         )
-    except subprocess.CalledProcessError as err:
-        print(f"BasedPyRight error: {err}")
+    except subprocess.CalledProcessError as e:
+        print(f"BasedPyRight error: {e}")
         sys.exit(1)
     finally:
         config.unlink()
 
+    # exit codes
+    #  - 0 No errors reported
+    #  - 1 One or more errors reported
+    #  - 2 Fatal error occurred with no errors or warnings reported
+    #  - 3 Config file could not be read or parsed
+    #  - 4 Illegal command-line parameters specified
+
     if result.stderr != "":
-        print(f"errorcode: {result.returncode}")
-        print(result.stderr)
+        print(f"exit code: {result.returncode} - {result.stderr.strip()}")
         sys.exit(result.returncode)
 
-    stdout = result.stdout.replace("\xa0", " ")
+    stdout = result.stdout.replace("\xa0", " ") # non breaking space
     data = json.loads(stdout)
 
     # {
@@ -184,7 +192,7 @@ def check_types(src_path: Path, python_version: str) -> None:
     #           "character": 40
     #         }
     #       },
-    #       "rule": "reportAssignmentType"
+    #       "rule": "reportAssignmentType" -> severity: only for file / error / warning, not for information
     #     }
     #   ],
     #   "summary": {
@@ -209,8 +217,8 @@ def check_types(src_path: Path, python_version: str) -> None:
     error_types: Counter[str] = Counter()
     for diagnostic in diagnostics:
 
-        file        = Path(diagnostic["file"]).as_posix()
-        severity    = diagnostic["severity"]
+        file = Path(diagnostic["file"]).as_posix()
+        severity = diagnostic["severity"]
         if severity == "information":
             error_type = ""
         else:
@@ -256,7 +264,7 @@ def check_types(src_path: Path, python_version: str) -> None:
 
     text += footer + "\n"
 
-    result_filename = f"BasedPyRight-{python_version}-'{name}'.txt"
+    result_filename = f"BasedPyRight-{python_version}-[{name}].txt"
     with (folder_path / result_filename).open(mode="w", newline="\n") as f:
         f.write(text)
 
@@ -275,4 +283,4 @@ if __name__ == "__main__":
         check_types(Path(args.path), args.version)
     except KeyboardInterrupt:
         print(" --> KeyboardInterrupt")
-        sys.exit(1)
+        sys.exit()
