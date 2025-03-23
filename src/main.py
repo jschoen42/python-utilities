@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 22.03.2025 17:35
+    © Jürgen Schoenemeyer, 23.03.2025 15:33
 
     src/main.py
 
@@ -17,6 +17,7 @@
 """
 from __future__ import annotations
 
+import atexit
 import hashlib
 import shutil
 import sys
@@ -28,6 +29,10 @@ from utils.file import delete_file, get_modification_timestamp, set_modification
 from utils.globals import BASE_PATH, ROOT
 from utils.prefs import Prefs
 from utils.trace import Trace
+
+@atexit.register
+def exit() -> None:
+    Trace.result("exit")
 
 def format_singular_plural(value: int, text: str) -> str:
     if value == 1:
