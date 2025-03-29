@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.03.2025 15:26
+    © Jürgen Schoenemeyer, 29.03.2025 18:57
 
     src/utils/xml.py
 
@@ -24,8 +24,8 @@ def open_xml_as_dict(myzip: ZipFile, path: str) -> Dict[str, Any] | None:
     try:
         with myzip.open(path) as xml_file:
             data = xmltodict.parse(xml_file.read())
-    except (KeyError, ParsingInterrupted) as err:
-        Trace.error(f"{path} > {err}")
+    except (KeyError, ParsingInterrupted) as e:
+        Trace.error(f"{path} > {e}")
         return None
 
     return data

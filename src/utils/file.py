@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 20.03.2025 15:50
+    © Jürgen Schoenemeyer, 29.03.2025 18:57
 
     src/utils/file.py
 
@@ -74,8 +74,8 @@ def get_modification_timestamp(filename: Path | str) -> float:
 
     try:
         ret = filename.stat().st_mtime
-    except OSError as err:
-        Trace.error(f"{err}")
+    except OSError as e:
+        Trace.error(f"{e}")
         return 0
 
     return ret
@@ -85,8 +85,8 @@ def set_modification_timestamp(filename: Path | str, timestamp: float) -> None:
 
     try:
         os.utime(filename, (timestamp, timestamp)) # atime and mtime
-    except OSError as err:
-        Trace.error(f"set_modification_timestamp: {err}")
+    except OSError as e:
+        Trace.error(f"{e}")
 
 # check
 
@@ -113,8 +113,8 @@ def check_file_exists(filepath_start: Path | str, filepath_end: Path | str) -> b
 
     try:
         filenames: list[str] = os.listdir(filepath)
-    except OSError as err:
-        Trace.error(f"{err}")
+    except OSError as e:
+        Trace.error(f"{e}")
         return False
 
     if filename in filenames:
@@ -169,8 +169,8 @@ def list_folders(path: Path | str) -> List[str]:
         for file in os.listdir(path):
             if (path / file).is_dir():
                 folders.append(file)
-    except OSError as err:
-        Trace.error(f"{err}")
+    except OSError as e:
+        Trace.error(f"{e}")
 
     return folders
 
@@ -180,8 +180,8 @@ def clear_folder(path: Path | str) -> None:
     for filepath in path.iterdir():
         try:
             shutil.rmtree(filepath)
-        except OSError as err:
-            error = str(err).split(":")[0]
+        except OSError as e:
+            error = str(e).split(":")[0]
             try:
                 filepath.unlink()
             except OSError:
@@ -213,8 +213,8 @@ def create_folder( folderpath: Path | str ) -> bool:
             folderpath.mkdir(parents=True)
             Trace.update( f"makedir: {folderpath}")
 
-        except OSError as err:
-            msg = str(err).split(":")[0]
+        except OSError as e:
+            msg = str(e).split(":")[0]
             Trace.error( f"{msg}: {folderpath}")
             return False
 
@@ -234,8 +234,8 @@ def delete_file(path: Path | str, filename: str) -> bool:
             Trace.update(f"file '{filepath}' deleted")
             return True
 
-        except OSError as err:
-            Trace.error(f"{err}")
+        except OSError as e:
+            Trace.error(f"{e}")
 
     return False
 
@@ -280,12 +280,12 @@ def import_text( folderpath: Path | str, filename: Path | str, encoding: str="ut
             with filepath.open(mode="r", encoding=encoding) as f:
                 data = f.read()
 
-        except OSError as err:
-            Trace.error(f"{err}")
+        except OSError as e:
+            Trace.error(f"{e}")
             return None
 
-        except UnicodeDecodeError as err:
-            Trace.error(f"{filepath}: {err}")
+        except UnicodeDecodeError as e:
+            Trace.error(f"{filepath}: {e}")
             return None
 
         return data
@@ -346,8 +346,8 @@ def export_text(folderpath: Path | str, filename: str, text: str, encoding: str=
 
         return True
 
-    except OSError as err:
-        msg = str(err).split(":")[0]
+    except OSError as e:
+        msg = str(e).split(":")[0]
         Trace.error(f"{msg} - {filepath}")
         return None
 
@@ -369,8 +369,8 @@ def export_binary_file(filepath: Path | str, filename: str, data: bytes, _timest
             f.write(data)
         return True
 
-    except OSError as err:
-        msg = str(err).split(":")[0]
+    except OSError as e:
+        msg = str(e).split(":")[0]
         Trace.error(f"{msg} - {filepath / filename}")
         return None
 
@@ -422,8 +422,8 @@ def export_file(filepath: Path | str, filename: str, text: str, in_type: str | N
                 try:
                     filepath.mkdir(parents=True)
                     Trace.update( f"makedir: '{trace_export_path_folder}'")
-                except OSError as err:
-                    error = str(err).split(":")[0]
+                except OSError as e:
+                    error = str(e).split(":")[0]
                     Trace.error(f"{error}: '{trace_export_path_folder}'")
                     return None
 
@@ -434,8 +434,8 @@ def export_file(filepath: Path | str, filename: str, text: str, in_type: str | N
             if timestamp != 0:
                 set_modification_timestamp(filepath / my_filename, timestamp)
 
-        except OSError as err:
-            error = str(err).split(":")[0]
+        except OSError as e:
+            error = str(e).split(":")[0]
             Trace.error(f"{error} '{trace_export_path}'")
             return None
 
@@ -561,8 +561,8 @@ def copy_my_file(source: Path | str, dest: Path | str, _show_updated: bool) -> b
             set_modification_timestamp(dest, timestamp=new_timestamp)
             Trace.info( f"copy {dest}" )
 
-        except OSError as err:
-            Trace.error(f"{err}")
+        except OSError as e:
+            Trace.error(f"{e}")
             return False
 
     return True

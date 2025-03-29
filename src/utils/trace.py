@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 22.03.2025 10:40
+    © Jürgen Schoenemeyer, 29.03.2025 18:57
 
     src/utils/trace.py
 
@@ -320,8 +320,8 @@ class Trace:
             with file_path.open(mode="w", encoding="utf-8", newline="\n") as file:
                 file.write(text)
 
-        except OSError as err:
-            Trace.error(f"[trace_end] write {err}")
+        except OSError as e:
+            Trace.error(f"write {e}")
 
         cls.messages = []
 

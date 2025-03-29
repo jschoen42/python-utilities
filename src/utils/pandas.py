@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.03.2025 15:26
+    © Jürgen Schoenemeyer, 29.03.2025 18:57
 
     src/utils/pandas.py
 
@@ -82,8 +82,8 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
         else:
             try:
                 data_frame = pd.read_excel(data_path, sheet_name=sheet_name)
-            except ValueError as err:
-                Trace.fatal(f"'{filename}': {err}")
+            except ValueError as e:
+                Trace.fatal(f"'{filename}': {e}")
     else:
         Trace.fatal( f"unknown file type '{import_type}'")
 

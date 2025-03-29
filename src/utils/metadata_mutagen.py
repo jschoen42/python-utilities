@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 14.03.2025 09:22
+    © Jürgen Schoenemeyer, 29.03.2025 18:57
 
     src/utils/metadata_mutagen.py
 
@@ -48,8 +48,8 @@ class MP4Info(Protocol): # -> mypi
 def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
     try:
         metadata = MP3.Open(filepath) # type: ignore [attr-defined]
-    except MutagenError as err:
-        Trace.error(f"MutagenError: {err}")
+    except MutagenError as e:
+        Trace.error(f"MutagenError: {e}")
         return None
 
     mp3_info = cast("MP3Info", metadata)
@@ -79,8 +79,8 @@ def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
 def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
     try:
         metadata = MP3.Open(filepath) # type: ignore [attr-defined]
-    except MutagenError as err:
-        Trace.error(f"MutagenError: {err}")
+    except MutagenError as e:
+        Trace.error(f"MutagenError: {e}")
         return None
 
     mp3_info = cast("MP3Info", metadata)
@@ -105,8 +105,8 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
 def get_video_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
     try:
         metadata = MP4.Open(filepath) # type: ignore [attr-defined]
-    except MutagenError as err:
-        Trace.error(f"MutagenError: {err}")
+    except MutagenError as e:
+        Trace.error(f"MutagenError: {e}")
         return None
 
     mp4_info = cast("MP4Info", metadata)

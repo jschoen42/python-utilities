@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 14.03.2025 17:59
+    © Jürgen Schoenemeyer, 29.03.2025 18:57
 
     src/utils/files.py
 
@@ -84,9 +84,9 @@ def get_timestamp(filepath: Path | str) -> Result[float, str]:
 
     try:
         ret = filepath.stat().st_mtime
-    except OSError as err:
-        Trace.debug(f"{err}")
-        return Err(f"{err}")
+    except OSError as e:
+        Trace.debug(f"{e}")
+        return Err(f"{e}")
 
     return Ok(ret)
 
@@ -112,9 +112,9 @@ def set_timestamp(filepath: Path | str, timestamp: float) -> Result[str, str]:
 
     try:
         os.utime(Path(filepath), times = (timestamp, timestamp)) # atime and mtime
-    except OSError as err:
-        Trace.debug(f"{err}")
-        return Err(f"{err}")
+    except OSError as e:
+        Trace.debug(f"{e}")
+        return Err(f"{e}")
 
     return Ok("")
 
@@ -137,9 +137,9 @@ def get_files_dirs(path: Path | str, extensions: List[str]) -> Result[Tuple[List
             else:
                 dirs.append(filename)
 
-    except OSError as err:
-        Trace.error(f"{err}")
-        return Err(f"{err}")
+    except OSError as e:
+        Trace.error(f"{e}")
+        return Err(f"{e}")
 
     return Ok((files, dirs))
 
@@ -200,9 +200,9 @@ def read_file(filepath: Path | str, encoding: str="utf-8") -> Result[Any, str]:
     try:
         with filepath.open(mode="r", encoding=encoding) as f:
             text = f.read()
-    except OSError as err:
-        Trace.debug(f"{err}")
-        return Err(f"{err}")
+    except OSError as e:
+        Trace.debug(f"{e}")
+        return Err(f"{e}")
 
     if file_type == "text":
         return Ok(text)
@@ -211,16 +211,16 @@ def read_file(filepath: Path | str, encoding: str="utf-8") -> Result[Any, str]:
         if "orjson" in sys.modules:
             try:
                 data = orjson.loads(text)           # type: ignore[reportPossiblyUnboundVariable]
-            except orjson.JSONDecodeError as err:   # type: ignore[reportPossiblyUnboundVariable]
-                error = f"JSONDecodeError: {filepath} => {err}"
+            except orjson.JSONDecodeError as e:   # type: ignore[reportPossiblyUnboundVariable]
+                error = f"JSONDecodeError: {filepath} => {e}"
                 Trace.debug(error)
                 return Err(error)
             return Ok(data)
         else:
             try:
                 data = json.loads(text)             # type: ignore[reportPossiblyUnboundVariable]
-            except json.JSONDecodeError as err:     # type: ignore[reportPossiblyUnboundVariable]
-                error = f"JSONDecodeError: {filepath} => {err}"
+            except json.JSONDecodeError as e:     # type: ignore[reportPossiblyUnboundVariable]
+                error = f"JSONDecodeError: {filepath} => {e}"
                 Trace.debug(error)
                 return Err(error)
             return Ok(data)
@@ -229,8 +229,8 @@ def read_file(filepath: Path | str, encoding: str="utf-8") -> Result[Any, str]:
         try:
             # data = ET.fromstring(text)
             data = minidom.parseString(text)  # noqa: S318
-        except (TypeError, AttributeError) as err:
-            error = f"ParseError: {err}"
+        except (TypeError, AttributeError) as e:
+            error = f"ParseError: {e}"
             Trace.debug(error)
             return Err(error)
         return Ok(data)
@@ -313,10 +313,10 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
                     text = orjson.dumps(data, default=serialize_sets, option=orjson.OPT_INDENT_2).decode("utf-8") # type: ignore[reportPossiblyUnboundVariable]
                 else:
                     text = json.dumps(data, default=serialize_sets, indent=2, ensure_ascii=False)                 # type: ignore[reportPossiblyUnboundVariable]
-            except TypeError as error:
-                err = f"TypeError: {error}"
-                Trace.error(err)
-                return Err(err)
+            except TypeError as e:
+                error = f"TypeError: {e}"
+                Trace.error(error)
+                return Err(error)
         else:
             err = f"Type '{type(data)}' is not supported for '{suffix}'"
             Trace.error(err)
@@ -341,9 +341,9 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
                 try:
                     text  = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>\n'
                     text += dict2xml(data, wrap="root", indent="  ") # type: ignore[reportPossiblyUnboundVariable]
-                except ValueError as error:
-                    err = f"ValueError: {error}"
-                    return Err(err)
+                except ValueError as e:
+                    error = f"ValueError: {e}"
+                    return Err(error)
             else:
                 err = "module 'dict2xml' not installed"
                 Trace.debug(err)
@@ -352,9 +352,9 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
             # if "dicttoxml" in sys.modules: # GNU License !
             #     try:
             #         xml = dicttoxml(data) # type: ignore[reportPossiblyUnboundVariable]
-            #     except ValueError as error:
-            #         err = f"ValueError: {error}"
-            #         return Err(err)
+            #     except ValueError as e:
+            #         error = f"ValueError: {e}"
+            #         return Err(error)
             #     text = minidom.parseString(xml).toprettyxml(indent="  ")
             #     text = text.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="utf-8" standalone="yes"?>')
             # else:
@@ -379,9 +379,9 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
             try:
                 dirpath.mkdir(parents=True)
                 Trace.update(f"'{dirpath}' created")
-            except OSError as err:
-                Trace.debug(f"{err}")
-                return Err(f"{err}")
+            except OSError as e:
+                Trace.debug(f"{e}")
+                return Err(f"{e}")
         else:
             return Err(f"DirNotFoundError: '{dirpath}'")
 
@@ -391,9 +391,9 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
         try:
             with filepath.open(mode="r", encoding=encoding) as f:
                 text_old = f.read()
-        except OSError as err:
-            Trace.debug(f"{err}")
-            return Err(f"{err}")
+        except OSError as e:
+            Trace.debug(f"{e}")
+            return Err(f"{e}")
 
         if text == text_old:
             Trace.info(f"'{filepath}' not modified")
@@ -402,8 +402,8 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
         try:
             with filepath.open(mode="w", encoding=encoding, newline=newline) as f:
                 f.write(text)
-        except OSError as err:
-            return Err(f"{err}")
+        except OSError as e:
+            return Err(f"{e}")
 
         if show_message:
             Trace.update(f"'{filepath}' updated")
@@ -412,9 +412,9 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
         try:
             with filepath.open(mode="w", encoding=encoding, newline=newline) as f:
                 f.write(text)
-        except OSError as err:
-            Trace.debug(f"{err}")
-            return Err(f"{err}")
+        except OSError as e:
+            Trace.debug(f"{e}")
+            return Err(f"{e}")
 
         if show_message:
             Trace.update(f"'{filepath}' created")
@@ -424,9 +424,9 @@ def write_file(filepath: Path | str, data: Any, filename_timestamp: bool = False
     if timestamp > 0:
         try:
             os.utime(filepath, times = (timestamp, timestamp)) # atime and mtime
-        except OSError as err:
-            Trace.debug(f"{err}")
-            return Err(f"timestamp: {err}")
+        except OSError as e:
+            Trace.debug(f"{e}")
+            return Err(f"timestamp: {e}")
 
     return Ok("")
 

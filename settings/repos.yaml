@@ -148,6 +148,11 @@ repos:
     lib:  true
     git:  true
 
+  - name: git-exercise
+    path: Python/Git
+    lib:  true
+    git:  true
+
   - name: github-codespace-test
     path: Python
     lib:  true

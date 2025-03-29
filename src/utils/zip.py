@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 01.03.2025 15:26
+    © Jürgen Schoenemeyer, 29.03.2025 18:57
 
     src/utils/zip.py
 
@@ -26,9 +26,9 @@ def check_zip(myzip: ZipFile, path: Path | str, files: List[str]) -> Dict[str, A
     for file in files:
         try:
             myzip.extract(file, path)
-        except OSError as err:
-            errors[file] = str(err)
-            Trace.error(f"{file}: {err}")
+        except OSError as e:
+            errors[file] = str(e)
+            Trace.error(f"{file}: {e}")
 
     return errors
 
@@ -39,8 +39,8 @@ def expand_zip(source_path: Path | str, dest_path: Path | str) -> bool:
     if Path.is_file(source_path):
         try:
             shutil.unpack_archive(source_path, dest_path)
-        except OSError as err:
-            Trace.error(f"{err}")
+        except OSError as e:
+            Trace.error(f"{e}")
             return False
 
         return True
@@ -63,8 +63,8 @@ def create_zip(source_path: Path | str, dest_path: Path | str, filename: str, co
         with ZipFile(dest_path / filename, "w", ZIP_DEFLATED, compresslevel=compression) as zf:
             for file in src_path.rglob("*"):
                 zf.write(file, file.relative_to(src_path))
-    except OSError as err:
-        Trace.error(f"{err}")
+    except OSError as e:
+        Trace.error(f"{e}")
         return False
 
     return True
