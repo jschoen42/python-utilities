@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 29.03.2025 18:30
+    © Jürgen Schoenemeyer, 30.03.2025 15:26
 
     _pyright.py
 
@@ -42,7 +42,6 @@ from argparse import ArgumentParser
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
-from subprocess import CompletedProcess
 from typing import Dict, List
 
 BASE_PATH = Path(sys.argv[0]).parent.parent.resolve()
@@ -117,13 +116,13 @@ def check_types(src_path: Path, python_version: str) -> None:
 
     start = time.perf_counter()
 
+    name = src_path.name
+    if name == "":
+        name = "."
+
     folder_path = BASE_PATH / RESULT_FOLDER
     if not folder_path.exists():
         folder_path.mkdir(parents=True, exist_ok=True)
-
-    name = src_path.stem
-    if name == "":
-        name = "."
 
     npx_path = shutil.which("npx")
     if not npx_path:
@@ -147,33 +146,43 @@ def check_types(src_path: Path, python_version: str) -> None:
     try:
         # https://github.com/microsoft/pyright/blob/main/docs/command-line.md
 
-        result: CompletedProcess[str] = subprocess.run(
+        process = subprocess.Popen(
             [npx_path, "pyright", src_path, "--project", config, "--outputjson"],
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            check=False, # important
             encoding="utf-8",
             errors="replace",
         )
+
+        counter = 0
+        while process.poll() is None:
+            print(f"PyRight is scanning ... ({counter} sec)", end="\r", flush=True)
+            time.sleep(1)
+            counter += 1
+
     except subprocess.CalledProcessError as e:
         print(f"PyRight error: {e}")
         sys.exit(1)
+
     finally:
         config.unlink()
 
-    # exit codes
-    #  - 0 No errors reported
-    #  - 1 One or more errors reported
-    #  - 2 Fatal error occurred with no errors or warnings reported
-    #  - 3 Config file could not be read or parsed
-    #  - 4 Illegal command-line parameters specified
+    # returncode:
+    #   0: No errors reported
+    #   1: One or more errors reported
+    #   2: Fatal error occurred with no errors or warnings reported
+    #   3: Config file could not be read or parsed
+    #   4: Illegal command-line parameters specified
 
-    if result.stderr != "":
-        print(f"exit code: {result.returncode} - {result.stderr.strip()}")
-        sys.exit(result.returncode)
+    returncode = process.returncode
+    stdout, stderr = process.communicate()
 
-    stdout = result.stdout.replace("\xa0", " ") # non breaking space
-    data = json.loads(stdout)
+    if stderr != "":
+        print(f"returncode: {returncode} - {stderr.strip()}")
+        sys.exit(returncode)
+
+    data = json.loads(stdout.replace("\xa0", " ")) # non breaking space
 
     # {
     #   "version": "1.1.394",
@@ -271,7 +280,7 @@ def check_types(src_path: Path, python_version: str) -> None:
 
     duration = time.perf_counter() - start
     print(f"[PyRight {version} ({duration:.2f} sec)] {footer} -> {RESULT_FOLDER}/{result_filename}")
-    sys.exit(result.returncode)
+    sys.exit(returncode)
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="static type check with PyRight")
