@@ -1,10 +1,11 @@
 """
-    © Jürgen Schoenemeyer, 25.02.2025 15:45
+    © Jürgen Schoenemeyer, 31.03.2025 15:12
 
     src/utils/text.py
 
     PUBLIC:
      - check_quote(test_id: str, text: None | str, language: str) -> str
+     - check_html(text_id: str, text: str) -> None
 """
 from __future__ import annotations
 
@@ -94,3 +95,11 @@ def check_quote(test_id: str, text: None | str, language: str) -> str:
         Trace.error( f"check_quote: not even error ({language}) {test_id}: {text}")
 
     return out_text
+
+def check_html(text_id: str, text: str) -> None:
+    if len(text.split("[b]")) > 1:
+        start_bold_number = len(text.split("[b]"))
+        end_bold_number = len(text.split("[/b]"))
+
+        if start_bold_number != end_bold_number:
+            Trace.error(f"text {text_id} - [b] + [/b] different ('{start_bold_number}  + {end_bold_number}')")

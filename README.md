@@ -18,7 +18,6 @@
 | text.py      | 25.02.2025  | |
 | trace.py     | 22.03.2025  | |
 | util.py      | 01.03.2025  | |
-| utilities.py | 01.03.2025  | |
 | utils.py     | 22.03.2025  | |
 | xml.py       | 01.03.2025  | |
 | zip.py       | 01.03.2025  | |
@@ -261,18 +260,6 @@ class ProcessLog (array cache)
 - pascal_to_snake(name: str) -> str
 - snake_to_pascal(name: str) -> str
 - to_title(text: str) -> str
-```
-
-### src/utils/utilities.py
-
-``` python
-- clean_import_json(text: str) -> str | bool
-- check_html(text_id: str, text: str) -> None
-- exception(function: Callable[[Any], Any]) -> Callable[[Any], Any]
-- check_url(url: str) -> bool
-- insert_meta_node(data: Dict[Any, Any], in_type: str, language: str | None = None) -> None
-- insert_data_node(data: Dict[Any, Any], paths: List[str], key: str, value: Any) -> None
-- prepare_smart_sort(text:str, count:int = 6) -> str
 ```
 
 ### src/utils/xml.py
