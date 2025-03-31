@@ -6,7 +6,7 @@
 | beautify.py  | 06.03.2025  | |
 | decorator.py | 15.03.2025  | |
 | excel.py     | 01.03.2025  | |
-| file.py      | 20.03.2025  | |
+| file.py      | 31.03.2025  | |
 | files.py     | 01.03.2025  | rustedpy  |
 | format.py    | 01.03.2025  | |
 | globals.py   | 20.03.2025  | |
@@ -70,22 +70,22 @@
 ### src/utils/file.py
 
 ``` python
-- get_modification_timestamp(filename: Path | str) -> float
-- set_modification_timestamp(filename: Path | str, timestamp: float) -> None
+- get_modification_timestamp(filepath: Path | str) -> float
+- set_modification_timestamp(filepath: Path | str, timestamp: float) -> None
 
-- check_path_exists(path: str) -> bool
+- check_path_exists(folderpath: Path | str) -> bool
 - check_file_exists(filepath: Path | str, filename: str) -> bool
 
-- listdir(path: Path | str) -> Tuple[List[str], List[str]]
+- listdir(path: Path | str ) -> Tuple[List[str], List[str]]
 - listdir_match_extention(path: Path | str, extensions: List[str] | None = None) -> Tuple[List[str], List[str]]
 
 - list_folders(path: Path | str) -> List[str]:
 - clear_folder(path: Path | str) -> None:
 - delete_folder_tree(dest_path: Path | str, relax: bool = False) -> bool:
-- create_folder(folderpath: Path | str) -> bool:
+- create_folder( folderpath: Path | str ) -> bool:
 - make_dir(path: Path | str) -> None:
 - delete_file(path: Path | str, filename: str) -> bool:
-- beautify_path(path: Path | str) -> str:
+- beautify_path( path: Path | str ) -> str:
 
 - get_trace_path(filepath: Path | str) -> str:
 - get_files_in_folder(path: Path) -> List[str]
@@ -93,18 +93,17 @@
 - get_save_filename(path: Path, stem: str, suffix: str) -> str
 
 - import_text(folderpath: Path | str, filename: Path | str, encoding: str="utf-8", show_error: bool=True) -> str | None
-- import_json(folderpath: Path | str, filename: str, show_error: bool=True) -> Any
-- import_json_timestamp(folderpath: Path | str, filename: str, show_error: bool=True) -> Tuple[Any, float | None]
+- import_json(folderpath: Path | str, filename: Path | str, show_error: bool=True) -> Any
+- import_json_timestamp( folderpath: Path | str, filename: Path | str, show_error: bool=True ) -> Tuple[Any, float | None]
 
-- export_text(folderpath: Path | str, filename: str, text: str, encoding: str="utf-8", newline: str="\n", timestamp: float=0.0, create_new_folder: bool=True, show_message: bool=True) -> str | None:
-- export_json(folderpath: Path | str, filename: str, data: Dict[str, Any] | List[Any], newline: str="\n", timestamp: float=0.0, show_message: bool=True) -> str | None:
-- export_binary_file(filepath: Path | str, filename: str, data: bytes, _timestamp: float=0, create_new_folder: bool=False) -> None
+- export_text(folderpath: Path | str, filename: Path | str, text: str, encoding: str="utf-8", newline: str="\n", timestamp: float=0.0, create_new_folder: bool=True, show_message: bool=True) -> bool | None:
+- export_json(folderpath: Path | str, filename: Path | str, data: Dict[str, Any] | List[Any], newline: str="\n", timestamp: float=0.0, show_message: bool=True) -> bool | None:
+- export_binary_file(filepath: Path | str, filename: Path | str, data: bytes, _timestamp: float=0, create_new_folder: bool=False) -> bool | None
+- export_file(filepath: Path|str, filename: Path | str, text: str, in_type: str | None = None, timestamp: float=0, create_new_folder: bool=True, encoding: str ="utf-8", newline: str="\n", overwrite: bool=True) -> None | str
 
-- export_file(filepath: Path | str, filename: str, text: str, in_type: str | None = None, encoding: str ="utf-8", newline: str="\n", timestamp: float=0.0, create_new_folder: bool=True, overwrite: bool=True) -> None | str
-
-- get_filename_unique(dirpath: Path, filename: str) -> str
-- find_matching_file(path_name: str) -> bool | str
-- find_matching_file_path(dirname: Path, filename: str) -> Path | bool
+- get_filename_unique(folderpath: Path |, filename: Path | str) -> str
+- find_matching_file(filepath: Path | str) -> bool | str
+- find_matching_file_path(folderpath: Path | str, filename: Path | str) -> Path | bool
 - get_valid_filename(name: str) -> str
 - get_file_infos(path: Path | str, filename: str, _in_type: str) -> None | Dict
 
