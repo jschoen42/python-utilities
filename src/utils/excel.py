@@ -1,13 +1,13 @@
 """
-    © Jürgen Schoenemeyer, 29.03.2025 18:57
+    © Jürgen Schoenemeyer, 31.03.2025 23:52
 
     src/utils/excel.py
 
     PUBLIC:
      - check_excel_file_exists(filepath: Path | str) -> bool
 
-     - read_excel_file(folderpath: Path | str, filename: str) -> None | Tuple[Workbook, float]
-     - read_excel_worksheet(folderpath: str, filename: str, sheet_name: str) -> Tuple[Worksheet | None, float]
+     - read_excel_file(folderpath: Path | str, filename: Path | str) -> None | Tuple[Workbook, float]
+     - read_excel_worksheet(folderpath: str, filename: Path | str, sheet_name: str) -> Tuple[Worksheet | None, float]
      - get_excel_worksheet(workbook: Workbook, sheet_name: str) -> Worksheet | None
 
      - get_cell_text(in_cell: Cell | MergedCell) -> str:
@@ -61,7 +61,9 @@ def check_excel_file_exists(filepath: Path | str) -> bool:
         return check_file_exists(folderpath, filename)
 
 def read_excel_file(folderpath: Path | str, filename: str) -> Tuple[Workbook | None, float]:
-    filepath = Path(folderpath) / filename
+    filepath   = Path(folderpath) / filename
+    folderpath = filepath.parent
+    filename   = filepath.name
 
     if check_excel_file_exists(filepath) is False:
         return None, 0
@@ -74,8 +76,10 @@ def read_excel_file(folderpath: Path | str, filename: str) -> Tuple[Workbook | N
 
     return workbook, get_modification_timestamp(filepath)
 
-def read_excel_worksheet(folderpath: Path | str, filename: str, sheet_name: str) -> Tuple[Worksheet | None, float]:
-    filepath = Path(folderpath) / filename
+def read_excel_worksheet(folderpath: Path | str, filename: Path | str, sheet_name: str) -> Tuple[Worksheet | None, float]:
+    filepath   = Path(folderpath) / filename
+    folderpath = filepath.parent
+    filename   = filepath.name
 
     if check_excel_file_exists(filepath) is False:
         return None, 0.0

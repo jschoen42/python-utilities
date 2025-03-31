@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 31.03.2025 13:06
+    © Jürgen Schoenemeyer, 02.04.2025 22:37
 
     src/utils/file.py
 
@@ -437,15 +437,15 @@ def export_file(folderpath: Path | str, filename: str, text: str, in_type: str |
             create_folder(folderpath)
 
         try:
-            with (filepath / my_filename).open(mode="w", encoding=encoding, newline=newline) as f:
+            with (folderpath / my_filename).open(mode="w", encoding=encoding, newline=newline) as f:
                 f.write(text)
 
             if timestamp != 0:
-                set_modification_timestamp(filepath / my_filename, timestamp)
+                set_modification_timestamp(folderpath / my_filename, timestamp)
 
         except OSError as e:
-            error = str(e).split(":")[0]
-            Trace.error(f"{error} '{trace_export_path}'")
+            err = str(e).split(":")[0]
+            Trace.error(f"{err} '{trace_export_path}'")
             return None
 
         if ref_text == "":

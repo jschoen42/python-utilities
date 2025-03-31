@@ -135,10 +135,12 @@
     "textMateRules": [
       {
         "scope": [
-         "entity.name.function.python",
-         "meta.attribute.python",
-         "meta.function-call.generic.python",
-         ],
+          "entity.name.function.js",
+          "variable.other.readwrite.alias.js",
+          "entity.name.function.python",
+          "meta.attribute.python",
+          "meta.function-call.generic.python",
+        ],
         "settings": {
           "foreground": "#000000",
           "fontStyle": "bold",
