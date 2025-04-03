@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 31.03.2025 23:52
+    © Jürgen Schoenemeyer, 03.04.2025 20:50
 
     src/utils/excel.py
 
@@ -18,7 +18,7 @@
      - check_double_quotes(wb_name: str, cell_text: str, line_number: int, function_name: str) -> Tuple[bool, str]
 
      - excel_date(date: datetime, time_zone_offset: tzoffset) -> float
-     - convert_datetime( time_string: str ) -> int
+     - convert_datetime(time_string: str) -> int
      - seconds_to_timecode_excel(x: float) -> str
 """
 from __future__ import annotations
@@ -123,11 +123,11 @@ def check_hidden_rows_columns(sheet: Any) -> None:
     for key, value in sheet.column_dimensions.items():
         if value.hidden is True:
             if key != "A":
-                Trace.warning( f"hidden column: {key}")
+                Trace.warning(f"hidden column: {key}")
 
     for row_num, row_dimension in sheet.row_dimensions.items():
         if row_dimension.hidden is True:
-            Trace.warning( f"hidden row: {row_num}")
+            Trace.warning(f"hidden row: {row_num}")
 
 ######################################################################################
 # get_cell_value with converting
@@ -220,7 +220,7 @@ def convert_datetime(time_string: str) -> int:
 
     my_timestamp = int(datetime.timestamp(my_time_string))
 
-    # Trace.debug( f"{time_string} -> {my_time_string} => epoch: {my_timestamp}" )
+    # Trace.debug(f"{time_string} -> {my_time_string} => epoch: {my_timestamp}")
     return my_timestamp
 
 def seconds_to_timecode_excel(x: float) -> str:

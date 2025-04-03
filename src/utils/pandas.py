@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 29.03.2025 18:57
+    © Jürgen Schoenemeyer, 07.04.2025 20:30
 
     src/utils/pandas.py
 
@@ -70,7 +70,7 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
         data_frame = pd.read_pickle(data_path)  # noqa: S301
 
     elif import_type == "hdf":
-        result = pd.read_hdf(data_path, key=key) # type: ignore [reportUnknownVariableType]
+        result = pd.read_hdf(data_path, key=key)
         if isinstance(result, pd.Series):
             data_frame = result.to_frame()
         else:
@@ -85,7 +85,7 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
             except ValueError as e:
                 Trace.fatal(f"'{filename}': {e}")
     else:
-        Trace.fatal( f"unknown file type '{import_type}'")
+        Trace.fatal(f"unknown file type '{import_type}'")
 
     duration = time.time() - start_timer
     Trace.info(f"'{filename}' loaded: {duration:.3f} sec")
@@ -143,7 +143,7 @@ def save_data(filepath:str, filename:str, data:Any, sheet_name:str = "Sheet1", k
         data.to_excel(data_path, sheet_name=sheet_name)
 
     else:
-        Trace.fatal( f"unknown file type '{export_type}'")
+        Trace.fatal(f"unknown file type '{export_type}'")
 
     duration = time.time() - start_timer
     Trace.info(f"'{filename}' saved: {duration:.3f} sec")

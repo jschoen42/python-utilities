@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 31.03.2025 15:12
+    © Jürgen Schoenemeyer, 03.04.2025 20:50
 
     src/utils/text.py
 
@@ -78,7 +78,7 @@ def check_quote(test_id: str, text: None | str, language: str) -> str:
         return text
 
     if language not in quote_info:
-        Trace.error( f"check_quote - unknown language: {language}")
+        Trace.error(f"check_quote - unknown language: {language}")
         language = "en"
 
     out_text = text
@@ -92,7 +92,7 @@ def check_quote(test_id: str, text: None | str, language: str) -> str:
         i = (i+1)%2
 
     if i==1:
-        Trace.error( f"check_quote: not even error ({language}) {test_id}: {text}")
+        Trace.error(f"check_quote: not even error ({language}) {test_id}: {text}")
 
     return out_text
 

@@ -2,25 +2,25 @@
 
 | File         | Last update | Note      |
 | :----------- | :---------: | :-------: |
-| audio.py     | 01.03.2025  | |
-| beautify.py  | 06.03.2025  | |
-| decorator.py | 15.03.2025  | |
-| excel.py     | 01.03.2025  | |
-| file.py      | 31.03.2025  | |
-| files.py     | 01.03.2025  | rustedpy  |
-| format.py    | 01.03.2025  | |
-| globals.py   | 20.03.2025  | |
-| metadata.py  | 25.02.2025  | |
-| metadata_mutagen.py | 13.03.2025 | |
-| pandas.py    | 01.03.2025  | |
-| prefs.py     | 20.03.2025  | |
-| result.py    | 25.02.2025  | rustedpy   |
-| text.py      | 25.02.2025  | |
-| trace.py     | 22.03.2025  | |
-| util.py      | 01.03.2025  | |
+| audio.py     | 20.03.2025  | |
+| beautify.py  | 07.04.2025  | |
+| decorator.py | 03.04.2025  | |
+| excel.py     | 03.04.2025  | |
+| file.py      | 03.04.2025  | |
+| files.py     | 07.04.2025  | rustedpy  |
+| format.py    | 03.04.2025  | |
+| globals.py   | 22.03.2025  | |
+| metadata.py  | 29.02.2025  | |
+| metadata_mutagen.py | 07.04.2025 | |
+| pandas.py    | 07.04.2025  | |
+| prefs.py     | 03.04.2025  | |
+| result.py    | 20.03.2025  | rustedpy   |
+| text.py      | 03.04.2025  | |
+| trace.py     | 07.04.2025  | |
+| util.py      | 03.04.2025  | |
 | utils.py     | 22.03.2025  | |
-| xml.py       | 01.03.2025  | |
-| zip.py       | 01.03.2025  | |
+| xml.py       | 29.03.2025  | |
+| zip.py       | 03.04.2025  | |
 
 ### src/utils/audio.py
 
@@ -75,16 +75,16 @@
 - check_path_exists(folderpath: Path | str) -> bool
 - check_file_exists(filepath: Path | str, filename: str) -> bool
 
-- listdir(path: Path | str ) -> Tuple[List[str], List[str]]
+- listdir(path: Path | str) -> Tuple[List[str], List[str]]
 - listdir_match_extention(path: Path | str, extensions: List[str] | None = None) -> Tuple[List[str], List[str]]
 
 - list_folders(path: Path | str) -> List[str]:
 - clear_folder(path: Path | str) -> None:
 - delete_folder_tree(dest_path: Path | str, relax: bool = False) -> bool:
-- create_folder( folderpath: Path | str ) -> bool:
+- create_folder(folderpath: Path | str) -> bool:
 - make_dir(path: Path | str) -> None:
 - delete_file(path: Path | str, filename: str) -> bool:
-- beautify_path( path: Path | str ) -> str:
+- beautify_path(path: Path | str) -> str:
 
 - get_trace_path(filepath: Path | str) -> str:
 - get_files_in_folder(path: Path) -> List[str]
@@ -93,7 +93,7 @@
 
 - import_text(folderpath: Path | str, filename: Path | str, encoding: str="utf-8", show_error: bool=True) -> str | None
 - import_json(folderpath: Path | str, filename: Path | str, show_error: bool=True) -> Any
-- import_json_timestamp( folderpath: Path | str, filename: Path | str, show_error: bool=True ) -> Tuple[Any, float | None]
+- import_json_timestamp(folderpath: Path | str, filename: Path | str, show_error: bool=True) -> Tuple[Any, float | None]
 
 - export_text(folderpath: Path | str, filename: Path | str, text: str, encoding: str="utf-8", newline: str="\n", timestamp: float=0.0, create_new_folder: bool=True, show_message: bool=True) -> bool | None:
 - export_json(folderpath: Path | str, filename: Path | str, data: Dict[str, Any] | List[Any], newline: str="\n", timestamp: float=0.0, show_message: bool=True) -> bool | None:
@@ -113,9 +113,9 @@
 
 ``` python
 - result = get_timestamp(filepath: Path | str) -> Result[float, str]
-- result = set_timestamp(filepath: Path | str, timestamp: float) -> Result[(), str]
+- result = set_timestamp(filepath: Path | str, timestamp: float) -> Result[str, str]
 
-- result = get_files_dirs(path: str, extensions: List) -> Result[Tuple[List, List], str]
+- result = get_files_dirs(path: str, extensions: List) -> Result[Tuple[List[str], List[str]], str]
 
 - result = read_file(filepath: Path | str, encoding: str="utf-8") -> Result[Any, str]
 - result = write_file(filepath: Path | str, data: Any, encoding: str="utf-8", create_dir: bool = True, show_message: bool=True) -> Result[str, str]

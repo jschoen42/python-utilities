@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 29.03.2025 18:57
+    © Jürgen Schoenemeyer, 07.04.2025 20:30
 
     src/utils/metadata_mutagen.py
 
@@ -47,7 +47,7 @@ class MP4Info(Protocol): # -> mypi
 @deprecated("licence does not fit")
 def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
     try:
-        metadata = MP3.Open(filepath) # type: ignore [attr-defined]
+        metadata = MP3.Open(filepath) # type: ignore [attr-defined] # PyRight: Attribute "Open" is unknown
     except MutagenError as e:
         Trace.error(f"MutagenError: {e}")
         return None
@@ -78,7 +78,7 @@ def get_audioinfo_mutagen(filepath: str) -> None | Dict[str, Any]:
 @deprecated("licence does not fit")
 def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
     try:
-        metadata = MP3.Open(filepath) # type: ignore [attr-defined]
+        metadata = MP3.Open(filepath) # type: ignore [attr-defined] # PyRight: Attribute "Open" is unknown
     except MutagenError as e:
         Trace.error(f"MutagenError: {e}")
         return None
@@ -104,7 +104,7 @@ def get_audio_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
 @deprecated("licence does not fit")
 def get_video_metadata_mutagen(filepath: Path | str) -> None | Dict[str, Any]:
     try:
-        metadata = MP4.Open(filepath) # type: ignore [attr-defined]
+        metadata = MP4.Open(filepath) # type: ignore [attr-defined] # PyRight: Attribute "Open" is unknown
     except MutagenError as e:
         Trace.error(f"MutagenError: {e}")
         return None

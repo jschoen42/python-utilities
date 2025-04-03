@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 29.03.2025 18:57
+    © Jürgen Schoenemeyer, 03.04.2025 20:50
 
     src/utils/zip.py
 
@@ -54,9 +54,9 @@ def create_zip(source_path: Path | str, dest_path: Path | str, filename: str, co
 
     if not dest_path.is_dir():
         dest_path.mkdir(parents=True)
-        Trace.update( f"makedir + '{dest_path}'")
+        Trace.update(f"makedir + '{dest_path}'")
 
-    Trace.info( f"'{get_trace_path(source_path)}/{filename}' > '{get_trace_path(dest_path)}/{filename}'")
+    Trace.info(f"'{get_trace_path(source_path)}/{filename}' > '{get_trace_path(dest_path)}/{filename}'")
 
     src_path = source_path.expanduser().resolve(strict=True)
     try:

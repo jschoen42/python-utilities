@@ -1,10 +1,10 @@
 """
-    © Jürgen Schoenemeyer, 29.03.2025 18:30
+    © Jürgen Schoenemeyer, 07.04.2025 20:30
 
     src/utils/beautify.py
 
     PUBLIC:
-     - beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool:
+     - beautify_file(file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str) -> bool:
         - file_type = "JS" | "CSS" | "JSON" | "XML"
 
     PRIVATE:
@@ -18,8 +18,8 @@ import json
 from pathlib import Path
 from typing import Dict
 
-import cssbeautifier  # type: ignore[import-untyped]
-import jsbeautifier  # type: ignore[import-untyped]
+import cssbeautifier  # type: ignore[import-untyped, reportMissingTypeStubs]
+import jsbeautifier  # type: ignore[import-untyped, reportMissingTypeStubs]
 
 from lxml import etree
 
@@ -160,7 +160,7 @@ def expand_css(text: str) -> str:
     return text
 
 @duration("beautify '{1}\\{2}'")
-def beautify_file( file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str ) -> bool:
+def beautify_file(file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str) -> bool:
     source = Path(source_path) / source_filename
     dest   = Path(dest_path) / dest_filename
 
@@ -182,7 +182,7 @@ def beautify_file( file_type: str, source_path: Path | str, source_filename: str
         """
         opts = jsbeautifier.default_options()
         opts.indent_size = 2
-        data = expand_js( jsbeautifier.beautify(text, opts) )
+        data = expand_js(jsbeautifier.beautify(text, opts))
 
     elif file_type == "CSS":
         """
@@ -198,13 +198,13 @@ def beautify_file( file_type: str, source_path: Path | str, source_filename: str
         """
         opts = cssbeautifier.default_options()
         opts.indent_size = 2
-        data = expand_css( cssbeautifier.beautify(text, opts) )
+        data = expand_css(cssbeautifier.beautify(text, opts))
 
     elif file_type == "JSON":
         try:
             data = json.dumps(json.loads(text), indent=2, sort_keys=False)
         except ValueError as e:
-            Trace.error( f"JSON parse error: {e} - {source}" )
+            Trace.error(f"JSON parse error: {e} - {source}")
             data = text
 
     elif file_type == "XML":
@@ -212,11 +212,11 @@ def beautify_file( file_type: str, source_path: Path | str, source_filename: str
             x = etree.fromstring(text)  # noqa: S320
             data = etree.tostring(x, pretty_print=True, encoding=str)
         except ValueError as e:
-            Trace.error( f"XML parse error: {e} - {source}" )
+            Trace.error(f"XML parse error: {e} - {source}")
             data = text
 
     else:
-        Trace.error( f"unknown file type '{file_type}'" )
+        Trace.error(f"unknown file type '{file_type}'")
         return False
 
     if export_text(dest.parent, dest.name, data, timestamp = mtime):
