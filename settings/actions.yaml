@@ -9,7 +9,6 @@ actions:
        - .vscode/settings.json
        - .gitignore
        - .gitattributes
-       - .windsurfrules
        - _mypy.py
        - _pyright.py
        - _basedpyright.py
@@ -55,4 +54,5 @@ actions:
        - .githooks.toml
 
   delete:
+     - .windsurfrules
      - ___Cheat-Sheet.txt

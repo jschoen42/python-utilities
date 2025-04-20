@@ -2,6 +2,11 @@
 ---
 
 repos:
+  - name: import-data
+    path: Html/shop-nim-fau
+    lib:  true
+    git:  false
+
   - name: _empty
     path: Python
     lib:  true
