@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 03.04.2025 20:50
+    © Jürgen Schoenemeyer, 08.05.2025 12:56
 
     src/utils/prefs.py
 
@@ -9,9 +9,15 @@
       - Prefs.load(pref_name: str) -> bool
       - Prefs.get(key_path: str) -> Any
 
+     - get_pref_special(pref_path: Path, pref_prefix: str, pref_name: str, key: str) -> str
+     - read_pref(pref_path: Path, pref_name: str) -> Tuple[bool, Dict[Any, Any]]
+     - beautify_path(path: Path | str) -> str
+     - merge_dicts(a: Dict[Any, Any], b: Dict[Any, Any]) -> Any
+     - beautify_path(path: Path | str) -> str
+
     PRIVATE:
-     - merge_dicts(a: Dict, b: Dict) -> Dict
-     - build_tree(tree: List, in_key: str, value: str) -> Dict
+     - merge(a: Dict[Any, Any], b: Dict[Any, Any], path: List[str] | None = None) -> Any
+     - build_tree(tree: List[str], in_key: str, value: str) -> Dict[str, Any]
 """
 from __future__ import annotations
 
@@ -55,15 +61,20 @@ class Prefs:
             with (cls.pref_path / pref_name).open(mode="r", encoding="utf-8") as file:
                 data = yaml.safe_load(file)
 
-            cls.data = dict(merge_dicts(cls.data, data))
-            # cls.data = merge(dict(cls.data), data) # -> Exception: Conflict at trainingCompany
-
-        except yaml.YAMLError as e:
+        except (yaml.YAMLError) as e:
             Trace.fatal(f"YAMLError '{pref_name}':\n{e}")
             return False
-
         except OSError as e:
-            Trace.error(f"{pref_name}: {e}")
+            Trace.fatal(f"{pref_name}: {e}")
+            return False
+
+        # add/merge to existing settings
+
+        try:
+            cls.data = dict(merge_dicts(cls.data, data))
+
+        except (AttributeError) as e:
+            Trace.fatal(f"AttributeError '{pref_name}': {e}")
             return False
 
         return True
@@ -121,9 +132,9 @@ class Prefs:
         return ret
 
 
-def get_pref_special(pref_path: Path, pref_prexix: str, pref_name: str, key: str) -> str:
+def get_pref_special(pref_path: Path, pref_prefix: str, pref_name: str, key: str) -> str:
     try:
-        path = pref_path / pref_prexix / (pref_name + ".yaml")
+        path = pref_path / pref_prefix / (pref_name + ".yaml")
         with path.open(mode="r", encoding="utf-8") as file:
             pref = yaml.safe_load(file)
 

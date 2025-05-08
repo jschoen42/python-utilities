@@ -19,11 +19,13 @@
   "editor.fontWeight": 400,
   "editor.formatOnSave": false,
   "editor.formatOnType": true,
-  "editor.indentSize": 2,
   "editor.inlineSuggest.enabled": true,
-  "editor.insertSpaces": true,
   "editor.lineHeight": 1.4,
+
+  "editor.detectIndentation": false,
   "editor.tabSize": 2,
+  "editor.indentSize": 2,
+  "editor.insertSpaces": true,
 
   "css.lint.emptyRules": "ignore",
   "css.lint.duplicateProperties": "warning",

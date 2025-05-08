@@ -393,6 +393,11 @@ repos:
     lib:  true
     git:  true
 
+  - name: websites-decide
+    path: Python
+    lib:  true
+    git:  true
+
   - name: zz-utils
     path: Python
     lib:  false

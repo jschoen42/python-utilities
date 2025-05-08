@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 03.04.2025 20:50
+    © Jürgen Schoenemeyer, 08.05.2025 12:56
 
     src/utils/decorator.py
 
@@ -9,8 +9,8 @@
      - @retry_exception(text: str="", exception=Exception, delay: int|float=1, retries: int=5)
 
     PRIVATE:
-     - def get_args_values(func: Callable, *args: Any, **kwargs: Any) -> Tuple[List, Dict]:
-     - def replace_arguments(match: Match, func_name: str, *args: Any, **kwargs: Any) -> str:
+     - get_args_values(func: Callable, *args: Any, **kwargs: Any) -> Tuple[List, Dict]
+     - replace_arguments(match: Match, func_name: str, *args: Any, **kwargs: Any) -> str
 """
 from __future__ import annotations
 
