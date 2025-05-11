@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 08.05.2025 12:56
+    © Jürgen Schoenemeyer, 11.05.2025 12:16
 
     src/utils/prefs.py
 
@@ -16,7 +16,8 @@
      - beautify_path(path: Path | str) -> str
 
     PRIVATE:
-     - merge(a: Dict[Any, Any], b: Dict[Any, Any], path: List[str] | None = None) -> Any
+     - merge_dicts(a: Dict[Any, Any], b: Dict[Any, Any]) -> Any
+     - deep_merge(dict1: Dict[Any, Any], dict2: Dict[Any, Any]) -> Dict[Any, Any]
      - build_tree(tree: List[str], in_key: str, value: str) -> Dict[str, Any]
 """
 from __future__ import annotations
@@ -26,7 +27,7 @@ import re
 
 from json import JSONDecodeError
 from pathlib import Path
-from typing import Any, ClassVar, Dict, List, Tuple
+from typing import Any, ClassVar, Dict, List, Mapping, Tuple
 
 import yaml
 
@@ -71,7 +72,8 @@ class Prefs:
         # add/merge to existing settings
 
         try:
-            cls.data = dict(merge_dicts(cls.data, data))
+            # cls.data = dict(merge_dicts(cls.data, data))
+            cls.data = deep_merge(cls.data, data)
 
         except (AttributeError) as e:
             Trace.fatal(f"AttributeError '{pref_name}': {e}")
@@ -186,6 +188,23 @@ def merge_dicts(a: Dict[Any, Any], b: Dict[Any, Any]) -> Any:
             yield (k, a[k])
         else:
             yield (k, b[k])
+
+def deep_merge(a: Dict[Any, Any], b: Mapping[Any, Any]) -> Dict[Any, Any]:
+    merged = a.copy()
+    for key, value in b.items():
+
+        if key in merged and isinstance(merged[key], list):
+            for item in value:
+                if item not in merged[key]:
+                    merged[key].append(item)
+
+        elif key in merged and isinstance(merged[key], Mapping) and isinstance(value, Mapping):
+            merged[key] = deep_merge(merged[key], value)
+
+        else:
+            merged[key] = value
+
+    return merged
 
 # https://stackoverflow.com/questions/7204805/deep-merge-dictionaries-of-dictionaries-in-python?page=1&tab=scoredesc#answer-7205107
 
