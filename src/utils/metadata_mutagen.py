@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 07.04.2025 20:30
+    © Jürgen Schoenemeyer, 27.05.2025 18:20
 
     src/utils/metadata_mutagen.py
 
@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Dict, Protocol, cast
 
-from mutagen._util import MutagenError
+from mutagen._util import MutagenError  # ty # type: ignore[reportPrivateImportUsage]
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 

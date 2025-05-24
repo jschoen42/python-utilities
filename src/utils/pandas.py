@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 07.04.2025 20:30
+    © Jürgen Schoenemeyer, 27.05.2025 18:20
 
     src/utils/pandas.py
 
@@ -66,8 +66,8 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
     elif import_type == "orc":
         data_frame = pd.read_orc(data_path)
 
-    elif import_type == "pkl":
-        data_frame = pd.read_pickle(data_path)  # noqa: S301
+    # elif import_type == "pkl":
+    #     data_frame = pd.read_pickle(data_path)  # noqa: S301
 
     elif import_type == "hdf":
         result = pd.read_hdf(data_path, key=key)
@@ -90,7 +90,7 @@ def load_data(filepath:Path | str, filename:str, sheet_name:str = "", key:str = 
     duration = time.time() - start_timer
     Trace.info(f"'{filename}' loaded: {duration:.3f} sec")
 
-    return data_frame
+    return data_frame # ty #type: ignore[invalid-return-type]
 
 ###################################################
 #
