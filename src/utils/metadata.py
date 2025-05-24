@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 29.03.2025 18:57
+    © Jürgen Schoenemeyer, 24.05.2025 19:36
 
     src/utils/metadata.py
 
@@ -112,12 +112,12 @@ def get_media_info(filepath: str | BytesIO) -> Dict[str, int | float] | None:
          Trace.error(f"MediaInfo: {e}")
          return None
 
-    audio_track = track
+    audio_track: Track = track
 
     return {
-        "duration": round(audio_track.duration/1000, 3),
-        "channels": audio_track.channel_s,
-        "samplingRate": audio_track.sampling_rate,
+        "duration": round(audio_track.duration/1000, 3), #type: ignore[unresolved-attribute]
+        "channels": audio_track.channel_s,               #type: ignore[unresolved-attribute]
+        "samplingRate": audio_track.sampling_rate,       #type: ignore[unresolved-attribute]
     }
 
 

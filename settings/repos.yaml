@@ -73,6 +73,16 @@ repos:
     lib:  true
     git:  true
 
+  - name: Decide/decide-websites
+    path: Python
+    lib:  true
+    git:  true
+
+  - name: Decide/websites-scan
+    path: Python
+    lib:  true
+    git:  true
+
   - name: django-course
     path: Python/Django
     lib:  false
@@ -389,11 +399,6 @@ repos:
     git:  true
 
   - name: Youtube-download-helper
-    path: Python
-    lib:  true
-    git:  true
-
-  - name: websites-decide
     path: Python
     lib:  true
     git:  true

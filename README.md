@@ -107,6 +107,7 @@
 - get_file_infos(path: Path | str, filename: str, _in_type: str) -> None | Dict
 
 - copy_my_file(source: str, dest: str, _show_updated: bool) -> bool
+- sanitize_filename(filename: str) -> str
 ```
 
 ### src/utils/files.py
