@@ -4,47 +4,63 @@ zz-utils v0.1.1
 │   │   └── six v1.17.0
 │   └── types-python-dateutil v2.9.0.20250516
 ├── cssbeautifier v1.15.4
-│   ├── editorconfig v0.17.0
+│   ├── editorconfig v0.17.1
 │   ├── jsbeautifier v1.15.4
-│   │   ├── editorconfig v0.17.0
+│   │   ├── editorconfig v0.17.1
 │   │   └── six v1.17.0
 │   └── six v1.17.0
 ├── dict2xml v1.7.6
+├── dotenv v0.9.9
+│   └── python-dotenv v1.1.0
 ├── jsbeautifier v1.15.4 (*)
 ├── lxml v5.4.0
 ├── mutagen v1.47.0
 ├── openpyxl v3.1.5
 │   └── et-xmlfile v2.0.0
 ├── orjson v3.10.18
-├── pandas v2.2.3
-│   ├── numpy v2.2.6
+├── pandas v2.3.0
+│   ├── numpy v2.3.0
 │   ├── python-dateutil v2.9.0.post0 (*)
 │   ├── pytz v2025.2
 │   └── tzdata v2025.2
 ├── pymediainfo v7.0.1
 ├── python-dateutil v2.9.0.post0 (*)
 ├── pyyaml v6.0.2
+├── requests v2.32.4
+│   ├── certifi v2025.6.15
+│   ├── charset-normalizer v3.4.2
+│   ├── idna v3.10
+│   └── urllib3 v2.5.0
 ├── result v0.17.0
+├── tldextract v5.3.0
+│   ├── filelock v3.18.0
+│   ├── idna v3.10
+│   ├── requests v2.32.4 (*)
+│   └── requests-file v2.1.0
+│       └── requests v2.32.4 (*)
 ├── tzdata v2025.2
 ├── xmltodict v0.14.2
-├── basedpyright v1.29.2 (group: dev)
+├── basedpyright v1.29.4 (group: dev)
 │   └── nodejs-wheel-binaries v22.16.0
 ├── lxml-stubs v0.5.1 (group: dev)
-├── mypy v1.15.0 (group: dev)
+├── mypy v1.16.1 (group: dev)
 │   ├── mypy-extensions v1.1.0
-│   └── typing-extensions v4.13.2
+│   ├── pathspec v0.12.1
+│   └── typing-extensions v4.14.0
 ├── openpyxl-stubs v0.1.25 (group: dev)
-│   ├── mypy v1.15.0 (*)
+│   ├── mypy v1.16.1 (*)
 │   ├── openpyxl v3.1.5 (*)
-│   └── typing-extensions v4.13.2
-├── pandas-stubs v2.2.3.250308 (group: dev)
-│   ├── numpy v2.2.6
+│   └── typing-extensions v4.14.0
+├── pandas-stubs v2.2.3.250527 (group: dev)
+│   ├── numpy v2.3.0
 │   └── types-pytz v2025.2.0.20250516
 ├── pip-licenses v5.0.0 (group: dev)
 │   ├── prettytable v3.16.0
 │   │   └── wcwidth v0.2.13
 │   └── tomli v2.2.1
-├── types-openpyxl v3.1.5.20250516 (group: dev)
+├── types-openpyxl v3.1.5.20250602 (group: dev)
 ├── types-pyyaml v6.0.12.20250516 (group: dev)
+├── types-requests v2.32.4.20250611 (group: dev)
+│   └── urllib3 v2.5.0
 └── types-xmltodict v0.14.0.20241009 (group: dev)
 (*) Package tree already displayed

@@ -1,9 +1,11 @@
 """
-    © Jürgen Schoenemeyer, 07.04.2025 20:30
+    © Jürgen Schoenemeyer, 21.06.2025 13:47
 
     src/utils/beautify.py
 
     PUBLIC:
+     - beautify_css( text: str ) -> str
+     - beautify_js( text: str ) -> str
      - beautify_file(file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str) -> bool:
         - file_type = "JS" | "CSS" | "JSON" | "XML"
 
@@ -158,6 +160,37 @@ def expand_css(text: str) -> str:
     for key, value in expand_data_css.items():
         text = text.replace(key, value)
     return text
+
+def beautify_css( text: str ) -> str:
+    """
+        default_options.brace_style = 'collapse'
+        default_options.end_with_newline = false
+        default_options.indent_char = ' '
+        default_options.indent_size = 4
+        default_options.newline_between_rules = false
+        default_options.preserve_newlines = false
+        default_options.selector_separator_newline = true
+        default_options.space_around_combinator = false
+        default_options.space_around_selector_separator = false
+    """
+    opts = cssbeautifier.default_options()
+    opts.indent_size = 2
+    return expand_css(cssbeautifier.beautify(text, opts))
+
+def beautify_js( text: str ) -> str:
+    """
+        default_options.break_chained_methods = false
+        default_options.eol = '\n'
+        default_options.indent_char = ' '
+        default_options.indent_level = 0
+        default_options.indent_size = 4
+        default_options.jslint_happy = false
+        default_options.preserve_newlines = true
+    """
+    opts = jsbeautifier.default_options()
+    opts.indent_size = 2
+    data = expand_js(jsbeautifier.beautify(text, opts))
+    return data
 
 @duration("beautify '{1}\\{2}'")
 def beautify_file(file_type: str, source_path: Path | str, source_filename: str, dest_path: Path | str, dest_filename: str) -> bool:
