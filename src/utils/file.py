@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 24.05.2025 19:14
+    © Jürgen Schoenemeyer, 26.06.2025 18:16
 
     src/utils/file.py
 
@@ -365,7 +365,7 @@ def export_text(folderpath: Path | str, filename: Path | str, text: str, encodin
         Trace.error(f"{msg} - {filepath}")
         return None
 
-def export_json(folderpath: Path | str, filename: Path | str, data: Dict[str, Any] | List[Any], newline: str="\n", timestamp: float=0.0, show_message: bool=True) -> bool | None:
+def export_json(folderpath: Path | str, filename: Path | str, data: Any, newline: str="\n", timestamp: float=0.0, show_message: bool=True) -> bool | None:
     filepath   = Path(folderpath) / filename
     folderpath = filepath.parent
     filename   = filepath.name
