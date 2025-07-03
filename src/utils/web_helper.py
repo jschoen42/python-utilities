@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 21.06.2025 13:47
+    © Jürgen Schoenemeyer, 03.07.2025 22:32
 
     src/utils/web_helper.py
 
@@ -17,6 +17,7 @@ from typing import Any, Dict, List, Tuple
 from urllib.parse import parse_qs, urlparse
 
 import requests
+import requests.exceptions
 import tldextract
 
 from dotenv import load_dotenv

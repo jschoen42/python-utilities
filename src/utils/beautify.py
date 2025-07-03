@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 21.06.2025 13:47
+    © Jürgen Schoenemeyer, 03.07.2025 22:32
 
     src/utils/beautify.py
 
@@ -240,13 +240,22 @@ def beautify_file(file_type: str, source_path: Path | str, source_filename: str,
             Trace.error(f"JSON parse error: {e} - {source}")
             data = text
 
+
     elif file_type == "XML":
         try:
-            x = etree.fromstring(text)  # noqa: S320
-            data = etree.tostring(x, pretty_print=True, encoding=str)
-        except ValueError as e:
-            Trace.error(f"XML parse error: {e} - {source}")
+            x = etree.fromstring(text.encode("utf-8"))
+            data = etree.tostring(x, pretty_print=True, encoding="unicode")
+        except etree.XMLSyntaxError as err:
+            Trace.warning(f"XML parse error [etree]: {err} - {source}")
             data = text
+
+    # elif file_type == "XML":
+    #     try:
+    #         x = etree.fromstring(text)  # noqa: S320
+    #         data = etree.tostring(x, pretty_print=True, encoding=str)
+    #     except ValueError as err:
+    #         Trace.warning(f"XML parse error [etree]: {err} - {source}")
+    #         data = text
 
     else:
         Trace.error(f"unknown file type '{file_type}'")
