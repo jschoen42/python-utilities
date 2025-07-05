@@ -42,6 +42,7 @@ actions:
        - src/utils/util.py
        - src/utils/utilities.py
        - src/utils/utils.py
+       - src/utils/web_helper.py
        - src/utils/xml.py
        - src/utils/zip.py
       git:

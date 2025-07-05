@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 03.07.2025 22:32
+    © Jürgen Schoenemeyer, 06.07.2025 00:12
 
     src/utils/web_helper.py
 
@@ -37,6 +37,7 @@ def parse_url(url: str) -> Tuple[str, str, str]:
 
     return scheme + "://", parse.netloc, parse.path.rstrip("/")
 
+TIMEOUT = 30
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0",
     "Accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
@@ -69,13 +70,13 @@ def init_credentials( id: str ) -> None:
 
 
 def requests_get_html(url: str) -> Tuple[str, str]:
-    return  requests_get( url, ["text/html"] )
+    return  requests_get( url, ["text/html", "text/html; charset=utf-8"] )
 
 def requests_get_css(url: str) -> Tuple[str, str]:
     return  requests_get( url, ["text/css", "text/css; charset=utf-8"] )
 
 def requests_get_js(url: str) -> Tuple[str, str]:
-    return  requests_get( url, ["application/javascript", "text/javascript", "application/javascript; charset=utf-8", "text/javascript; charset=utf-8"] )
+    return  requests_get( url, ["application/javascript", "application/javascript; charset=utf-8", "text/javascript", "text/javascript; charset=utf-8"] )
 
 def requests_get(url: str, types: List[str] ) -> Tuple[str, str]:
 
@@ -87,7 +88,7 @@ def requests_get(url: str, types: List[str] ) -> Tuple[str, str]:
     # step 1: requests.head -> check: domain, content-type
 
     try:
-        response = requests.head(url, auth=auth, headers=HEADERS, allow_redirects=True, timeout=10)
+        response = requests.head(url, auth=auth, headers=HEADERS, allow_redirects=True, timeout=TIMEOUT)
     except requests.exceptions.RequestException as err:
         Trace.error(f"{url}: {err}")
         return f"RequestException: {err}", ""
@@ -162,10 +163,10 @@ def requests_head(url: str) -> Tuple[str, int]:
             print(f"{key}: {value}")
 
         Trace.error( f"response {response.status_code}: {url}" ) # ????
-        return f"_status_code: {response.status_code}", -1
+        return f"status_code: {response.status_code}", -1
     else:
         Trace.error( f"response {response.status_code}: {url}" )
-        return f"_status_code: {response.status_code}", -1
+        return f"status_code: {response.status_code}", -1
 
 def get_domain(url: str) -> str:
     extracted = tldextract.extract(url)
