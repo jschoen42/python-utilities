@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 06.07.2025 00:12
+    © Jürgen Schoenemeyer, 12.07.2025 23:50
 
     src/utils/web_helper.py
 
@@ -109,7 +109,7 @@ def requests_get(url: str, types: List[str] ) -> Tuple[str, str]:
         return f"redirect to '{final_host}'", ""
 
     content_type = response.headers.get("Content-Type")
-    if content_type not in types:
+    if content_type and content_type.lower() not in types:
         Trace.warning(f"href '{url}': content-type '{content_type}' (expected '{types}')")
         return f"unexpected content-type {content_type}", ""
 

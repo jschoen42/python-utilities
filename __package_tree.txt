@@ -2,24 +2,24 @@ zz-utils v0.1.1
 ├── arrow v1.3.0
 │   ├── python-dateutil v2.9.0.post0
 │   │   └── six v1.17.0
-│   └── types-python-dateutil v2.9.0.20250516
+│   └── types-python-dateutil v2.9.0.20250708
 ├── cssbeautifier v1.15.4
 │   ├── editorconfig v0.17.1
 │   ├── jsbeautifier v1.15.4
 │   │   ├── editorconfig v0.17.1
 │   │   └── six v1.17.0
 │   └── six v1.17.0
-├── dict2xml v1.7.6
+├── dict2xml v1.7.7
 ├── dotenv v0.9.9
-│   └── python-dotenv v1.1.0
+│   └── python-dotenv v1.1.1
 ├── jsbeautifier v1.15.4 (*)
-├── lxml v5.4.0
+├── lxml v6.0.0
 ├── mutagen v1.47.0
 ├── openpyxl v3.1.5
 │   └── et-xmlfile v2.0.0
 ├── orjson v3.10.18
-├── pandas v2.3.0
-│   ├── numpy v2.3.0
+├── pandas v2.3.1
+│   ├── numpy v2.3.1
 │   ├── python-dateutil v2.9.0.post0 (*)
 │   ├── pytz v2025.2
 │   └── tzdata v2025.2
@@ -27,7 +27,7 @@ zz-utils v0.1.1
 ├── python-dateutil v2.9.0.post0 (*)
 ├── pyyaml v6.0.2
 ├── requests v2.32.4
-│   ├── certifi v2025.6.15
+│   ├── certifi v2025.7.9
 │   ├── charset-normalizer v3.4.2
 │   ├── idna v3.10
 │   └── urllib3 v2.5.0
@@ -40,19 +40,19 @@ zz-utils v0.1.1
 │       └── requests v2.32.4 (*)
 ├── tzdata v2025.2
 ├── xmltodict v0.14.2
-├── basedpyright v1.29.4 (group: dev)
-│   └── nodejs-wheel-binaries v22.16.0
+├── basedpyright v1.30.1 (group: dev)
+│   └── nodejs-wheel-binaries v22.17.0
 ├── lxml-stubs v0.5.1 (group: dev)
 ├── mypy v1.16.1 (group: dev)
 │   ├── mypy-extensions v1.1.0
 │   ├── pathspec v0.12.1
-│   └── typing-extensions v4.14.0
+│   └── typing-extensions v4.14.1
 ├── openpyxl-stubs v0.1.25 (group: dev)
 │   ├── mypy v1.16.1 (*)
 │   ├── openpyxl v3.1.5 (*)
-│   └── typing-extensions v4.14.0
-├── pandas-stubs v2.2.3.250527 (group: dev)
-│   ├── numpy v2.3.0
+│   └── typing-extensions v4.14.1
+├── pandas-stubs v2.3.0.250703 (group: dev)
+│   ├── numpy v2.3.1
 │   └── types-pytz v2025.2.0.20250516
 ├── pip-licenses v5.0.0 (group: dev)
 │   ├── prettytable v3.16.0
