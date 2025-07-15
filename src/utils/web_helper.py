@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 12.07.2025 23:50
+    © Jürgen Schoenemeyer, 15.07.2025 22:52
 
     src/utils/web_helper.py
 
@@ -135,7 +135,7 @@ def requests_head(url: str) -> Tuple[str, int]:
         auth = None
 
     try:
-        response = requests.head(url, auth=auth, headers=HEADERS, allow_redirects=True, timeout=10)
+        response = requests.head(url, auth=auth, headers=HEADERS, allow_redirects=True, timeout=TIMEOUT)
     except requests.exceptions.RequestException as err:
         Trace.error(f"{err}")
         return f"{err}", -1
