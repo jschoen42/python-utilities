@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 11.05.2025 12:16
+    © Jürgen Schoenemeyer, 29.07.2025 07:53
 
     _mypy.py
 
@@ -176,7 +176,6 @@ def check_types(src_path: Path, python_version: str) -> None:
         # "--pretty",                     # default: False
         # "--error-summary",              # default: True
         # "--show-absolute-path",         # default: False
-        "--force-uppercase-builtins",     # default: False
         # "--force-union-syntax",         # default: False
 
         ### Advanced options
