@@ -7,6 +7,7 @@ actions:
       common:
        - .cheat-sheet.txt
        - .vscode/settings.json
+       - .vscode/extensions.json
        - .gitignore
        - .gitattributes
        - _mypy.py
@@ -42,6 +43,7 @@ actions:
        - src/utils/util.py
        - src/utils/utilities.py
        - src/utils/utils.py
+       - src/utils/web.py
        - src/utils/web_helper.py
        - src/utils/xml.py
        - src/utils/zip.py

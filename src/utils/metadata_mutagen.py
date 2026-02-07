@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 27.05.2025 18:20
+    © Jürgen Schoenemeyer, 20.08.2025 21:52
 
     src/utils/metadata_mutagen.py
 
@@ -16,6 +16,7 @@ from mutagen._util import MutagenError  # ty # type: ignore[reportPrivateImportU
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 
+# utils
 from utils.decorator import deprecated
 from utils.trace import Trace
 

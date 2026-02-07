@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 26.06.2025 18:16
+    © Jürgen Schoenemeyer, 07.02.2026 22:49
 
     src/utils/file.py
 
@@ -66,7 +66,8 @@ from pathlib import Path
 from re import Match
 from typing import Any, Dict, List, Tuple
 
-from utils.trace import Trace
+# utils
+from src.utils.trace import Trace, normalize_path
 
 # timestamp
 
@@ -103,13 +104,16 @@ def check_file_exists(filepath_start: Path | str, filepath_end: Path | str) -> b
     # "/dir1" + "/dir2/dir3/file.ext"
     # "" + "/dir1/dir2/dir3/file.ext"
 
-    full_path = Path(filepath_start) / filepath_end
+    if filepath_end == "":
+        full_path = Path(filepath_start)
+    else:
+        full_path = Path(filepath_start) / filepath_end
 
     filepath = full_path.parent
     filename = full_path.name
 
     if not filepath.exists():
-        Trace.error(f"directory missing '{filepath}'")
+        Trace.error(f"directory missing '{normalize_path(filepath)}'")
         return False
 
     try:
@@ -121,7 +125,7 @@ def check_file_exists(filepath_start: Path | str, filepath_end: Path | str) -> b
     if filename in filenames:
         return True
     else:
-        Trace.error(f"file missing {full_path}")
+        Trace.error(f"file missing {normalize_path(full_path)}")
         return False
 
 # folder Listing
@@ -212,11 +216,11 @@ def create_folder(folderpath: Path | str) -> bool:
     if not folderpath.is_dir():
         try:
             folderpath.mkdir(parents=True)
-            Trace.update(f"makedir: {folderpath}")
+            Trace.update(f"makedir: {normalize_path(folderpath)}")
 
         except OSError as e:
             msg = str(e).split(":")[0]
-            Trace.error(f"{msg}: {folderpath}")
+            Trace.error(f"{msg}: {normalize_path(folderpath)}")
             return False
 
         return True
@@ -232,7 +236,7 @@ def delete_file(path: Path | str, filename: str) -> bool:
     if filepath.is_file():
         try:
             filepath.unlink()
-            Trace.update(f"file '{filepath}' deleted")
+            Trace.update(f"file '{normalize_path(filepath)}' deleted")
             return True
 
         except OSError as e:
@@ -290,14 +294,14 @@ def import_text(folderpath: Path | str, filename: Path | str, encoding: str="utf
             return None
 
         except UnicodeDecodeError as e:
-            Trace.error(f"{filepath}: {e}")
+            Trace.error(f"{normalize_path(filepath)}: {e}")
             return None
 
         return data
 
     else:
         if show_error:
-            Trace.error(f"file not exist {filepath.resolve()}")
+            Trace.error(f"file not exist {normalize_path(filepath.resolve())}")
         return None
 
 def import_json(folderpath: Path | str, filename: Path | str, show_error: bool=True) -> Any | None:
@@ -324,22 +328,27 @@ def import_json_timestamp(folderpath: Path | str, filename: Path | str, show_err
         return None, 0.0
 
 def export_text(folderpath: Path | str, filename: Path | str, text: str, encoding: str="utf-8", newline: str="\n", timestamp: float=0.0, create_new_folder: bool=True, show_message: bool=True) -> bool | None:
-    filepath   = Path(folderpath) / filename
+    filepath   = Path(folderpath).resolve() / filename
     folderpath = filepath.parent
     filename   = filepath.name
 
     exist = False
-    try:
-        with filepath.open(mode="r", encoding=encoding) as f:
-            text_old = f.read()
-            exist = True
-    except OSError:
-        text_old = ""
+    text_old = ""
+
+    if filepath.is_file():
+        try:
+            with filepath.open(mode="r", encoding=encoding) as f:
+                text_old = f.read()
+                exist = True
+        except (OSError, UnicodeDecodeError) as err:
+            Trace.error( f"file open:  {err}" )
+            text_old = ""
+
 
     if exist:
         if text == text_old:
             if show_message:
-                Trace.info(f"not changed '{filepath}'")
+                Trace.info(f"not changed '{normalize_path(filepath)}'")
             return False
 
     if create_new_folder:
@@ -354,15 +363,15 @@ def export_text(folderpath: Path | str, filename: Path | str, text: str, encodin
 
         if show_message:
             if text_old == "":
-                Trace.update(f"created '{filepath}'")
+                Trace.update(f"created '{normalize_path(filepath)}'")
             else:
-                Trace.update(f"changed '{filepath}'")
+                Trace.update(f"changed '{normalize_path(filepath)}'")
 
         return True
 
     except OSError as e:
         msg = str(e).split(":")[0]
-        Trace.error(f"{msg} - {filepath}")
+        Trace.error(f"{msg} - {normalize_path(filepath)}")
         return None
 
 def export_json(folderpath: Path | str, filename: Path | str, data: Any, newline: str="\n", timestamp: float=0.0, show_message: bool=True) -> bool | None:
@@ -389,7 +398,7 @@ def export_binary_file(folderpath: Path | str, filename: Path | str, data: bytes
 
     except OSError as e:
         msg = str(e).split(":")[0]
-        Trace.error(f"{msg} - {folderpath / filename}")
+        Trace.error(f"{msg} - {normalize_path(folderpath / filename)}")
         return None
 
 def export_file(folderpath: Path | str, filename: str, text: str, in_type: str | None = None, encoding: str ="utf-8", newline: str="\n",timestamp: float=0.0, create_new_folder: bool=True, overwrite: bool=True) -> bool | None:
@@ -506,11 +515,11 @@ def find_matching_file(filepath: Path | str) -> bool | str:
     matches = list(filepath.glob("*"))
 
     if len(matches) == 0:
-        Trace.error(f"file not found: {filepath}")
+        Trace.error(f"file not found: {normalize_path(filepath)}")
         return False
 
     if len(matches) > 1:
-        Trace.error(f"file not unique: {filepath} - {matches}")
+        Trace.error(f"file not unique: {normalize_path(filepath)} - {matches}")
         return False
 
     return str(matches[0]).replace("\\", "/")
@@ -523,11 +532,11 @@ def find_matching_file_path(folderpath: Path | str, filename: Path | str) -> Non
     matches = list(folderpath.glob(filename))
 
     if len(matches) == 0:
-        Trace.error(f"file not found: {filepath}")
+        Trace.error(f"file not found: {normalize_path(filepath)}")
         return None
 
     if len(matches) > 1:
-        Trace.error(f"file not unique: {filepath} - {matches}")
+        Trace.error(f"file not unique: {normalize_path(filepath)} - {matches}")
         return None
 
     return matches[0]
@@ -565,7 +574,7 @@ def get_file_infos(folderpath: Path | str, filename: Path | str, _in_type: str) 
             "md5":        md5,
         }
     else:
-        Trace.error(f"not found: {filepath}")
+        Trace.error(f"not found: {normalize_path(filepath)}")
         return None
 
 def copy_my_file(source: Path | str, dest: Path | str, _show_updated: bool) -> bool:
@@ -579,7 +588,7 @@ def copy_my_file(source: Path | str, dest: Path | str, _show_updated: bool) -> b
         try:
             shutil.copyfile(source, dest)
             set_modification_timestamp(dest, timestamp=new_timestamp)
-            Trace.info(f"copy {dest}")
+            Trace.info(f"copy {normalize_path(dest)}")
 
         except OSError as e:
             Trace.error(f"{e}")

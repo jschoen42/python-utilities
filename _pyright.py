@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 29.07.2025 07:53
+    © Jürgen Schoenemeyer, 05.01.2026 13:24
 
     _pyright.py
 
@@ -102,6 +102,9 @@ def check_types(src_path: Path, python_version: str) -> None:
 
         "deprecateTypingAliases": False,       # always False -> typing: List, Dict, ...
         "reportUnusedCallResult": False,       # always False -> _vars
+
+        "reportUnusedVariable": False,
+        "reportUnusedImport": False,
 
         "exclude": [
             "**/.venv",

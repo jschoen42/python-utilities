@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 23.03.2025 15:59
+    © Jürgen Schoenemeyer, 07.02.2026 22:49
 
     src/main.py
 
@@ -21,9 +21,12 @@ import sys
 
 from argparse import ArgumentParser
 
-from helper.distribute import distribute
-from utils.prefs import Prefs
-from utils.trace import Trace
+# helper
+from src.helper.distribute import distribute
+
+# utils
+from src.utils.prefs import Prefs
+from src.utils.trace import Trace
 
 if __name__ == "__main__":
     Trace.set( timezone=False, show_caller=False )

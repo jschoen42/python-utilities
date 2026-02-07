@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 11.05.2025 12:16
+    © Jürgen Schoenemeyer, 07.02.2026 22:49
 
     src/utils/prefs.py
 
@@ -31,8 +31,9 @@ from typing import Any, ClassVar, Dict, List, Mapping, Tuple
 
 import yaml
 
-from utils.globals import BASE_PATH
-from utils.trace import Trace
+# utils
+from src.utils.globals import BASE_PATH
+from src.utils.trace import Trace
 
 class Prefs:
     pref_path: Path = BASE_PATH / "prefs"
@@ -226,11 +227,11 @@ def merge(a: Dict[Any, Any], b: Dict[Any, Any], path: List[str] | None = None) -
     for key, value in b.items():
         if key in a:
             if isinstance(a[key], dict) and isinstance(value, dict):
-                merge(a[key], b[key], [*path, str(key)])
-            elif a[key] != b[key]:
+                merge(a[key], value, [*path, str(key)])
+            elif a[key] != value:
                 raise Exception("Conflict at " + ".".join([*path, str(key)]))
         else:
-            a[key] = b[key]
+            a[key] = value
     return a
 
 def build_tree(tree: List[str], in_key: str, value: str) -> Dict[str, Any]:

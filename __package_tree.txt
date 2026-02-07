@@ -1,66 +1,43 @@
 zz-utils v0.1.1
-├── arrow v1.3.0
-│   ├── python-dateutil v2.9.0.post0
-│   │   └── six v1.17.0
-│   └── types-python-dateutil v2.9.0.20250708
-├── cssbeautifier v1.15.4
-│   ├── editorconfig v0.17.1
-│   ├── jsbeautifier v1.15.4
-│   │   ├── editorconfig v0.17.1
-│   │   └── six v1.17.0
-│   └── six v1.17.0
-├── dict2xml v1.7.7
-├── dotenv v0.9.9
-│   └── python-dotenv v1.1.1
-├── jsbeautifier v1.15.4 (*)
-├── lxml v6.0.0
-├── mutagen v1.47.0
-├── openpyxl v3.1.5
-│   └── et-xmlfile v2.0.0
-├── orjson v3.10.18
-├── pandas v2.3.1
-│   ├── numpy v2.3.1
-│   ├── python-dateutil v2.9.0.post0 (*)
-│   ├── pytz v2025.2
-│   └── tzdata v2025.2
-├── pymediainfo v7.0.1
-├── python-dateutil v2.9.0.post0 (*)
-├── pyyaml v6.0.2
-├── requests v2.32.4
-│   ├── certifi v2025.7.9
-│   ├── charset-normalizer v3.4.2
-│   ├── idna v3.10
-│   └── urllib3 v2.5.0
-├── result v0.17.0
-├── tldextract v5.3.0
-│   ├── filelock v3.18.0
-│   ├── idna v3.10
-│   ├── requests v2.32.4 (*)
-│   └── requests-file v2.1.0
-│       └── requests v2.32.4 (*)
-├── tzdata v2025.2
-├── xmltodict v0.14.2
-├── basedpyright v1.30.1 (group: dev)
-│   └── nodejs-wheel-binaries v22.17.0
-├── lxml-stubs v0.5.1 (group: dev)
-├── mypy v1.16.1 (group: dev)
-│   ├── mypy-extensions v1.1.0
-│   ├── pathspec v0.12.1
-│   └── typing-extensions v4.14.1
-├── openpyxl-stubs v0.1.25 (group: dev)
-│   ├── mypy v1.16.1 (*)
-│   ├── openpyxl v3.1.5 (*)
-│   └── typing-extensions v4.14.1
-├── pandas-stubs v2.3.0.250703 (group: dev)
-│   ├── numpy v2.3.1
-│   └── types-pytz v2025.2.0.20250516
-├── pip-licenses v5.0.0 (group: dev)
-│   ├── prettytable v3.16.0
-│   │   └── wcwidth v0.2.13
-│   └── tomli v2.2.1
-├── types-openpyxl v3.1.5.20250602 (group: dev)
-├── types-pyyaml v6.0.12.20250516 (group: dev)
-├── types-requests v2.32.4.20250611 (group: dev)
-│   └── urllib3 v2.5.0
-└── types-xmltodict v0.14.0.20241009 (group: dev)
+├── arrow v1.4.0 (67.2KiB)
+│   ├── python-dateutil v2.9.0.post0 (224.5KiB)
+│   │   └── six v1.17.0 (10.8KiB)
+│   └── tzdata v2025.3 (340.4KiB)
+├── cssbeautifier v1.15.4 (120.8KiB)
+│   ├── editorconfig v0.17.1 (16.0KiB)
+│   ├── jsbeautifier v1.15.4 (92.5KiB)
+│   │   ├── editorconfig v0.17.1 (16.0KiB)
+│   │   └── six v1.17.0 (10.8KiB)
+│   └── six v1.17.0 (10.8KiB)
+├── dict2xml v1.7.7 (7.7KiB)
+├── dotenv v0.9.9 (1.8KiB)
+│   └── python-dotenv v1.2.1 (20.7KiB)
+├── jsbeautifier v1.15.4 (92.5KiB) (*)
+├── lxml v6.0.2 (8.2MiB)
+├── mutagen v1.47.0 (189.8KiB)
+├── openpyxl v3.1.5 (245.0KiB)
+│   └── et-xmlfile v2.0.0 (17.6KiB)
+├── orjson v3.11.5 (239.5KiB)
+├── pandas v2.3.3 (11.0MiB)
+│   ├── numpy v2.3.5 (16.0MiB)
+│   ├── python-dateutil v2.9.0.post0 (224.5KiB) (*)
+│   ├── pytz v2025.2 (497.3KiB)
+│   └── tzdata v2025.3 (340.4KiB)
+├── pymediainfo v7.0.1 (6.7MiB)
+├── python-dateutil v2.9.0.post0 (224.5KiB) (*)
+├── pyyaml v6.0.3 (177.4KiB)
+├── requests v2.32.5 (63.2KiB)
+│   ├── certifi v2025.11.12 (155.7KiB)
+│   ├── charset-normalizer v3.4.4 (203.2KiB)
+│   ├── idna v3.11 (69.3KiB)
+│   └── urllib3 v2.6.2 (128.1KiB)
+├── result v0.17.0 (11.4KiB)
+├── tldextract v5.3.0 (104.9KiB)
+│   ├── filelock v3.20.1 (16.3KiB)
+│   ├── idna v3.11 (69.3KiB)
+│   ├── requests v2.32.5 (63.2KiB) (*)
+│   └── requests-file v3.0.1 (4.4KiB)
+│       └── requests v2.32.5 (63.2KiB) (*)
+├── tzdata v2025.3 (340.4KiB)
+└── xmltodict v1.0.2 (13.6KiB)
 (*) Package tree already displayed

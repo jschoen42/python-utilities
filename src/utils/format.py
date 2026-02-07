@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 03.04.2025 20:50
+    © Jürgen Schoenemeyer, 07.02.2026 22:49
 
     src/utils/format.py
 
@@ -7,6 +7,10 @@
      - floor(number: float, decimals: int=2) -> int
 
      - convert_date_time(time_string: str) -> int
+     - convert_to_seconds(timestring: str) -> float
+     - get_timestamp_tz() -> str
+     - get_timestamp_tz_file_full( filepath: str | Path ) -> str
+     - get_timestamp_tz_file_ymd( filepath: str | Path ) -> str
 
      - format_bytes(size: int, unit: str) -> str
      - format_bytes_v2(size: int) -> str
@@ -24,11 +28,10 @@ from __future__ import annotations
 import datetime
 import math
 
+from pathlib import Path
 from typing import Any, Dict
 
 from dateutil.parser import parse
-
-# from utils.trace import Trace
 
 def floor(number: float, decimals: int=2) -> int:
     if decimals < 0:
@@ -50,6 +53,52 @@ def convert_date_time(time_string: str) -> int:
 def convert_to_seconds(timestring: str) -> float:
     tmp = timestring.split(":")
     return 60 * int(tmp[0]) + int(tmp[1]) + float("." + tmp[2])
+
+def get_timestamp_tz() -> str:
+    now = datetime.datetime.now().astimezone()
+    offset = now.strftime("%z")
+    offset_format = f"{offset[:3]}:{offset[3:]}"
+
+    return now.strftime("%d.%m.%Y %H:%M:%S") + f"{offset_format}"
+
+def get_timestamp_long() -> str:
+    now = datetime.datetime.now().astimezone()
+    return now.strftime("%Y-%m-%d_%H-%M-%S")
+
+def get_timestamp_short() -> str:
+    now = datetime.datetime.now().astimezone()
+    return now.strftime("%d.%m.%Y")
+
+def get_timestamp_short_back() -> str:
+    now = datetime.datetime.now().astimezone()
+    return now.strftime("%Y-%m-%d")
+
+def get_timestamp_tz_file_full( filepath: str | Path ) -> str:
+    filepath = Path(filepath)
+    timestamp = filepath.stat().st_mtime
+
+    dt = datetime.datetime.fromtimestamp(timestamp).astimezone()
+
+    offset = dt.strftime("%z")
+    offset_format = f"{offset[:3]}:{offset[3:]}"
+
+    return dt.strftime("%Y-%m-%d / %H:%M:%S") + f"{offset_format}"
+
+def get_timestamp_tz_file_ymd( filepath: str | Path ) -> str:
+    filepath = Path(filepath)
+    timestamp = filepath.stat().st_mtime
+
+    dt = datetime.datetime.fromtimestamp(timestamp).astimezone()
+
+    return dt.strftime("%Y-%m-%d")
+
+def get_timestamp_tz_file_ymd_hms( filepath: str | Path ) -> str:
+    filepath = Path(filepath)
+    timestamp = filepath.stat().st_mtime
+
+    dt = datetime.datetime.fromtimestamp(timestamp).astimezone()
+
+    return dt.strftime("%Y-%m-%d_%H-%M-%S")
 
 """
 def format_bytes(size: int, reference: str) -> str:
@@ -93,12 +142,14 @@ def convert_duration(duration: int) -> str:
     return f"{hours:02d}:{minutes:02d}:{seconds:02d}" # .{ms:03d}"
 
 def bin_nibble_null(val: int) -> str:
-    b = bin(val)[2:]
+    # b = bin(val)[2:]
+    b = f"{val:b}"
     new_b = ".".join([b[::-1][i:i+4][::-1] for i in range(0, len(b), 4)][::-1])
     return "".join(["0"]*(4 - len(b) % 4 if len(b) % 4 != 0 else 0) + [new_b])
 
 def bin_nibble(val: int) -> str:
-    b = bin(val)[2:]
+    # b = bin(val)[2:]
+    b = f"{val:b}"
     return  ".".join([b[::-1][i:i+4][::-1] for i in range(0, len(b), 4)][::-1])
 
 FALSE_STRINGS = ("0", "F", "FALSE", "N", "NO")

@@ -1,16 +1,26 @@
 """
-    © Jürgen Schoenemeyer, 15.07.2025 22:52
+    © Jürgen Schoenemeyer, 20.08.2025 21:52
 
     src/utils/web_helper.py
 
     PUBLIC:
-     . parse_url(url: str) -> Tuple[str, str]
+     - init_credentials( id: str ) -> None
+     - parse_url(url: str) -> Tuple[str, str]
      - requests_get_html(url: str) -> Tuple[str, str]
+     - requests_get_css(url: str) -> Tuple[str, str]
+     - requests_get_js(url: str) -> Tuple[str, str]
+     - requests_get(url: str, types: List[str] ) -> Tuple[str, str]
+     - check_is_html(url: str) -> bool
      - requests_head(url: str) -> Tuple[str, int]
+     - get_domain(url: str) -> str
+     - read_query(query_string: str) -> Dict[str, Any]
 
+    PRIVAT:
+     - normalize_encoding(enc: str) -> str
 """
 from __future__ import annotations
 
+import codecs
 import os
 
 from typing import Any, Dict, List, Tuple
@@ -20,8 +30,10 @@ import requests
 import requests.exceptions
 import tldextract
 
+from charset_normalizer import from_bytes
 from dotenv import load_dotenv
 
+# utils
 from utils.format import format_bytes_v2
 from utils.trace import Trace
 
@@ -68,6 +80,11 @@ def init_credentials( id: str ) -> None:
         else:
             Trace.fatal( f"no valid credentials for '{id}'" )
 
+def normalize_encoding(enc: str) -> str:
+    try:
+        return codecs.lookup(enc).name
+    except LookupError:
+        return enc
 
 def requests_get_html(url: str) -> Tuple[str, str]:
     return  requests_get( url, ["text/html", "text/html; charset=utf-8"] )
@@ -122,10 +139,36 @@ def requests_get(url: str, types: List[str] ) -> Tuple[str, str]:
         return f"{err}", ""
 
     if response.status_code == 200:
-        return f"{response.status_code}", response.text
+        result = from_bytes(response.content).best() # fix wrong values for "response.encoding"
+        if result is None:
+            Trace.error(f"encoding detection failed for: {url}")
+            return f"encoding detection failed - {response.encoding=}, found=None", ""
+
+        if response.encoding:
+            if normalize_encoding(result.encoding) != normalize_encoding(response.encoding):
+                Trace.warning( f"check server configuration: {response.encoding=}, found: {result.encoding=}" )
+
+        return f"{response.status_code}", str(result)
     else:
         Trace.error( f"response {response.status_code}: {url}" )
         return f"{response.status_code}", ""
+
+def check_is_html(url: str) -> bool:
+    auth = None
+
+    try:
+        response = requests.head(url, auth=auth, headers=HEADERS, allow_redirects=True, timeout=TIMEOUT)
+    except requests.exceptions.RequestException as err:
+        Trace.error(f"{err}")
+        return False
+
+    if response.status_code == 200:
+        content_type = response.headers.get("Content-Type")
+        if content_type:
+            if "text/html" in content_type:
+                return True
+
+    return False
 
 def requests_head(url: str) -> Tuple[str, int]:
 

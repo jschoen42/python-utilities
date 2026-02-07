@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 30.07.2025 15:22
+    © Jürgen Schoenemeyer, 24.12.2025 22:20
 
     src/utils/trace.py
 
@@ -127,21 +127,38 @@ pattern: Dict[str, str] = {
     "unknown":   " ??? ",
 }
 
+
+# G:\Python\Decide\websites-scan\src       -> G:/Python/Decide/websites-scan/src
+# \\Nuc5\g\Python\Decide\websites-scan\src -> G:/Python/Decide/websites-scan/src
+
+def normalize_path(path: str | Path) -> str:
+    path = str(path).replace("\\", "/")
+
+    if path.startswith("//"):
+        trimmed = path[2:]
+        parts = trimmed.split("/")
+        if len(parts) >= 2:
+            drive_letter = parts[1].upper() + ":"
+            remaining_path = "/".join(parts[2:])
+            return f"{drive_letter}/{remaining_path}"
+
+    return path
+
 class Trace:
     BASE_PATH: Path = Path(sys.argv[0]).parent
 
     default_base: Path = BASE_PATH.resolve()
-    default_base_folder: str = str(default_base).replace("\\", "/")
+    default_base_folder: str = normalize_path(str(default_base))
 
     settings: ClassVar[Dict[str, Any]] = {
         "appl_folder":    default_base_folder + "/",
 
         "color":          True,
         "reduced_mode":   False,
-        "debug_mode":     False,
+        "debug_mode":     True, # False,
 
         "show_timestamp": True,
-        "timezone":       True,
+        "timezone":       False,
 
         "show_caller":    True,
     }
@@ -275,7 +292,7 @@ class Trace:
                             fd,
                             termios.TCSADRAIN,                 # type: ignore[attr-defined, reportAttributeAccessIssue] # -> Windows
                             old_settings,
-                       )
+                        )
                         print()  # noqa: T201
 
                 if key == b"\x1b":

@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "donjayamanne.githistory",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "usernamehw.errorlens",
+    "eriklynd.json-tools",
+    "tamasfe.even-better-toml",
+    "redhat.vscode-xml",
+    "DavidAnson.vscode-markdownlint"
+  ],
+  "unwantedRecommendations": [
+    "ms-python.vscode-python-envs",
+    "GitHub.copilot-chat",
+    "GitHub.copilot",
+  ]
+}

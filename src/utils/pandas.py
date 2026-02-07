@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 27.05.2025 18:20
+    © Jürgen Schoenemeyer, 20.08.2025 21:52
 
     src/utils/pandas.py
 
@@ -18,6 +18,7 @@ import pandas as pd
 
 from pandas import DataFrame
 
+# utils
 from utils.file import check_file_exists
 from utils.trace import Trace
 

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 03.07.2025 22:32
+    © Jürgen Schoenemeyer, 07.02.2026 22:49
 
     src/utils/beautify.py
 
@@ -25,9 +25,10 @@ import jsbeautifier  # type: ignore[import-untyped, reportMissingTypeStubs]
 
 from lxml import etree
 
-from utils.decorator import duration
-from utils.file import export_text, import_text
-from utils.trace import Trace
+# utils
+from src.utils.decorator import duration
+from src.utils.file import export_text, import_text
+from src.utils.trace import Trace
 
 expand_data_js: Dict[str, str] = {
     "!0":  "true",

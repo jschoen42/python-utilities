@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 24.05.2025 19:14
+    © Jürgen Schoenemeyer, 07.02.2026 22:49
 
     src/utils/decorator.py
 
@@ -23,7 +23,8 @@ import time
 from inspect import BoundArguments, Signature
 from typing import TYPE_CHECKING, Any, Dict, Generator, Match, Tuple
 
-from utils.trace import Color, Trace
+# utils
+from src.utils.trace import Color, Trace
 
 if TYPE_CHECKING:
     from collections.abc import Callable

@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 23.03.2025 15:59
+    © Jürgen Schoenemeyer, 07.02.2026 22:49
 
     src/helper/distrubute.py
 """
@@ -10,10 +10,11 @@ import shutil
 
 from pathlib import Path
 
-from utils.file import delete_file, get_modification_timestamp, set_modification_timestamp
-from utils.globals import BASE_PATH, ROOT
-from utils.prefs import Prefs
-from utils.trace import Trace
+# utils
+from src.utils.file import delete_file, get_modification_timestamp, set_modification_timestamp
+from src.utils.globals import BASE_PATH, ROOT
+from src.utils.prefs import Prefs
+from src.utils.trace import Trace
 
 def format_singular_plural(value: int, text: str) -> str:
     if value == 1:

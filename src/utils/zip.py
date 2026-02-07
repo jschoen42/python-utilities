@@ -1,5 +1,5 @@
 """
-    © Jürgen Schoenemeyer, 03.04.2025 20:50
+    © Jürgen Schoenemeyer, 20.08.2025 21:52
 
     src/utils/zip.py
 
@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 from zipfile import ZIP_DEFLATED, ZipFile
 
+# utils
 from utils.file import get_trace_path
 from utils.trace import Trace
 
